@@ -101,12 +101,10 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Task'
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
   /task:
     parameters:
     - name: token
@@ -135,12 +133,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Task'
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
     patch:
       tags:
         - task
@@ -161,12 +157,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Task'
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
   '/task/{taskId}':
     parameters:
       - name: token
@@ -192,12 +186,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TaskDetails'
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
     delete:
       tags:
         - task
@@ -205,12 +197,10 @@ paths:
       responses:
         '200':
           description: Successful operation
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
   /resources:
     parameters:
     - name: token
@@ -232,12 +222,10 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ResourceDetails'
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
   /resource:
     parameters:
     - name: token
@@ -263,12 +251,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
     patch:
       tags:
         - resource
@@ -286,12 +272,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
   '/resource/{resourceId}':
     parameters:
       - name: token
@@ -318,12 +302,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceDetails'
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
     delete:
       tags:
         - resource
@@ -335,12 +317,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
   /projects:
     parameters:
       - name: token
@@ -370,12 +350,10 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ProjectDetails'
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
   /project:
     parameters:
       - name: token
@@ -393,12 +371,10 @@ paths:
       responses:
         '200':
           description: Successful operation
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
     patch:
       tags:
         - project
@@ -408,12 +384,10 @@ paths:
       responses:
         '200':
           description: Successful operation
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
   '/project/{projectId}':
     parameters:
       - name: token
@@ -440,12 +414,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProjectDetails'
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
     delete:
       tags:
         - project
@@ -453,12 +425,10 @@ paths:
       responses:
         '200':
           description: Successful operation
-        default:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
 components:
   schemas:
     Resource:
@@ -651,6 +621,13 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Project'
+  responses:
+    Error:
+      description: An error occurred
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     petstore_auth:
       type: oauth2
