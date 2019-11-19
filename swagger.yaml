@@ -203,16 +203,33 @@ paths:
           $ref: '#/components/responses/Error'
   /resources:
     parameters:
-    - name: token
-      in: query
-      description: API token
-      required: true
-      schema:
-        type: string
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
     get:
       tags:
         - resource
       summary: Get all resources
+      parameters:
+        - name: includeNotes
+          in: query
+          description: Include notes in result
+          required: false
+          schema:
+            type: integer
+            enum: [0, 1]
+            default: 0
+        - name: includeEmptyDataFields
+          in: query
+          description: Include data fields for which the task has no value in result
+          required: false
+          schema:
+            type: integer
+            enum: [0, 1]
+            default: 0
       responses:
         '200':
           description: Successful operation
@@ -228,12 +245,12 @@ paths:
           $ref: '#/components/responses/Error'
   /resource:
     parameters:
-    - name: token
-      in: query
-      description: API token
-      required: true
-      schema:
-        type: string
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
     post:
       tags:
         - resource
@@ -334,13 +351,22 @@ paths:
         - project
       summary: Get all projects
       parameters:
-        - name: projectId
+        - name: includeNotes
           in: query
-          description: The id of the project
-          required: true
+          description: Include notes in result
+          required: false
           schema:
             type: integer
-            format: int64
+            enum: [0, 1]
+            default: 0
+        - name: includeEmptyDataFields
+          in: query
+          description: Include data fields for which the task has no value in result
+          required: false
+          schema:
+            type: integer
+            enum: [0, 1]
+            default: 0
       responses:
         '200':
           description: Successful operation
