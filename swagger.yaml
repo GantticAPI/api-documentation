@@ -1,18 +1,18 @@
 openapi: 3.0.0
 info:
   description: |
-    Ganttic API rough blueprint.
     [www.ganttic.com](https://www.ganttic.com)
+    <br/><br/>
+    **Authentication**: TODO
+    <br/><br/>
+    **Data structure**: TODO
+    <br/><br/>
+    **Other stuff**
   version: "1.0.1"
   title: Ganttic API
   termsOfService: 'https://www.ganttic.com/terms-and-conditions'
   contact:
     email: info@ganttic.com
-servers:
-  # Added by API Auto Mocking Plugin
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/Ganttic/GantticAPI/1.0.0
-  - url: 'https://petstore.swagger.io/v2'
 tags:
   - name: task
     description: Operations on tasks
@@ -20,8 +20,205 @@ tags:
     description: Operations on resources
   - name: project
     description: Operations on projects
+  - name: user
+    description: Operations on users
 paths:
+  /tasks:
+    parameters:
+    - name: token
+      in: query
+      description: API token
+      required: true
+      schema:
+        type: string
+    get:
+      tags:
+        - task
+      summary: Get all tasks matching query parameters
+      parameters:
+        - name: timeMin
+          in: query
+          description: Start date of task range (YYYY-MM-DD HH:MM)
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: timeMax
+          in: query
+          description: End date of task range (YYYY-MM-DD HH:MM)
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: includeArchived
+          in: query
+          description: Include archived tasks
+          required: false
+          schema:
+            type: integer
+            enum: [0, 1]
+            default: 0
+        - name: includeNotes
+          in: query
+          description: Include notes in result
+          required: false
+          schema:
+            type: integer
+            enum: [0, 1]
+            default: 0
+        - name: includeEmptyDataFields
+          in: query
+          description: Include data fields for which the task has no value in result
+          required: false
+          schema:
+            type: integer
+            enum: [0, 1]
+            default: 0
+        - name: projectId
+          in: query
+          description: Project id of the tasks
+          required: false
+          schema:
+            type: string
+        - name: resourceId
+          in: query
+          description: Resource id of the tasks
+          required: false
+          schema:
+            type: string
+        - name: recurringId
+          in: query
+          description: Recurring id of the tasks
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+        default:
+          description: An error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /task:
+    parameters:
+    - name: token
+      in: query
+      description: API token
+      required: true
+      schema:
+        type: string
+    post:
+      tags:
+        - task
+      summary: Create a task
+      parameters:
+        - name: token
+          in: query
+          description: API token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: '#/components/requestBodies/Task'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        default:
+          description: An error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      tags:
+        - task
+      summary: Modify a task
+      parameters:
+        - name: token
+          in: query
+          description: API token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: '#/components/requestBodies/Task'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        default:
+          description: An error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  '/task/{taskId}':
+    parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
+      - name: taskId
+        in: path
+        description: Id of the task
+        required: true
+        schema:
+          type: string
+    get:
+      tags:
+        - task
+      summary: Get task details
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskDetails'
+        default:
+          description: An error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+        - task
+      summary: Delete a task
+      responses:
+        '200':
+          description: Successful operation
+        default:
+          description: An error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /resources:
+    parameters:
+    - name: token
+      in: query
+      description: API token
+      required: true
+      schema:
+        type: string
     get:
       tags:
         - resource
@@ -35,23 +232,24 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ResourceDetails'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Too many requests
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
   /resource:
+    parameters:
+    - name: token
+      in: query
+      description: API token
+      required: true
+      schema:
+        type: string
     post:
       tags:
         - resource
-      summary: Add a resource
+      summary: Create a resource
       requestBody:
         required: true
         content:
@@ -65,14 +263,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Too many requests
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
@@ -94,26 +286,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '404':
-          description: The resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Too many requests
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
   '/resource/{resourceId}':
     parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
       - name: resourceId
         in: path
         description: ID of the resource
@@ -132,20 +318,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceDetails'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '404':
-          description: The resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Too many requests
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
@@ -161,216 +335,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '404':
-          description: The resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Too many requests
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /tasks:
-    get:
-      tags:
-        - task
-      summary: Get all tasks matching query parameters
-      parameters:
-        - name: token
-          in: query
-          description: API token
-          required: true
-          schema:
-            type: string
-        - name: timeMin
-          in: query
-          description: Start date of task range
-          required: true
-          schema:
-            type: string
-            format: date-time
-        - name: timeMax
-          in: query
-          description: End date of task range
-          required: true
-          schema:
-            type: string
-            format: date-time
-        - name: showArchived
-          in: query
-          description: Include archived tasks
-          required: false
-          schema:
-            type: boolean
-        - name: showNotes
-          in: query
-          description: Include notes in result
-          required: false
-          schema:
-            type: boolean
-        - name: projectId
-          in: query
-          description: Project id of the tasks
-          required: false
-          schema:
-            type: string
-        - name: resourceId
-          in: query
-          description: Resource id of the tasks
-          required: false
-          schema:
-            type: string
-        - name: recurringId
-          in: query
-          description: Recurring id of the taks
-          required: false
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Task'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Too many requests
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /task:
-    post:
-      tags:
-        - task
-      summary: Add a task
-      requestBody:
-        $ref: '#/components/requestBodies/Task'
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Too many requests
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-    patch:
-      tags:
-        - task
-      summary: Modify a task
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Task'
-      responses:
-        '200':
-          description: Successful operation
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '404':
-          description: The resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Too many requests
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  '/task/{taskId}':
-    get:
-      tags:
-        - task
-      summary: Get task details
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TaskDetails'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '404':
-          description: The resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Too many requests
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-    parameters:
-      - name: taskId
-        in: path
-        description: ID of the resource
-        required: true
-        schema:
-          type: integer
-          format: int64
-    delete:
-      tags:
-        - task
-      summary: Delete a task
-      responses:
-        '200':
-          description: Successful operation
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '404':
-          description: The resource was not found
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
   /projects:
+    parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
     get:
       tags:
         - project
@@ -392,36 +370,31 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ProjectDetails'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Too many requests
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
   /project:
+    parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
     post:
       tags:
         - project
-      summary: Add a project
+      summary: Create a project
       requestBody:
         $ref: '#/components/requestBodies/Project'
       responses:
         '200':
           description: Successful operation
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Too many requests
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
@@ -435,26 +408,20 @@ paths:
       responses:
         '200':
           description: Successful operation
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '404':
-          description: The resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Too many requests
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
   '/project/{projectId}':
     parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
       - name: projectId
         in: path
         description: ID of the project
@@ -473,20 +440,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProjectDetails'
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '404':
-          description: The resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Too many requests
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
@@ -498,20 +453,8 @@ paths:
       responses:
         '200':
           description: Successful operation
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '404':
-          description: The resource was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '429':
-          description: Too many requests
+        default:
+          description: An error occurred
           content:
             application/json:
               schema:
