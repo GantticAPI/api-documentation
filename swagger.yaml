@@ -455,6 +455,60 @@ paths:
           $ref: '#/components/responses/Error'
         '5XX':
           $ref: '#/components/responses/Error'
+  /users:
+    parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
+    get:
+      tags:
+        - user
+      summary: Get all users
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
+  '/user/{userId}':
+    parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
+      - name: userId
+        in: path
+        description: Id of the user
+        required: true
+        schema:
+          type: string
+    get:
+      tags:
+        - user
+      summary: Get user details
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
 components:
   schemas:
     Resource:
@@ -560,6 +614,29 @@ components:
           type: string
           format: date-time
           description: Date the project was created (YYYY-MM-DD HH:MM)
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of the user
+        firstName:
+          type: string
+          description: First name of the user
+        surname:
+          type: string
+          description: Surname of the user
+        email:
+          type: string
+          description: Email of the user
+        type:
+          type: string
+          enum: [user, admin]
+          description: Type of the user
+        created:
+          type: string
+          format: date-time
+          description: Date the user was created (YYYY-MM-DD HH:MM)
     DataFields:
       type: object
       properties:
