@@ -94,13 +94,7 @@ paths:
             type: string
       responses:
         '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/TaskGet'
+          $ref: '#/components/responses/Tasks'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -151,11 +145,7 @@ paths:
         $ref: '#/components/requestBodies/TaskPost'
       responses:
         '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TaskGet'
+          $ref: '#/components/responses/Task'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -175,11 +165,7 @@ paths:
         $ref: '#/components/requestBodies/TaskPatch'
       responses:
         '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TaskGet'
+          $ref: '#/components/responses/Task'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -204,11 +190,7 @@ paths:
       summary: Get task details
       responses:
         '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TaskGet'
+          $ref: '#/components/responses/Task'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -255,13 +237,7 @@ paths:
             default: 0
       responses:
         '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ResourceGet'
+          $ref: '#/components/responses/Resources'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -305,11 +281,7 @@ paths:
         $ref: '#/components/requestBodies/ResourcePost'
       responses:
         '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceGet'
+          $ref: '#/components/responses/Resource'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -322,11 +294,7 @@ paths:
         $ref: '#/components/requestBodies/ResourcePost'
       responses:
         '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceGet'
+          $ref: '#/components/responses/Resource'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -352,11 +320,7 @@ paths:
       summary: Get resource details
       responses:
         '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceGet'
+          $ref: '#/components/responses/Resource'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -404,12 +368,7 @@ paths:
       responses:
         '200':
           description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ProjectGet'
+          $ref: '#/components/responses/Projects'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -453,11 +412,7 @@ paths:
         $ref: '#/components/requestBodies/ProjectPost'
       responses:
         '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProjectGet'
+          $ref: '#/components/responses/Project'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -470,11 +425,7 @@ paths:
         $ref: '#/components/requestBodies/ProjectPatch'
       responses:
         '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProjectGet'
+          $ref: '#/components/responses/Project'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -500,11 +451,7 @@ paths:
       summary: Get project details
       responses:
         '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProjectGet'
+          $ref: '#/components/responses/Project'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -534,13 +481,7 @@ paths:
       summary: Get all users
       responses:
         '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/User'
+          $ref: '#/components/responses/Users'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -565,11 +506,7 @@ paths:
       summary: Get user details
       responses:
         '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
+          $ref: '#/components/responses/User'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -898,6 +835,62 @@ components:
           schema:
             $ref: '#/components/schemas/ProjectPatch'
   responses:
+    Task:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TaskGet'
+    Tasks:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TaskGet'
+    Resource:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResourceGet'
+    Resources:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/ResourceGet'
+    Project:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectGet'
+    Projects:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/ProjectGet'
+    User:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+    Users:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/User'
     Error:
       description: An error occurred
       content:
