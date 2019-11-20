@@ -462,10 +462,14 @@ components:
       properties:
         id:
           type: string
+          description: Id of the resource
         name:
           type: string
+          description: Name of the resource
         status:
           type: string
+          enum: ["", archived]
+          description: Status of the resource - empty for a regular resource
         dataFields:
           $ref: '#/components/schemas/DataFields'
     ResourceDetails:
@@ -476,40 +480,52 @@ components:
         created:
           type: string
           format: date-time
+          description: Date the resource was created (YYYY-MM-DD HH:MM)
     Task:
       type: object
       properties:
         id:
           type: string
+          description: Id of the task
         status:
           type: string
-          description: "asdasd"
+          enum: ["", archived]
+          description: Status of the task - empty for a regular task
         projectId:
           type: string
+          description: Id of the project the task belongs in
         name:
           type: string
+          description: Name of the task
         resources:
           type: array
           items:
             type: string
+          description: List of resources the task is connected to
         start:
           type: string
           format: date-time
+          description: Start time of the task (YYYY-MM-DD HH:MM)
         end:
           type: string
           format: date-time
+          description: End time of the task (YYYY-MM-DD HH:MM)
         allDay:
           type: boolean
+          description: Whether this is a all day task (planning precision is day)
         usedTime:
           type: integer
           format: int64
+          description: Task used time in minutes
         recurringId:
           type: string
+          description: Recurring id of the task
         dataFields:
           $ref: '#/components/schemas/DataFields'
         created:
           type: string
           format: date-time
+          description: Date the task was created (YYYY-MM-DD HH:MM)
     TaskDetails:
       type: object
       allOf:
@@ -519,15 +535,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Note'
+          description: List of notes attached to the task
     Project:
       type: object
       properties:
         id:
           type: string
+          description: Id of the project
         name:
           type: string
+          description: Name of the project
         status:
           type: string
+          enum: ["", archived]
+          description: Status of the project - empty for a regular project
         dataFields:
           $ref: '#/components/schemas/DataFields'
     ProjectDetails:
@@ -538,6 +559,7 @@ components:
         created:
           type: string
           format: date-time
+          description: Date the project was created (YYYY-MM-DD HH:MM)
     DataFields:
       type: object
       properties:
@@ -545,92 +567,117 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DataFieldUser'
+          description: List of user type data fields
         dates:
           type: array
           items:
             $ref: '#/components/schemas/DataFieldDate'
+          description: List of date type data fields
         numbers:
           type: array
           items:
             $ref: '#/components/schemas/DataFieldNumber'
+          description: List of number type data fields
         texts:
           type: array
           items:
             $ref: '#/components/schemas/DataFieldText'
+          description: List of text type data fields
         links:
           type: array
           items:
             $ref: '#/components/schemas/DataFieldLink'
+          description: List of link type data fields
         listValues:
           type: array
           items:
             $ref: '#/components/schemas/DataFieldListValue'
+          description: List of list type data fields
+    DataField:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of the data field
     DataFieldUser:
       type: object
+      allOf:
+        - $ref: '#/components/schemas/DataField'
       properties:
-        id:
-          type: string
         userId:
           type: string
+          description: Id of the user
     DataFieldDate:
       type: object
+      allOf:
+        - $ref: '#/components/schemas/DataField'
       properties:
-        id:
-          type: string
         date:
           type: string
           format: date-time
+          description: Date value (YYYY-MM-DD HH:MM)
     DataFieldNumber:
       type: object
+      allOf:
+        - $ref: '#/components/schemas/DataField'
       properties:
-        id:
-          type: string
         number:
           type: integer
           format: int64
+          description: Number value
     DataFieldText:
       type: object
+      allOf:
+        - $ref: '#/components/schemas/DataField'
       properties:
-        id:
-          type: string
         text:
           type: string
+          description: Text value
     DataFieldLink:
       type: object
+      allOf:
+        - $ref: '#/components/schemas/DataField'
       properties:
-        id:
-          type: string
         url:
           type: string
           format: url
+          description: Url value
         text:
           type: string
+          description: Text value
     DataFieldListValue:
       type: object
+      allOf:
+        - $ref: '#/components/schemas/DataField'
       properties:
-        id:
-          type: string
         listId:
           type: string
+          description: Id of the list
     Note:
       type: object
       properties:
         id:
           type: string
+          description: Id of the note
         userId:
           type: string
+          description: Id of the user that created the note
         note:
           type: string
+          description: Contents of the note
         dateTime:
           type: string
           format: date-time
+          description: Date the note was created (YYYY-MM-DD HH:MM)
     Error:
       type: object
       properties:
         errorCode:
           type: integer
-        meddage:
+          description: Error code
+        message:
           type: string
+          description: Error description
   requestBodies:
     Task:
       content:
@@ -655,15 +702,7 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   securitySchemes:
-    petstore_auth:
-      type: oauth2
-      flows:
-        implicit:
-          authorizationUrl: 'http://petstore.swagger.io/oauth/dialog'
-          scopes:
-            'write:pets': modify pets in your account
-            'read:pets': read your pets
     api_key:
       type: apiKey
-      name: api_key
-      in: header
+      name: token
+      in: query
