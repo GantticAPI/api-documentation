@@ -105,6 +105,29 @@ paths:
           $ref: '#/components/responses/Error'
         '5XX':
           $ref: '#/components/responses/Error'
+  '/tasks/datafields':
+    parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
+    get:
+      tags:
+        - task
+      summary: Get all task data fields
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataFields'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
   /task:
     parameters:
     - name: token
@@ -243,6 +266,29 @@ paths:
           $ref: '#/components/responses/Error'
         '5XX':
           $ref: '#/components/responses/Error'
+  '/resources/datafields':
+    parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
+    get:
+      tags:
+        - resource
+      summary: Get all resource data fields
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataFields'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
   /resource:
     parameters:
       - name: token
@@ -376,6 +422,29 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ProjectDetails'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
+  '/projects/datafields':
+    parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
+    get:
+      tags:
+        - project
+      summary: Get all project data fields
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataFields'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
