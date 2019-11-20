@@ -100,7 +100,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Task'
+                  $ref: '#/components/schemas/TaskGet'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -148,14 +148,14 @@ paths:
           schema:
             type: string
       requestBody:
-        $ref: '#/components/requestBodies/Task'
+        $ref: '#/components/requestBodies/TaskPost'
       responses:
         '200':
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Task'
+                $ref: '#/components/schemas/TaskGet'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -172,14 +172,14 @@ paths:
           schema:
             type: string
       requestBody:
-        $ref: '#/components/requestBodies/Task'
+        $ref: '#/components/requestBodies/TaskPatch'
       responses:
         '200':
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Task'
+                $ref: '#/components/schemas/TaskGet'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -208,7 +208,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TaskDetails'
+                $ref: '#/components/schemas/TaskGet'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -261,7 +261,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ResourceDetails'
+                  $ref: '#/components/schemas/ResourceGet'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -302,18 +302,14 @@ paths:
         - resource
       summary: Create a resource
       requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Resource'
+        $ref: '#/components/requestBodies/ResourcePost'
       responses:
         '200':
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/ResourceGet'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -323,18 +319,14 @@ paths:
         - resource
       summary: Modify a resource
       requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Resource'
+        $ref: '#/components/requestBodies/ResourcePost'
       responses:
         '200':
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/ResourceGet'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -349,7 +341,7 @@ paths:
           type: string
       - name: resourceId
         in: path
-        description: ID of the resource
+        description: Id of the resource
         required: true
         schema:
           type: integer
@@ -364,7 +356,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceDetails'
+                $ref: '#/components/schemas/ResourceGet'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -376,10 +368,6 @@ paths:
       responses:
         '200':
           description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -421,7 +409,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ProjectDetails'
+                  $ref: '#/components/schemas/ProjectGet'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -462,10 +450,14 @@ paths:
         - project
       summary: Create a project
       requestBody:
-        $ref: '#/components/requestBodies/Project'
+        $ref: '#/components/requestBodies/ProjectPost'
       responses:
         '200':
           description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectGet'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -475,10 +467,14 @@ paths:
         - project
       summary: Modify a project
       requestBody:
-        $ref: '#/components/requestBodies/Project'
+        $ref: '#/components/requestBodies/ProjectPatch'
       responses:
         '200':
           description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectGet'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -493,7 +489,7 @@ paths:
           type: string
       - name: projectId
         in: path
-        description: ID of the project
+        description: Id of the project
         required: true
         schema:
           type: integer
@@ -508,7 +504,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProjectDetails'
+                $ref: '#/components/schemas/ProjectGet'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -583,9 +579,6 @@ components:
     Resource:
       type: object
       properties:
-        id:
-          type: string
-          description: Id of the resource
         name:
           type: string
           description: Name of the resource
@@ -595,21 +588,37 @@ components:
           description: Status of the resource - empty for a regular resource
         dataFields:
           $ref: '#/components/schemas/DataFields'
-    ResourceDetails:
+    ResourceGet:
       type: object
       allOf:
         - $ref: '#/components/schemas/Resource'
       properties:
+        id:
+          type: string
+          description: Id of the resource
+        notes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+          description: List of notes attached to the resource
         created:
           type: string
           format: date-time
           description: Date the resource was created (YYYY-MM-DD HH:MM)
-    Task:
-      type: object
+    ResourcePost:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+    ResourcePatch:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
       properties:
         id:
           type: string
-          description: Id of the task
+          description: Id of the resource
+    Task:
+      type: object
+      properties:
+        
         status:
           type: string
           enum: ["", archived]
@@ -645,26 +654,38 @@ components:
           description: Recurring id of the task
         dataFields:
           $ref: '#/components/schemas/DataFields'
-        created:
-          type: string
-          format: date-time
-          description: Date the task was created (YYYY-MM-DD HH:MM)
-    TaskDetails:
+    TaskGet:
       type: object
       allOf:
         - $ref: '#/components/schemas/Task'
       properties:
+        id:
+          type: string
+          description: Id of the task
         notes:
           type: array
           items:
             $ref: '#/components/schemas/Note'
           description: List of notes attached to the task
-    Project:
+        created:
+          type: string
+          format: date-time
+          description: Date the task was created (YYYY-MM-DD HH:MM)
+    TaskPost:
       type: object
+      allOf:
+        - $ref: '#/components/schemas/Task'
+    TaskPatch:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Task'
       properties:
         id:
           type: string
-          description: Id of the project
+          description: Id of the task
+    Project:
+      type: object
+      properties:
         name:
           type: string
           description: Name of the project
@@ -674,15 +695,35 @@ components:
           description: Status of the project - empty for a regular project
         dataFields:
           $ref: '#/components/schemas/DataFields'
-    ProjectDetails:
+    ProjectGet:
       type: object
       allOf:
         - $ref: '#/components/schemas/Project'
       properties:
+        id:
+          type: string
+          description: Id of the project
+        notes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+          description: List of notes attached to the project
         created:
           type: string
           format: date-time
           description: Date the project was created (YYYY-MM-DD HH:MM)
+    ProjectPost:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Project'
+    ProjectPatch:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Project'
+      properties:
+        id:
+          type: string
+          description: Id of the project
     User:
       type: object
       properties:
@@ -697,6 +738,7 @@ components:
           description: Surname of the user
         email:
           type: string
+          format: email
           description: Email of the user
         type:
           type: string
@@ -825,21 +867,36 @@ components:
           type: string
           description: Error description
   requestBodies:
-    Task:
+    TaskPost:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Task'
-    Resource:
+            $ref: '#/components/schemas/TaskPost'
+    TaskPatch:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Resource'
-    Project:
+            $ref: '#/components/schemas/TaskPatch'
+    ResourcePost:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Project'
+            $ref: '#/components/schemas/ResourcePost'
+    ResourcePatch:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResourcePatch'
+    ProjectPost:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectPost'
+    ProjectPatch:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectPatch'
   responses:
     Error:
       description: An error occurred
