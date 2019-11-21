@@ -523,7 +523,7 @@ components:
           enum: ["", archived]
           description: Status of the resource - empty for a regular resource
         dataFields:
-          $ref: '#/components/schemas/DataFields'
+          $ref: '#/components/schemas/DataFieldValues'
     ResourceGet:
       type: object
       allOf:
@@ -589,7 +589,7 @@ components:
           type: string
           description: Recurring id of the task
         dataFields:
-          $ref: '#/components/schemas/DataFields'
+          $ref: '#/components/schemas/DataFieldValues'
     TaskGet:
       type: object
       allOf:
@@ -630,7 +630,7 @@ components:
           enum: ["", archived]
           description: Status of the project - empty for a regular project
         dataFields:
-          $ref: '#/components/schemas/DataFields'
+          $ref: '#/components/schemas/DataFieldValues'
     ProjectGet:
       type: object
       allOf:
@@ -684,6 +684,99 @@ components:
           type: string
           format: date-time
           description: Date the user was created (YYYY-MM-DD HH:MM)
+    DataFieldValues:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataFieldUserValue'
+          description: List of user type data fields
+        dates:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataFieldDateValue'
+          description: List of date type data fields
+        numbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataFieldNumberValue'
+          description: List of number type data fields
+        texts:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataFieldTextValue'
+          description: List of text type data fields
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataFieldLinkValue'
+          description: List of link type data fields
+        listValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataFieldListValue'
+          description: List of list type data fields
+    DataFieldValue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of the data field
+    DataFieldUserValue:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/DataFieldValue'
+      properties:
+        userId:
+          type: string
+          description: Id of the user
+    DataFieldDateValue:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/DataFieldValue'
+      properties:
+        date:
+          type: string
+          format: date-time
+          description: Date value (YYYY-MM-DD HH:MM)
+    DataFieldNumberValue:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/DataFieldValue'
+      properties:
+        number:
+          type: integer
+          format: int64
+          description: Number value
+    DataFieldTextValue:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/DataFieldValue'
+      properties:
+        text:
+          type: string
+          description: Text value
+    DataFieldLinkValue:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/DataFieldValue'
+      properties:
+        url:
+          type: string
+          format: url
+          description: Url value
+        text:
+          type: string
+          description: Text value
+    DataFieldListValue:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/DataFieldValue'
+      properties:
+        listId:
+          type: string
+          description: Id of the list
     DataFields:
       type: object
       properties:
@@ -715,7 +808,7 @@ components:
         listValues:
           type: array
           items:
-            $ref: '#/components/schemas/DataFieldListValue'
+            $ref: '#/components/schemas/DataFieldList'
           description: List of list type data fields
     DataField:
       type: object
@@ -723,60 +816,39 @@ components:
         id:
           type: string
           description: Id of the data field
+        name:
+          type: string
+          description: Name of the data field
     DataFieldUser:
       type: object
       allOf:
         - $ref: '#/components/schemas/DataField'
-      properties:
-        userId:
-          type: string
-          description: Id of the user
     DataFieldDate:
       type: object
       allOf:
         - $ref: '#/components/schemas/DataField'
-      properties:
-        date:
-          type: string
-          format: date-time
-          description: Date value (YYYY-MM-DD HH:MM)
     DataFieldNumber:
       type: object
       allOf:
         - $ref: '#/components/schemas/DataField'
-      properties:
-        number:
-          type: integer
-          format: int64
-          description: Number value
     DataFieldText:
       type: object
       allOf:
         - $ref: '#/components/schemas/DataField'
-      properties:
-        text:
-          type: string
-          description: Text value
     DataFieldLink:
       type: object
       allOf:
         - $ref: '#/components/schemas/DataField'
-      properties:
-        url:
-          type: string
-          format: url
-          description: Url value
-        text:
-          type: string
-          description: Text value
-    DataFieldListValue:
+    DataFieldList:
       type: object
       allOf:
         - $ref: '#/components/schemas/DataField'
       properties:
-        listId:
-          type: string
+        values:
+          type: array
           description: Id of the list
+          items:
+            type: string
     Note:
       type: object
       properties:
