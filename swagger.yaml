@@ -113,11 +113,7 @@ paths:
       summary: Get all task data fields
       responses:
         '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DataFields'
+          $ref: '#/components/responses/DataFields'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -256,11 +252,7 @@ paths:
       summary: Get all resource data fields
       responses:
         '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DataFields'
+          $ref: '#/components/responses/DataFields'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -386,11 +378,7 @@ paths:
       summary: Get all project data fields
       responses:
         '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DataFields'
+          $ref: '#/components/responses/DataFields'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -848,7 +836,16 @@ components:
           type: array
           description: Id of the list
           items:
-            type: string
+            $ref: '#/components/schemas/DataFieldListOption'
+    DataFieldListOption:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of the list option
+        value:
+          type: string
+          description: Value of the list option
     Note:
       type: object
       properties:
@@ -962,6 +959,12 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/User'
+    DataFields:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DataFields'
     Error:
       description: An error occurred
       content:
