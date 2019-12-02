@@ -500,6 +500,20 @@ paths:
           $ref: '#/components/responses/Error'
 components:
   schemas:
+    ResourceList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceGet'
+          description: A list of resources
+        page:
+          type: integer
+          description: Current page
+        pageCount:
+          type: integer
+          description: Number of total pages
     Resource:
       type: object
       properties:
@@ -539,10 +553,23 @@ components:
         id:
           type: string
           description: Id of the resource
+    TaskList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskGet'
+          description: A list of tasks
+        page:
+          type: integer
+          description: Current page
+        pageCount:
+          type: integer
+          description: Number of total pages
     Task:
       type: object
       properties:
-        
         status:
           type: string
           enum: ["", archived]
@@ -607,6 +634,20 @@ components:
         id:
           type: string
           description: Id of the task
+    ProjectList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectGet'
+          description: A list of projects
+        page:
+          type: integer
+          description: Current page
+        pageCount:
+          type: integer
+          description: Number of total pages
     Project:
       type: object
       properties:
@@ -648,6 +689,20 @@ components:
         id:
           type: string
           description: Id of the project
+    UserList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+          description: A list of users
+        page:
+          type: integer
+          description: Current page
+        pageCount:
+          type: integer
+          description: Number of total pages
     User:
       type: object
       properties:
@@ -914,9 +969,7 @@ components:
       content:
         application/json:
           schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/TaskGet'
+            $ref: '#/components/schemas/TaskList'
     Resource:
       description: Successful operation
       content:
@@ -928,9 +981,7 @@ components:
       content:
         application/json:
           schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/ResourceGet'
+            $ref: '#/components/schemas/ResourceList'
     Project:
       description: Successful operation
       content:
@@ -942,9 +993,7 @@ components:
       content:
         application/json:
           schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/ProjectGet'
+            $ref: '#/components/schemas/ProjectList'
     User:
       description: Successful operation
       content:
@@ -956,9 +1005,7 @@ components:
       content:
         application/json:
           schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/User'
+            $ref: '#/components/schemas/UserList'
     DataFields:
       description: Successful operation
       content:
