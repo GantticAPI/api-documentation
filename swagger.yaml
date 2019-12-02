@@ -74,6 +74,13 @@ paths:
             type: integer
             enum: [0, 1]
             default: 0
+        - name: page
+          in: query
+          description: Page of tasks to get
+          required: false
+          schema:
+            type: integer
+            default: 1
         - name: projectId
           in: query
           description: Project id of the tasks
@@ -231,6 +238,13 @@ paths:
             type: integer
             enum: [0, 1]
             default: 0
+        - name: page
+          in: query
+          description: Page of resources to get
+          required: false
+          schema:
+            type: integer
+            default: 1
       responses:
         '200':
           $ref: '#/components/responses/Resources'
@@ -357,6 +371,13 @@ paths:
             type: integer
             enum: [0, 1]
             default: 0
+        - name: page
+          in: query
+          description: Page of projects to get
+          required: false
+          schema:
+            type: integer
+            default: 1
       responses:
         '200':
           $ref: '#/components/responses/Projects'
@@ -466,6 +487,14 @@ paths:
       tags:
         - user
       summary: Get all users
+      parameters:
+        - name: page
+          in: query
+          description: Page of users to get
+          required: false
+          schema:
+            type: integer
+            default: 1
       responses:
         '200':
           $ref: '#/components/responses/Users'
