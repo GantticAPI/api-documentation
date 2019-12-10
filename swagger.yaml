@@ -502,6 +502,27 @@ paths:
           $ref: '#/components/responses/Error'
         '5XX':
           $ref: '#/components/responses/Error'
+  /user:
+    parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
+    post:
+      tags:
+        - user
+      summary: Create a user
+      requestBody:
+        $ref: '#/components/requestBodies/UserPost'
+      responses:
+        '200':
+          $ref: '#/components/responses/User'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
   '/user/{userId}':
     parameters:
       - name: token
@@ -739,9 +760,6 @@ components:
     User:
       type: object
       properties:
-        id:
-          type: string
-          description: Id of the user
         firstName:
           type: string
           description: First name of the user
@@ -756,10 +774,22 @@ components:
           type: string
           enum: [user, admin]
           description: Type of the user
+    UserGet:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/User'
+      properties:
+        id:
+          type: string
+          description: Id of the user
         created:
           type: string
           format: date-time
           description: Date the user was created (YYYY-MM-DD HH:MM)
+    UserPost:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/User'
     DataFieldValues:
       type: object
       properties:
@@ -990,6 +1020,11 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ProjectPatch'
+    UserPost:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserPost'
   responses:
     Task:
       description: Successful operation
@@ -1032,7 +1067,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/User'
+            $ref: '#/components/schemas/UserGet'
     Users:
       description: Successful operation
       content:
