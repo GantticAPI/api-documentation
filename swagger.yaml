@@ -749,7 +749,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/User'
+            $ref: '#/components/schemas/UserGet'
           description: A list of users
         page:
           type: integer
