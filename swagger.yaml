@@ -632,6 +632,10 @@ components:
         recurringId:
           type: string
           description: Recurring id of the task
+        utilizationPercent:
+          type: integer
+          format: int32
+          description: Utilization percent of the task
         dataFields:
           $ref: '#/components/schemas/DataFieldValues'
     TaskGet:
