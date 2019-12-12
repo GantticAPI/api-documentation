@@ -15,7 +15,7 @@ info:
     email: info@ganttic.com
 tags:
   - name: task
-    description: Operations on tasks
+    description: Operations on tasks<br/><br/>test
   - name: resource
     description: Operations on resources
   - name: project
