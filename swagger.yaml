@@ -15,7 +15,7 @@ info:
     email: info@ganttic.com
 tags:
   - name: task
-    description: Operations on tasks<br/><br/>test
+    description: Operations on tasks.
   - name: resource
     description: Operations on resources
   - name: project
@@ -87,18 +87,28 @@ paths:
           required: false
           schema:
             type: string
+            default: null
         - name: resourceId
           in: query
           description: Resource id of the tasks
           required: false
           schema:
             type: string
+            default: null
         - name: recurringId
           in: query
           description: Recurring id of the tasks
           required: false
           schema:
             type: string
+            default: null
+        - name: timeZone
+          in: query
+          description: IANA name of the time zone into which resulting task start and end times are converted
+          required: false
+          schema:
+            type: string
+            default: null
       responses:
         '200':
           $ref: '#/components/responses/Tasks'
@@ -187,6 +197,13 @@ paths:
         required: true
         schema:
           type: string
+      - name: timeZone
+        in: query
+        description: IANA name of the time zone into which resulting task start and end times are converted
+        required: false
+        schema:
+          type: string
+          default: null
     get:
       tags:
         - task
@@ -680,6 +697,15 @@ components:
       type: object
       allOf:
         - $ref: '#/components/schemas/Task'
+      properties:
+        timeZone:
+          type: string
+          default: null
+          description: IANA name of the time zone of the task's start and end times
+      required:
+        - start
+        - end
+        - resources
     TaskPatch:
       type: object
       allOf:
@@ -688,6 +714,15 @@ components:
         id:
           type: string
           description: Id of the task
+        timeZone:
+          type: string
+          default: null
+          description: IANA name of the time zone of the task's start and end times
+      required:
+        - id
+        - start
+        - end
+        - resources
     ProjectList:
       type: object
       properties:
