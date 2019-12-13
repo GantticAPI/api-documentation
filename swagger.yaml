@@ -22,6 +22,8 @@ tags:
     description: Operations on projects
   - name: user
     description: Operations on users
+servers:
+  - url: https://yutiti.com/api/v1
 paths:
   /tasks:
     parameters:
