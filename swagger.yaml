@@ -641,8 +641,8 @@ components:
       properties:
         status:
           type: string
-          enum: ["", archived]
-          description: Status of the task - empty for a regular task
+          enum: [task, archived, holiday, public_holiday]
+          description: Status of the task
         projectId:
           type: string
           description: Id of the project the task belongs in
@@ -1013,7 +1013,7 @@ components:
         note:
           type: string
           description: Contents of the note
-        dateTime:
+        created:
           type: string
           format: date-time
           description: Date the note was created (YYYY-MM-DD HH:MM)
