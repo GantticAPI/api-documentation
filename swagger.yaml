@@ -59,7 +59,7 @@ tags:
       In addition, the user has a created property showing when the user was added to the system.
       <br/><br/>
       When dealing with a lot of users the list can be split into several pages. Each response contains the current page and the number of total pages. The required page number can be specified by the page query parameter.
-  - name: data fields
+  - name: datafields
     description: "Resources, tasks and projects can all contain data fields. There are six types of data fields in total: users, dates, numbers, texts, links and listValues. The data fields are grouped by type in the dataFields object.<br/><br/>Data fields are account wide meaning that each resource/task/project has identical data fields to other resources/tasks/projects. However not each of them has a value for each data field. You can strip out empty data fields from list queries by setting the value of the includeEmptyDataFields to 0.<br/><br/>A user data field contains a user id. A date data field contains a date value. A number data field contains either an integer or a floating point value. A text data field contains a string value. A link data field contains a url and a title for the link. And a list type data field contains one of string type predefined values for that list.<br/><br/>You can use one of the queries below to fetch all data fields for resources/tasks/projects. Requests for resources/projects/tasks also contain data fields and their respective values for each resource/task/project. You can select whether to include data fields with no value via the includeEmptyDataFields query parameter."
 servers:
   - url: https://yutiti.com/api/v1
