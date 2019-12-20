@@ -38,7 +38,9 @@ tags:
       <br/>
       NOTE - Deleting a recurring task will delete all other tasks in the set.
       <br/><br/>
-      TODO - query parameters
+      You can set several parameters to fine tune the response of your /tasks query. timeMin and timeMax are required parameters representing the interval for which you are querying tasks for. The includeArchived parameter can be used to include archived tasks in the response. includeNotes and includeEmptyDatafields parameters can be used to save bandwidth when notes and/or empty data fields are not required, they default to 0, and are not required if the data is not necessary. projectId, resourceId and recurringId parameters can be used alone or in combination to fine tune the response to only contain tasks for a specific project, resource or belonging to a specific recurring set.
+      <br/><br/>
+      You can also specify a time zone from [the IANA time zone database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) to convert the start and end times of the resulting tasks to the time zone of your choice. The default value for this is UTC.
       <br/><br/>
       When dealing with a lot of tasks the list can be split into several pages. Each response contains the current page and the number of total pages. The required page number can be specified by the page query parameter.
   - name: project
@@ -52,7 +54,13 @@ tags:
       <br/><br/>
       When dealing with a lot of projects the list can be split into several pages. Each response contains the current page and the number of total pages. The required page number can be specified by the page query parameter.
   - name: user
-    description: Operations on users
+    description: Users are the users of Ganttic, not resources. This is not mutually exclusive, however a separate resource must be created for the person to assign them tasks. Users are identified by the automatically generated id, but also a unique email address, which is used to log into Ganttic's web application.
+      <br/><br/>
+      First name and surname can be set for each user as well as a status of either "user" or "admin", which represents the basic permission set the user has in the application. The permissions can be tweaked further in the web interface.
+      <br/><br/>
+      In addition, the user has a created property showing when the user was added to the system.
+      <br/><br/>
+      When dealing with a lot of users the list can be split into several pages. Each response contains the current page and the number of total pages. The required page number can be specified by the page query parameter.
 servers:
   - url: https://yutiti.com/api/v1
 paths:
