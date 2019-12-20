@@ -64,6 +64,139 @@ tags:
 servers:
   - url: https://yutiti.com/api/v1
 paths:
+  /resources:
+    parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
+    get:
+      tags:
+        - resource
+      summary: Get all resources
+      parameters:
+        - name: includeNotes
+          in: query
+          description: Include notes in result
+          required: false
+          schema:
+            type: integer
+            enum: [0, 1]
+            default: 0
+        - name: includeEmptyDataFields
+          in: query
+          description: Include data fields for which the task has no value in result
+          required: false
+          schema:
+            type: integer
+            enum: [0, 1]
+            default: 0
+        - name: page
+          in: query
+          description: Page of resources to get
+          required: false
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          $ref: '#/components/responses/Resources'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
+  '/resources/datafields':
+    parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
+    get:
+      tags:
+        - datafields
+      summary: Get all resource data fields
+      responses:
+        '200':
+          $ref: '#/components/responses/DataFields'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
+  /resource:
+    parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
+    post:
+      tags:
+        - resource
+      summary: Create a resource
+      requestBody:
+        $ref: '#/components/requestBodies/ResourcePost'
+      responses:
+        '200':
+          $ref: '#/components/responses/Resource'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
+    patch:
+      tags:
+        - resource
+      summary: Modify a resource
+      requestBody:
+        $ref: '#/components/requestBodies/ResourcePost'
+      responses:
+        '200':
+          $ref: '#/components/responses/Resource'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
+  '/resource/{resourceId}':
+    parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
+      - name: resourceId
+        in: path
+        description: Id of the resource
+        required: true
+        schema:
+          type: integer
+          format: int64
+    get:
+      tags:
+        - resource
+      summary: Get resource details
+      responses:
+        '200':
+          $ref: '#/components/responses/Resource'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
+    delete:
+      tags:
+        - resource
+      summary: Delete a resource
+      responses:
+        '200':
+          description: Successful operation
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
   /tasks:
     parameters:
     - name: token
@@ -260,139 +393,6 @@ paths:
       tags:
         - task
       summary: Delete a task
-      responses:
-        '200':
-          description: Successful operation
-        '4XX':
-          $ref: '#/components/responses/Error'
-        '5XX':
-          $ref: '#/components/responses/Error'
-  /resources:
-    parameters:
-      - name: token
-        in: query
-        description: API token
-        required: true
-        schema:
-          type: string
-    get:
-      tags:
-        - resource
-      summary: Get all resources
-      parameters:
-        - name: includeNotes
-          in: query
-          description: Include notes in result
-          required: false
-          schema:
-            type: integer
-            enum: [0, 1]
-            default: 0
-        - name: includeEmptyDataFields
-          in: query
-          description: Include data fields for which the task has no value in result
-          required: false
-          schema:
-            type: integer
-            enum: [0, 1]
-            default: 0
-        - name: page
-          in: query
-          description: Page of resources to get
-          required: false
-          schema:
-            type: integer
-            default: 1
-      responses:
-        '200':
-          $ref: '#/components/responses/Resources'
-        '4XX':
-          $ref: '#/components/responses/Error'
-        '5XX':
-          $ref: '#/components/responses/Error'
-  '/resources/datafields':
-    parameters:
-      - name: token
-        in: query
-        description: API token
-        required: true
-        schema:
-          type: string
-    get:
-      tags:
-        - datafields
-      summary: Get all resource data fields
-      responses:
-        '200':
-          $ref: '#/components/responses/DataFields'
-        '4XX':
-          $ref: '#/components/responses/Error'
-        '5XX':
-          $ref: '#/components/responses/Error'
-  /resource:
-    parameters:
-      - name: token
-        in: query
-        description: API token
-        required: true
-        schema:
-          type: string
-    post:
-      tags:
-        - resource
-      summary: Create a resource
-      requestBody:
-        $ref: '#/components/requestBodies/ResourcePost'
-      responses:
-        '200':
-          $ref: '#/components/responses/Resource'
-        '4XX':
-          $ref: '#/components/responses/Error'
-        '5XX':
-          $ref: '#/components/responses/Error'
-    patch:
-      tags:
-        - resource
-      summary: Modify a resource
-      requestBody:
-        $ref: '#/components/requestBodies/ResourcePost'
-      responses:
-        '200':
-          $ref: '#/components/responses/Resource'
-        '4XX':
-          $ref: '#/components/responses/Error'
-        '5XX':
-          $ref: '#/components/responses/Error'
-  '/resource/{resourceId}':
-    parameters:
-      - name: token
-        in: query
-        description: API token
-        required: true
-        schema:
-          type: string
-      - name: resourceId
-        in: path
-        description: Id of the resource
-        required: true
-        schema:
-          type: integer
-          format: int64
-    get:
-      tags:
-        - resource
-      summary: Get resource details
-      responses:
-        '200':
-          $ref: '#/components/responses/Resource'
-        '4XX':
-          $ref: '#/components/responses/Error'
-        '5XX':
-          $ref: '#/components/responses/Error'
-    delete:
-      tags:
-        - resource
-      summary: Delete a resource
       responses:
         '200':
           description: Successful operation
