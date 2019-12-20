@@ -3,11 +3,9 @@ info:
   description: |
     [www.ganttic.com](https://www.ganttic.com)
     <br/><br/>
-    **Authentication**: TODO
-    <br/><br/>
-    **Data structure**: TODO
-    <br/><br/>
-    **Other stuff**
+    **Authentication**: Each request to the ganttic API is authorized by an API token. This token needs to be contained in the query itself as a parameter. To generate or regenerate an API token go to [the web interface](https://planner.ganttic.com), open settings, select the API tab and click on "Generate new token".
+      <br/>
+      NOTE - When you already have a token and generate a new one then the old token will be discontinued immediately and will no longer function in any existing systems you might have running.
   version: "1.0.1"
   title: Ganttic API
   termsOfService: 'https://www.ganttic.com/terms-and-conditions'
@@ -29,7 +27,7 @@ tags:
       <br/><br/>
       Each task has a unique id that is generated automatically when adding the task. When adding a task start and end properties are mandatory, representing the start and end times of the task respectively. The allDay parameter specifies the date format of the start and end. If it is an all day task then the format is YYYY-MM-DD, YYYY-MM-DD HH:MM otherwise. Each task can also have a human-friendly name, but this is not required.
       <br/><br/>
-      Also mandatory is that the task is assigned to at least one resource via the resources parameter, which is a list of resource ids. You can fetch all available resources via a query to the /resources endpont, which you can read more about in the resources section. The task also has an optional projectId parameter which indicates that the task is a port of a specific project. Read more about projects in the projects section.
+      Also mandatory is that the task is assigned to at least one resource via the resources parameter, which is a list of resource ids. You can fetch all available resources via a query to the /resources endpont, which you can read more about in the resources section. The task also has an optional projectId parameter which indicates that the task is a part of a specific project. Read more about projects in the projects section.
       <br/><br/>
       In addition, each task has a status, any of "task", "archived", "holiday" or "public_holiday", which in order represent a regular task, an inactive read-only task, a custom time-off (e.g. vacation or sick leave) and a public holiday. The difference between the last two is that public holiday tasks are automatically assigned to all resources while custom holidays are resource specific. You can read more about holydays [here](https://www.ganttic.com/helpdesk/features/tasks/holiday-and-public-holiday-tasks).
       Some other properties of a task are usedTime, which represents the time it actually took to complete the task in minutes; utilizationPercent, which represents the percentage of time that should be used to focus on that specific task in the given time span; creation time of the task; user generated notes; and data fields, which you can find more about in the data fields section.
@@ -61,6 +59,8 @@ tags:
       In addition, the user has a created property showing when the user was added to the system.
       <br/><br/>
       When dealing with a lot of users the list can be split into several pages. Each response contains the current page and the number of total pages. The required page number can be specified by the page query parameter.
+  - name: data fields
+    description: "Resources, tasks and projects can all contain data fields. There are six types of data fields in total: users, dates, numbers, texts, links and listValues. The data fields are grouped by type in the dataFields object.<br/><br/>Data fields are account wide meaning that each resource/task/project has identical data fields to other resources/tasks/projects. However not each of them has a value for each data field. You can strip out empty data fields from list queries by setting the value of the includeEmptyDataFields to 0.<br/><br/>A user data field contains a user id. A date data field contains a date value. A number data field contains either an integer or a floating point value. A text data field contains a string value. A link data field contains a url and a title for the link. And a list type data field contains one of string type predefined values for that list."
 servers:
   - url: https://yutiti.com/api/v1
 paths:
