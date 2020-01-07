@@ -18,6 +18,9 @@ info:
   termsOfService: 'https://www.ganttic.com/terms-and-conditions'
   contact:
     email: info@ganttic.com
+  x-logo:
+    url: 'https://redocly.github.io/redoc/petstore-logo.png'
+    altText: Petstore logo
 tags:
   - name: resource
     description: A resource in Ganttic represents anyone or anything that should be planned or booked in order to complete a project. You can learn more about resources [here](https://www.ganttic.com/helpdesk/features/resources).
