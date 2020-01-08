@@ -11,7 +11,20 @@ info:
     # Authentication
     Each request to the ganttic API is authorized by an API token. This token must be sent with each request as a query parameter. An coount administrator can obtain the token from [the web interface](https://planner.ganttic.com) under Settings > API. If the authentication token is not contained in the request or is invalid then the server will return an Unauthorized (401) response.
     
-      **NOTE** - When you already have a token and generate a new one then the old token will be discontinued immediately and will no longer function in any existing systems you might have running.
+    **NOTE** - When you already have a token and generate a new one then the old token will be discontinued immediately and will no longer function in any existing systems you might have running.
+    
+    # Data format
+    All requests and responses are in JSON format. Nonexistent values are given as null values.
+    
+    ### Date & time formatting
+    All dates and times used by the API are in the format of YYYY-MM-DD hh:mm:ss. In certain cases the API will not return a time component or will ignore the time component in the request. Details for specific requests are given below.
+    
+    ### Responses
+    All successful requests will return a Success (200) response along with a response body if appropriate. Unsuccessful requests will return a 4XX or 5XX response code along with an error object containing the error code and error description.
+    
+    # Pagination
+    Pagination is used in all GET requests that return an array of objects. Each response includes page and pageCount parameters. Page can be specified as a query parameter, pageCount is the number of total pages. Pages are 1-indexed and the page parameter defaults to 1. Page size is 50.
+
       
   version: "1.0.1"
   title: Ganttic API
