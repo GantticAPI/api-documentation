@@ -654,7 +654,7 @@ components:
           description: Name of the resource
         status:
           type: string
-          enum: ["", archived]
+          enum: [resource, archived]
           description: Status of the resource - empty for a regular resource
         dataFields:
           $ref: '#/components/schemas/DataFieldValues'
@@ -716,7 +716,7 @@ components:
           type: array
           items:
             type: string
-          description: List of resources the task is connected to
+          description: List of resources the task is assigned to
         start:
           type: string
           format: date-time
@@ -734,7 +734,7 @@ components:
           description: Task used time in minutes
         recurringId:
           type: string
-          description: Recurring id of the task
+          description: Id of the recurring set the task is in
         utilizationPercent:
           type: integer
           format: int32
