@@ -48,23 +48,6 @@ tags:
       When dealing with a lot of resources the list can be split into several pages. Each response contains the current page and the number of total pages. The required page number can be specified by the page query parameter.
   - name: task
     description: A task is an assignment for a resource, whether it's a booking, a job or something else. You can learn more about tasks [here](https://www.ganttic.com/helpdesk/features/tasks).
-      <br/><br/>
-      Each task has a unique id that is generated automatically when adding the task. When adding a task start and end properties are mandatory, representing the start and end times of the task respectively. The allDay parameter specifies the date format of the start and end. If it is an all day task then the format is YYYY-MM-DD, YYYY-MM-DD HH:MM otherwise. Each task can also have a human-friendly name, but this is not required.
-      <br/><br/>
-      Also mandatory is that the task is assigned to at least one resource via the resources parameter, which is a list of resource ids. You can fetch all available resources via a query to the /resources endpont, which you can read more about in the resources section. The task also has an optional projectId parameter which indicates that the task is a part of a specific project. Read more about projects in the projects section.
-      <br/><br/>
-      In addition, each task has a status, any of "task", "archived", "holiday" or "public_holiday", which in order represent a regular task, an inactive read-only task, a custom time-off (e.g. vacation or sick leave) and a public holiday. The difference between the last two is that public holiday tasks are automatically assigned to all resources while custom holidays are resource specific. You can read more about holydays [here](https://www.ganttic.com/helpdesk/features/tasks/holiday-and-public-holiday-tasks).
-      Some other properties of a task are usedTime, which represents the time it actually took to complete the task in minutes; utilizationPercent, which represents the percentage of time that should be used to focus on that specific task in the given time span; creation time of the task; user generated notes; and data fields, which you can find more about in the data fields section.
-      <br/><br/>
-      Tasks can also have a recurring id. This means that the task is repeated at certain time intervals. When editing a task that is in a recurring set then all the tasks in the set will be modified accordingly. For example, if you set the start of a recurring task to be two hours later then all other tasks in the set will be moved forward two hours. To remove a task from the group leave the recurringId property empty when updating the task.
-      <br/>
-      NOTE - Deleting a recurring task will delete all other tasks in the set.
-      <br/><br/>
-      You can set several parameters to fine tune the response of your /tasks query. timeMin and timeMax are required parameters representing the interval for which you are querying tasks for. The includeArchived parameter can be used to include archived tasks in the response. includeNotes and includeEmptyDatafields parameters can be used to save bandwidth when notes and/or empty data fields are not required, they default to 0, and are not required if the data is not necessary. projectId, resourceId and recurringId parameters can be used alone or in combination to fine tune the response to only contain tasks for a specific project, resource or belonging to a specific recurring set.
-      <br/><br/>
-      You can also specify a time zone from [the IANA time zone database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) to convert the start and end times of the resulting tasks to the time zone of your choice. The default value for this is UTC.
-      <br/><br/>
-      When dealing with a lot of tasks the list can be split into several pages. Each response contains the current page and the number of total pages. The required page number can be specified by the page query parameter.
   - name: project
     description: Projects might be the reason you're planning your resources. In that case this is the place to look for projects that are ongoing. To see which tasks a certain project contains look into the tasks section. You can learn more about projects [here](https://www.ganttic.com/helpdesk/features/projects).
       <br/><br/>
