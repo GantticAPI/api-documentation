@@ -688,40 +688,48 @@ components:
         status:
           type: string
           enum: [task, archived, holiday, public_holiday]
-          description: Status of the task
+          nullable: false
+          default: task
+          description: Status of the task. "task" for a regular task, "archived" for an archived read-only task, "holiday" for a custom time-off (e.g. vacation or sick leave) or "public_holiday" which is assigned to all resources. When creating or modifying a task only "task", "holiday" and "public_holiday" values are accepted. A task is archived when its corresponding project is archived.
         projectId:
           type: string
-          description: Id of the project the task belongs in
+          description: Id of the project the task belongs in.
+          nullable: true
         name:
           type: string
-          description: Name of the task
+          description: Name of the task.
+          nullable: true
         resources:
           type: array
           items:
             type: string
-          description: List of resources the task is assigned to
+          description: List of resource ids the task is assigned to. At least one resource id is required when creating or modifying a task unless the task status is "public_holiday" in which case it is automatically assigned to all resources.
         start:
           type: string
           format: date-time
-          description: Start time of the task (YYYY-MM-DD HH:MM)
+          description: Start time of the task YYYY-MM-DD if allDay=true YYYY-MM-DD hh:mm otherwise.
         end:
           type: string
           format: date-time
-          description: End time of the task (YYYY-MM-DD HH:MM)
+          description: End time of the task YYYY-MM-DD if allDay=true YYYY-MM-DD hh:mm otherwise.
         allDay:
           type: boolean
-          description: Whether this is a all day task (planning precision is day)
+          description: Whether this is an all day task.
+          default: false
         usedTime:
           type: integer
           format: int64
-          description: Task used time in minutes
+          description: Task used time in minutes.
+          default: 0
         recurringId:
           type: string
-          description: Id of the recurring set the task is in
+          description: Id of the recurring set the task is in.
+          default: null
         utilizationPercent:
           type: integer
           format: int32
-          description: Utilization percent of the task
+          description: Utilization percent of the task.
+          default: 100
         dataFields:
           $ref: '#/components/schemas/DataFieldValues'
     TaskGet:
@@ -731,16 +739,19 @@ components:
       properties:
         id:
           type: string
-          description: Id of the task
+          description: Id of the task. This value is assigned automatically when a task is created.
+          readOnly: true
         notes:
           type: array
           items:
             $ref: '#/components/schemas/Note'
-          description: List of notes attached to the task
+          readOnly: true
+          description: List of notes attached to the task.
         created:
           type: string
           format: date-time
-          description: Date the task was created (YYYY-MM-DD HH:MM)
+          readOnly: true
+          description: Date the task was created YYYY-MM-DD hh:mm
     TaskPost:
       type: object
       allOf:
@@ -748,6 +759,7 @@ components:
       properties:
         timeZone:
           type: string
+          nullable: true
           default: null
           description: IANA name of the time zone of the task's start and end times
       required:
