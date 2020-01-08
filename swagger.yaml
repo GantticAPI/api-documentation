@@ -32,7 +32,8 @@ info:
   contact:
     email: info@ganttic.com
   x-logo:
-    url: 'https://redocly.github.io/redoc/petstore-logo.png'
+    #url: 'https://redocly.github.io/redoc/petstore-logo.png'
+    url: './ganttic-logo_sini-valge.svg'
     altText: Petstore logo
 tags:
   - name: resource
