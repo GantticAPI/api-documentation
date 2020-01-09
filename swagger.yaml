@@ -50,22 +50,8 @@ tags:
     description: A task is an assignment for a resource, whether it's a booking, a job or something else. You can learn more about tasks [here](https://www.ganttic.com/helpdesk/features/tasks).
   - name: project
     description: Projects might be the reason you're planning your resources. In that case this is the place to look for projects that are ongoing. To see which tasks a certain project contains look into the tasks section. You can learn more about projects [here](https://www.ganttic.com/helpdesk/features/projects).
-      <br/><br/>
-      Each project has a unique id that is generated automatically when adding a resource. A name is required when adding a project. This is a human-friendly identifier for telling them apart. However, the names are not unique.
-      <br/><br/>
-      In addition, each project has a status, either "project" or "archived", the latter denoting a finished project. Archived projects are read-only. Each project has a list of user generated notes and a list of data fields. You can read more about them in the data fields section.
-      <br/><br/>
-      When querying the list of projects you can use the includeNotes query paramter to specify whether you want to receive notes attached to projects and the includeEmptyDataFields parameter to specify whether each project should contain data fields for which it does not have a non-null value.
-      <br/><br/>
-      When dealing with a lot of projects the list can be split into several pages. Each response contains the current page and the number of total pages. The required page number can be specified by the page query parameter.
   - name: user
     description: Users are the users of Ganttic, not resources. This is not mutually exclusive, however a separate resource must be created for the person to assign them tasks. Users are identified by the automatically generated id, but also a unique email address, which is used to log into Ganttic's web application.
-      <br/><br/>
-      First name and surname can be set for each user as well as a status of either "user" or "admin", which represents the basic permission set the user has in the application. The permissions can be tweaked further in the web interface.
-      <br/><br/>
-      In addition, the user has a created property showing when the user was added to the system.
-      <br/><br/>
-      When dealing with a lot of users the list can be split into several pages. Each response contains the current page and the number of total pages. The required page number can be specified by the page query parameter.
   - name: datafield
     description: "Resources, tasks and projects can all contain data fields. There are six types of data fields in total: users, dates, numbers, texts, links and listValues. The data fields are grouped by type in the dataFields object.<br/><br/>Data fields are account wide meaning that each resource/task/project has identical data fields to other resources/tasks/projects. However not each of them has a value for each data field. You can strip out empty data fields from list queries by setting the value of the includeEmptyDataFields to 0.<br/><br/>A user data field contains a user id. A date data field contains a date value. A number data field contains either an integer or a floating point value. A text data field contains a string value. A link data field contains a url and a title for the link. And a list type data field contains one of string type predefined values for that list.<br/><br/>You can use one of the queries below to fetch all data fields for resources/tasks/projects. Requests for resources/projects/tasks also contain data fields and their respective values for each resource/task/project. You can select whether to include data fields with no value via the includeEmptyDataFields query parameter."
 servers:
@@ -947,9 +933,8 @@ components:
         - $ref: '#/components/schemas/DataFieldValue'
       properties:
         number:
-          type: integer
-          format: int64
-          description: Number value
+          type: string
+          description: Number value in string format. Can be signed or unsigned integer or floating point number.
     DataFieldTextValue:
       type: object
       allOf:
