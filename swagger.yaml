@@ -933,6 +933,8 @@ components:
           format: date-time
           description: Date the user was created (YYYY-MM-DD hh:mm).
           readOnly: true
+      required:
+        - email
     UserGet:
       type: object
       allOf:
@@ -949,6 +951,8 @@ components:
         password:
           type: string
           description: Password of the user. This is a write-only property included in the request when creating a user and will not be returned with GET requests.
+      required:
+        - password
     UserPatch:
       type: object
       allOf:
