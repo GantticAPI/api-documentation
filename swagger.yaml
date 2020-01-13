@@ -682,7 +682,6 @@ components:
         status:
           type: string
           enum: [resource, archived]
-          nullable: false
           default: resource
           description: Status of the resource. One of either "resource" for a regular resource or "archived" for a read-only archived resource.
         notes:
@@ -738,7 +737,6 @@ components:
         status:
           type: string
           enum: [task, archived, holiday, public_holiday]
-          nullable: false
           default: task
           description: Status of the task. "task" for a regular task, "archived" for an archived read-only task, "holiday" for a custom time-off (e.g. vacation or sick leave) or "public_holiday" which is assigned to all resources. When creating or modifying a task only "task", "holiday" and "public_holiday" values are accepted. A task is archived when its corresponding project is archived.
         projectId:
@@ -862,7 +860,6 @@ components:
         status:
           type: string
           enum: [project, archived]
-          nullable: false
           default: project
           description: Status of the project. One of either "project" for a regular project or "archived" for a read-only archived project. When the project is archived all the tasks in the project will be archived automatically.
         notes:
