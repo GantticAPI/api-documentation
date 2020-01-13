@@ -36,15 +36,20 @@ info:
     url: './ganttic-logo_sini-valge.svg'
     altText: Ganttic logo
 tags:
-  - name: Resource
+  - name: resource
+    x-displayName: Resource
     description: A resource in Ganttic represents anyone or anything that should be planned or booked in order to complete a project. You can learn more about resources [here](https://www.ganttic.com/helpdesk/features/resources).
   - name: task
+    x-displayName: Task
     description: A task is an assignment for a resource, whether it's a booking, a job or something else. You can learn more about tasks [here](https://www.ganttic.com/helpdesk/features/tasks).
-  - name: Project
+  - name: project
+    x-displayName: Project
     description: Projects might be the reason you're planning your resources. In that case this is the place to look for projects that are ongoing. To see which tasks a certain project contains look into the tasks section. You can learn more about projects [here](https://www.ganttic.com/helpdesk/features/projects).
-  - name: User
+  - name: user
+    x-displayName: User
     description: Users are the users of Ganttic, not resources. This is not mutually exclusive, however a separate resource must be created for the person to assign them tasks. Users are identified by the automatically generated id, but also a unique email address, which is used to log into Ganttic's web application.
-  - name: Datafield
+  - name: datafield
+    x-displayName: Datafield
     description: "Resources, tasks and projects can all contain data fields. There are six types of data fields in total: users, dates, numbers,  texts, links and listValues.The data fields are grouped by type in   the dataFields object. Data fields are account wide meaning that     each resource/task/project has identical data fields to other        resources/tasks/projects. However not each of them has a value for   each data field. You can strip out empty data fields from list       queries by setting the value of the includeEmptyDataFields to 0. You can use one of the queries below to fetch all data fields for resources/tasks/projects. Requests for resources/projects/tasks also contain data fields and their respective values for each resource/task/project. You can select whether to include data fields with no value via the includeEmptyDataFields query parameter."
   - name: resource_model
     x-displayName: Resource model
