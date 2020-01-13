@@ -607,6 +607,19 @@ paths:
           $ref: '#/components/responses/Error'
         '5XX':
           $ref: '#/components/responses/Error'
+    patch:
+      tags:
+        - user
+      summary: Modify a user
+      requestBody:
+        $ref: '#/components/requestBodies/UserPatch'
+      responses:
+        '200':
+          $ref: '#/components/responses/User'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
   '/user/{userId}':
     parameters:
       - name: token
@@ -628,6 +641,17 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/User'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
+    delete:
+      tags:
+        - user
+      summary: Delete a user
+      responses:
+        '200':
+          description: Successful operation
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -896,6 +920,11 @@ components:
           type: string
           enum: [user, admin]
           description: Type of the user
+        created:
+          type: string
+          format: date-time
+          description: Date the user was created (YYYY-MM-DD hh:mm).
+          readOnly: true
     UserGet:
       type: object
       allOf:
@@ -903,15 +932,19 @@ components:
       properties:
         id:
           type: string
-          description: Id of the user
-        created:
-          type: string
-          format: date-time
-          description: Date the user was created (YYYY-MM-DD HH:MM)
+          description: Id of the user.
     UserPost:
       type: object
       allOf:
         - $ref: '#/components/schemas/User'
+    UserPatch:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/User'
+      properties:
+        id:
+          type: string
+          description: Id of the user.
     DataFieldValues:
       type: object
       properties:
@@ -1146,6 +1179,11 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/UserPost'
+    UserPatch:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserPatch'
   responses:
     Task:
       description: Successful operation
