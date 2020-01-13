@@ -24,7 +24,6 @@ info:
     
     # Pagination
     Pagination is used in all GET requests that return an array of objects. Each response includes page and pageCount parameters. Page can be specified as a query parameter, pageCount is the number of total pages. Pages are 1-indexed and the page parameter defaults to 1. Page size is 50.
-
       
   version: "1.0.1"
   title: Ganttic API
@@ -262,6 +261,14 @@ paths:
         - name: includeEmptyDataFields
           in: query
           description: Include data fields for which the task has no value in result
+          required: false
+          schema:
+            type: integer
+            enum: [0, 1]
+            default: 0
+        - name: onlyHolidays
+          in: query
+          description: Get holiday and public holiday type tasks. If this value is true then all other tasks will be excluded from the response.
           required: false
           schema:
             type: integer
