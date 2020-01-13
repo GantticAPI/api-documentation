@@ -681,6 +681,8 @@ components:
         status:
           type: string
           enum: [resource, archived]
+          nullable: false
+          default: resource
           description: Status of the resource. One of either "resource" for a regular resource or "archived" for a read-only archived resource.
         notes:
           type: array
@@ -853,6 +855,8 @@ components:
         status:
           type: string
           enum: [project, archived]
+          nullable: false
+          default: project
           description: Status of the project. One of either "project" for a regular project or "archived" for a read-only archived project. When the project is archived all the tasks in the project will be archived automatically.
         notes:
           type: array
