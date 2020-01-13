@@ -678,6 +678,7 @@ components:
         name:
           type: string
           description: Name of the resource.
+          minLength: 1
         status:
           type: string
           enum: [resource, archived]
@@ -857,6 +858,7 @@ components:
         name:
           type: string
           description: Name of the project.
+          minLength: 1
         status:
           type: string
           enum: [project, archived]
