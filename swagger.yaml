@@ -86,7 +86,7 @@ paths:
     parameters:
       - name: token
         in: query
-        description: API token
+        description: API token.
         required: true
         schema:
           type: string
@@ -97,7 +97,7 @@ paths:
       parameters:
         - name: includeNotes
           in: query
-          description: Include notes in result
+          description: Include notes in result.
           required: false
           schema:
             type: integer
@@ -105,7 +105,7 @@ paths:
             default: 0
         - name: includeEmptyDataFields
           in: query
-          description: Include data fields for which the task has no value in result
+          description: Include data fields for which the task has no value in result.
           required: false
           schema:
             type: integer
@@ -113,7 +113,7 @@ paths:
             default: 0
         - name: page
           in: query
-          description: Page of resources to get
+          description: Page of resources to get.
           required: false
           schema:
             type: integer
@@ -651,6 +651,10 @@ components:
     Resource:
       type: object
       properties:
+        id:
+          type: string
+          description: Id of the resource. This is a read-only value and is assigned when a resource is created.
+          readOnly: true
         name:
           type: string
           description: Name of the resource.
@@ -667,10 +671,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/Resource'
       properties:
-        id:
-          type: string
-          description: Id of the resource. This assigned when a resource is created.
-          readOnly: true
         notes:
           type: array
           items:
@@ -763,7 +763,7 @@ components:
       properties:
         id:
           type: string
-          description: Id of the task. This value is assigned automatically when a task is created.
+          description: Id of the task. This is a read-only value and is assigned automatically when a task is created.
           readOnly: true
         notes:
           type: array
@@ -797,7 +797,7 @@ components:
       properties:
         id:
           type: string
-          description: Id of the task
+          description: Id of the task.
         timeZone:
           type: string
           default: null
