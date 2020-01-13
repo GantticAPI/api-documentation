@@ -781,6 +781,10 @@ components:
           default: 100
         dataFields:
           $ref: '#/components/schemas/DataFieldValues'
+      required:
+        - start
+        - end
+        - resources
     TaskGet:
       type: object
       allOf:
