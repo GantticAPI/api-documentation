@@ -916,10 +916,6 @@ components:
           type: string
           format: email
           description: Email of the user
-        password:
-          type: string
-          description: Password of the user. This is a write-only property included in the request when creating a user and will not be returned with GET requests.
-          writeOnly: true
         type:
           type: string
           enum: [user, admin]
@@ -941,6 +937,10 @@ components:
       type: object
       allOf:
         - $ref: '#/components/schemas/User'
+      properties:
+        password:
+          type: string
+          description: Password of the user. This is a write-only property included in the request when creating a user and will not be returned with GET requests.
     UserPatch:
       type: object
       allOf:
