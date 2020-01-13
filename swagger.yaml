@@ -916,14 +916,14 @@ components:
       properties:
         firstName:
           type: string
-          description: First name of the user
+          description: First name of the user.
         surname:
           type: string
-          description: Surname of the user
+          description: Surname of the user.
         email:
           type: string
           format: email
-          description: Email of the user
+          description: Email of the user.
         type:
           type: string
           enum: [user, admin]
