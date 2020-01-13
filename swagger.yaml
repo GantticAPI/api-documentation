@@ -691,7 +691,7 @@ components:
         created:
           type: string
           format: date-time
-          description: Date the resource was created (YYYY-MM-DD hh:mm)
+          description: Date the resource was created (YYYY-MM-DD hh:mm).
           readOnly: true
         dataFields:
           $ref: '#/components/schemas/DataFieldValues'
@@ -916,10 +916,14 @@ components:
           type: string
           format: email
           description: Email of the user
+        password:
+          type: string
+          description: Password of the user. This is a write-only property included in the request when creating a user and will not be returned with GET requests.
+          writeOnly: true
         type:
           type: string
           enum: [user, admin]
-          description: Type of the user
+          description: Type of the user. Either "user" for a regular user or "admin" for an administrator. This sets a basic permissions template when creating a user. The permissions can be fine tuned in the web insterface.
         created:
           type: string
           format: date-time
@@ -991,7 +995,7 @@ components:
       properties:
         userId:
           type: string
-          description: Id of the user
+          description: Id of the user.
     DataFieldDateValue:
       type: object
       allOf:
@@ -1000,7 +1004,7 @@ components:
         date:
           type: string
           format: date-time
-          description: Date value (YYYY-MM-DD HH:MM)
+          description: Date value (YYYY-MM-DD hh:mm).
     DataFieldNumberValue:
       type: object
       allOf:
@@ -1133,7 +1137,7 @@ components:
         created:
           type: string
           format: date-time
-          description: Date the note was created (YYYY-MM-DD HH:MM)
+          description: Date the note was created (YYYY-MM-DD hh:mm).
     Error:
       type: object
       properties:
