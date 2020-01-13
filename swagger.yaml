@@ -73,6 +73,7 @@ x-tagGroups:
       - task
       - project
       - user
+      - datafields
   - name: Models
     tags:
       - resource_model
