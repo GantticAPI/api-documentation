@@ -63,6 +63,12 @@ tags:
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/UserGet"/>
 x-tagGroups:
+  - name: Requests
+    tags:
+      - resource
+      - task
+      - project
+      - user
   - name: Models
     tags:
       - resource_model
