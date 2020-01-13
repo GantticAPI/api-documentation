@@ -651,10 +651,6 @@ components:
     Resource:
       type: object
       properties:
-        id:
-          type: string
-          description: Id of the resource. This is a read-only value and is assigned when a resource is created.
-          readOnly: true
         name:
           type: string
           description: Name of the resource.
@@ -662,15 +658,6 @@ components:
           type: string
           enum: [resource, archived]
           description: Status of the resource. One of either "resource" for a regular resource or "archived" for a read-only archived resource.
-        dataFields:
-          $ref: '#/components/schemas/DataFieldValues'
-      required:
-        - name
-    ResourceGet:
-      type: object
-      allOf:
-        - $ref: '#/components/schemas/Resource'
-      properties:
         notes:
           type: array
           items:
@@ -682,6 +669,18 @@ components:
           format: date-time
           description: Date the resource was created (YYYY-MM-DD hh:mm)
           readOnly: true
+        dataFields:
+          $ref: '#/components/schemas/DataFieldValues'
+      required:
+        - name
+    ResourceGet:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+      properties:
+        id:
+          type: string
+          description: Id of the resource. This is a read-only value and is assigned when a resource is created.
     ResourcePost:
       allOf:
         - $ref: '#/components/schemas/Resource'
@@ -691,7 +690,7 @@ components:
       properties:
         id:
           type: string
-          description: Id of the resource
+          description: Id of the resource. This is a read-only value and is assigned when a resource is created.
     TaskList:
       type: object
       properties:
