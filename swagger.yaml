@@ -230,21 +230,21 @@ paths:
       parameters:
         - name: timeMin
           in: query
-          description: Start date of task range (YYYY-MM-DD HH:MM)
+          description: Start date of task range (YYYY-MM-DD hh:mm).
           required: true
           schema:
             type: string
             format: date-time
         - name: timeMax
           in: query
-          description: End date of task range (YYYY-MM-DD HH:MM)
+          description: End date of task range (YYYY-MM-DD hh:mm).
           required: true
           schema:
             type: string
             format: date-time
         - name: includeArchived
           in: query
-          description: Include archived tasks
+          description: Include archived tasks in the result.
           required: false
           schema:
             type: integer
@@ -252,7 +252,7 @@ paths:
             default: 0
         - name: includeNotes
           in: query
-          description: Include notes in result
+          description: Include notes in the result.
           required: false
           schema:
             type: integer
@@ -260,7 +260,7 @@ paths:
             default: 0
         - name: includeEmptyDataFields
           in: query
-          description: Include data fields for which the task has no value in result
+          description: Include data fields for which the task has no value in the result.
           required: false
           schema:
             type: integer
@@ -276,35 +276,35 @@ paths:
             default: 0
         - name: page
           in: query
-          description: Page of tasks to get
+          description: Page of tasks to get.
           required: false
           schema:
             type: integer
             default: 1
         - name: projectId
           in: query
-          description: Project id of the tasks
+          description: Project id of the tasks.
           required: false
           schema:
             type: string
             default: null
         - name: resourceId
           in: query
-          description: Resource id of the tasks
+          description: Resource id of the tasks.
           required: false
           schema:
             type: string
             default: null
         - name: recurringId
           in: query
-          description: Recurring id of the tasks
+          description: Recurring id of the tasks.
           required: false
           schema:
             type: string
             default: null
         - name: timeZone
           in: query
-          description: IANA name of the time zone into which resulting task start and end times are converted
+          description: IANA name of the time zone into which resulting task start and end times are converted.
           required: false
           schema:
             type: string
