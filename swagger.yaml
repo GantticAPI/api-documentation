@@ -808,13 +808,15 @@ components:
       properties:
         name:
           type: string
-          description: Name of the project
+          description: Name of the project.
         status:
           type: string
-          enum: ["", archived]
-          description: Status of the project - empty for a regular project
+          enum: [project, archived]
+          description: Status of the project. One of either "project" for a regular project or "archived" for a read-only archived project. When the project is archived all the tasks in the project will be archived automatically.
         dataFields:
           $ref: '#/components/schemas/DataFieldValues'
+      required:
+        - name
     ProjectGet:
       type: object
       allOf:
