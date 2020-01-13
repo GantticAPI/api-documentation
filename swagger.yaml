@@ -80,7 +80,7 @@ x-tagGroups:
       - project_model
       - user_model
 servers:
-  - url: https://yutiti.com/api/v1
+  - url: https://www.ganttic.com/api/v1
 paths:
   /resources:
     parameters:
