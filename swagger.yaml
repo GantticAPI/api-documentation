@@ -635,13 +635,15 @@ components:
       properties:
         name:
           type: string
-          description: Name of the resource
+          description: Name of the resource.
         status:
           type: string
           enum: [resource, archived]
-          description: Status of the resource - empty for a regular resource
+          description: Status of the resource. One of either "resource" for a regular resource or "archived" for a read-only archived resource.
         dataFields:
           $ref: '#/components/schemas/DataFieldValues'
+      required:
+        - name
     ResourceGet:
       type: object
       allOf:
@@ -649,16 +651,19 @@ components:
       properties:
         id:
           type: string
-          description: Id of the resource
+          description: Id of the resource. This assigned when a resource is created.
+          readOnly: true
         notes:
           type: array
           items:
             $ref: '#/components/schemas/Note'
-          description: List of notes attached to the resource
+          description: List of notes attached to the resource.
+          readOnly: true
         created:
           type: string
           format: date-time
-          description: Date the resource was created (YYYY-MM-DD HH:MM)
+          description: Date the resource was created (YYYY-MM-DD hh:mm)
+          readOnly: true
     ResourcePost:
       allOf:
         - $ref: '#/components/schemas/Resource'
