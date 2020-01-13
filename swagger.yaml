@@ -170,7 +170,7 @@ paths:
         - resource
       summary: Modify a resource
       requestBody:
-        $ref: '#/components/requestBodies/ResourcePost'
+        $ref: '#/components/requestBodies/ResourcePatch'
       responses:
         '200':
           $ref: '#/components/responses/Resource'
