@@ -830,6 +830,17 @@ components:
           type: string
           enum: [project, archived]
           description: Status of the project. One of either "project" for a regular project or "archived" for a read-only archived project. When the project is archived all the tasks in the project will be archived automatically.
+        notes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+          description: List of notes attached to the project.
+          readOnly: true
+        created:
+          type: string
+          format: date-time
+          description: Date the project was created (YYYY-MM-DD hh:mm).
+          readOnly: true
         dataFields:
           $ref: '#/components/schemas/DataFieldValues'
       required:
@@ -842,18 +853,6 @@ components:
         id:
           type: string
           description: Id of the project. This value is assigned when a project is created.
-          readOnly: true
-        notes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Note'
-          description: List of notes attached to the project.
-          readOnly: true
-        created:
-          type: string
-          format: date-time
-          description: Date the project was created (YYYY-MM-DD hh:mm).
-          readOnly: true
     ProjectPost:
       type: object
       allOf:
@@ -865,7 +864,7 @@ components:
       properties:
         id:
           type: string
-          description: Id of the project
+          description: Id of the project. This value is assigned when a project is created.
     UserList:
       type: object
       properties:
