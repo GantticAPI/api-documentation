@@ -752,6 +752,7 @@ components:
           type: array
           items:
             type: string
+          minItems: 1
           description: List of resource ids the task is assigned to. At least one resource id is required when creating or modifying a task unless the task status is "public_holiday" in which case it is automatically assigned to all resources.
         start:
           type: string
