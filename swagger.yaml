@@ -236,6 +236,7 @@ paths:
           schema:
             type: string
             format: date-time
+            example: 2020-01-01 20:20
         - name: timeMax
           in: query
           description: End date of task range (YYYY-MM-DD hh:mm).
@@ -243,6 +244,7 @@ paths:
           schema:
             type: string
             format: date-time
+            example: 2020-01-01 20:20
         - name: includeArchived
           in: query
           description: Include archived tasks in the result.
@@ -694,6 +696,7 @@ components:
         created:
           type: string
           format: date-time
+          example: 2020-01-01 20:20
           description: Date the resource was created (YYYY-MM-DD hh:mm).
           readOnly: true
         dataFields:
@@ -757,10 +760,12 @@ components:
         start:
           type: string
           format: date-time
+          example: 2020-01-01 20:20
           description: Start time of the task YYYY-MM-DD if allDay=true YYYY-MM-DD hh:mm otherwise.
         end:
           type: string
           format: date-time
+          example: 2020-01-01 20:20
           description: End time of the task YYYY-MM-DD if allDay=true YYYY-MM-DD hh:mm otherwise.
         allDay:
           type: boolean
@@ -804,6 +809,7 @@ components:
         created:
           type: string
           format: date-time
+          example: 2020-01-01 20:20
           readOnly: true
           description: Date the task was created YYYY-MM-DD hh:mm
     TaskPost:
@@ -873,6 +879,7 @@ components:
           type: string
           format: date-time
           description: Date the project was created (YYYY-MM-DD hh:mm).
+          example: 2020-01-01 20:20
           readOnly: true
         dataFields:
           $ref: '#/components/schemas/DataFieldValues'
@@ -932,6 +939,7 @@ components:
         created:
           type: string
           format: date-time
+          example: 2020-01-01 20:20
           description: Date the user was created (YYYY-MM-DD hh:mm).
           readOnly: true
       required:
@@ -1025,6 +1033,7 @@ components:
         date:
           type: string
           format: date-time
+          example: 2020-01-01 20:20
           description: Date value (YYYY-MM-DD hh:mm).
     DataFieldNumberValue:
       type: object
@@ -1158,6 +1167,7 @@ components:
         created:
           type: string
           format: date-time
+          example: 2020-01-01 20:20
           description: Date the note was created (YYYY-MM-DD hh:mm).
     Error:
       type: object
