@@ -81,7 +81,7 @@ x-tagGroups:
       - project_model
       - user_model
 servers:
-  - url: https://www.ganttic.com/api/v1
+  - url: https://planner.ganttic.com/api/v1
 paths:
   /resources:
     parameters:
