@@ -769,7 +769,7 @@ components:
           description: End time of the task YYYY-MM-DD if allDay=true YYYY-MM-DD hh:mm otherwise.
         allDay:
           type: boolean
-          description: Whether this is an all day task.
+          description: Whether this is an all day task. This changes the start and end date format to either include or exclude time values.
           default: false
         usedTime:
           type: integer
