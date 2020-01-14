@@ -1148,22 +1148,22 @@ components:
       properties:
         id:
           type: string
-          description: Id of the list option
+          description: Id of the list option.
         value:
           type: string
-          description: Value of the list option
+          description: Value of the list option.
     Note:
       type: object
       properties:
         id:
           type: string
-          description: Id of the note
+          description: Id of the note.
         userId:
           type: string
-          description: Id of the user that created the note
+          description: Id of the user that created the note.
         note:
           type: string
-          description: Contents of the note
+          description: Contents of the note.
         created:
           type: string
           format: date-time
