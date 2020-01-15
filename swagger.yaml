@@ -6,12 +6,12 @@ info:
     # Description
     Ganttic API allows programmatic access to Ganttic resources, tasks, projects and users. It is intended to access your data programmatically for integration with your in-house applications or integrations with third party applications. Ganttic API follows RESTful style and uses JSON data format.
 
-    Ganttic API root URL is https://planner.ganttic.com/api/v1. ‘v1’ is the version number. All requests to the API must me made over HTTPS. This reference lists all available endpoints and their descriptions. 
+    Ganttic API root URL is https://planner.ganttic.com/api/v1. ‘v1’ is the version number. All requests to the API must be made over HTTPS. This reference lists all available endpoints and their descriptions. 
 
     # Authentication
-    Each request to the ganttic API is authorized by an API token. This token must be sent with each request as a "token" query parameter. An account administrator can obtain the token from [the web interface](https://planner.ganttic.com) under Settings > API. If the authentication token is not contained in the request or is invalid then the server will return an Unauthorized (401) response.
+    Each request to the Ganttic API is authorized by an API token. This token must be sent with each request as a "token" query parameter. An account administrator can obtain the token from [the web interface](https://planner.ganttic.com) under Settings > API. If the authentication token is not contained in the request or is invalid then the server will return an Unauthorized (401) response.
     
-    **NOTE** - When you already have a token and generate a new one then the old token will be discontinued immediately and will no longer function in any existing systems you might have running.
+    **NOTE** - If you already have a token and generate a new one then the old token will be discontinued immediately and will no longer function in any existing systems you might have running.
     
     # Data format
     All requests and responses are in JSON format. Nonexistent values are given as null values.
@@ -31,7 +31,6 @@ info:
   contact:
     email: info@ganttic.com
   x-logo:
-    #url: 'https://redocly.github.io/redoc/petstore-logo.png'
     url: './ganttic-logo_sini-valge.svg'
     altText: Ganttic logo
 tags:
@@ -43,13 +42,13 @@ tags:
     description: A task is an assignment for a resource, whether it's a booking, a job or something else. You can learn more about tasks [here](https://www.ganttic.com/helpdesk/features/tasks).
   - name: project
     x-displayName: Project
-    description: Projects might be the reason you're planning your resources. In that case this is the place to look for projects that are ongoing. To see which tasks a certain project contains look into the tasks section. You can learn more about projects [here](https://www.ganttic.com/helpdesk/features/projects).
+    description: Projects might be the reason you're planning your resources. In that case, this is the place to look for projects that are ongoing. To see which tasks a certain project contains, look into the tasks section. You can learn more about projects [here](https://www.ganttic.com/helpdesk/features/projects).
   - name: user
     x-displayName: User
-    description: Users are the users of Ganttic, not resources. This is not mutually exclusive, however a separate resource must be created for the person to assign them tasks. Users are identified by the automatically generated id, but also a unique email address, which is used to log into Ganttic's web application.
+    description: Users are the users of Ganttic, not resources. Though this may not be mutually exclusive, a separate resource must be created for the person to assign them tasks. Users are identified by the automatically generated id, and also a unique email address, which is used to log into Ganttic's web application.
   - name: datafield
     x-displayName: Datafield
-    description: "Resources, tasks and projects can all contain data fields. There are six types of data fields in total: users, dates, numbers,  texts, links and listValues.The data fields are grouped by type in   the dataFields object. Data fields are account wide meaning that     each resource/task/project has identical data fields to other        resources/tasks/projects. However not each of them has a value for   each data field. You can strip out empty data fields from list       queries by setting the value of the includeEmptyDataFields to 0. You can use one of the queries below to fetch all data fields for resources/tasks/projects. Requests for resources/projects/tasks also contain data fields and their respective values for each resource/task/project. You can select whether to include data fields with no value via the includeEmptyDataFields query parameter."
+    description: "Resources, tasks and projects can all contain data fields. There are six types of data fields in total: users, dates, numbers,  texts, links and listValues. The data fields are grouped by type in the dataFields object. Data fields are account wide, meaning that     each resource/task/project has identical data fields to other resources/tasks/projects. However, not each of them has a value for each data field. You can strip out empty data fields from list queries by setting the value of the includeEmptyDataFields to 0. You can use one of the queries below to fetch all data fields for resources/tasks/projects. Requests for resources/projects/tasks also contain data fields and their respective values for each resource/task/project. You can select whether to include data fields with no value via the includeEmptyDataFields query parameter."
   - name: resource_model
     x-displayName: Resource model
     description: |
@@ -935,7 +934,7 @@ components:
         type:
           type: string
           enum: [user, admin]
-          description: Type of the user. Either "user" for a regular user or "admin" for an administrator. This sets a basic permissions template when creating a user. The permissions can be fine tuned in the web insterface.
+          description: Type of the user. Either "user" for a regular user or "admin" for an administrator. This sets a basic permissions template when creating a user. The permissions can be fine-tuned in the web interface.
         created:
           type: string
           format: date-time
