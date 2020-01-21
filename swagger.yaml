@@ -1144,7 +1144,7 @@ components:
       properties:
         values:
           type: array
-          description: Id of the list
+          description: Possible values the list can have.
           items:
             $ref: '#/components/schemas/DataFieldListOption'
     DataFieldListOption:
