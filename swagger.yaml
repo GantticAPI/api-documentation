@@ -68,7 +68,7 @@ tags:
   - name: datafields_model
     x-displayName: Datafields model
     description: |
-      <SchemaDefinition schemaRef="#/components/schemas/Datafields"/>
+      <SchemaDefinition schemaRef="#/components/schemas/DataFields"/>
 x-tagGroups:
   - name: Requests
     tags:
