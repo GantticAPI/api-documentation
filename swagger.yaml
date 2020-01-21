@@ -1067,9 +1067,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataFieldValue'
       properties:
-        listId:
+        valueId:
           type: string
-          description: Id of the list
+          description: Id of the current value of the list.
     DataFields:
       type: object
       properties:
