@@ -65,6 +65,10 @@ tags:
     x-displayName: User model
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/UserSchema"/>
+  - name: datafields_model
+    x-displayName: Datafields model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/Datafields"/>
 x-tagGroups:
   - name: Requests
     tags:
@@ -79,6 +83,7 @@ x-tagGroups:
       - task_model
       - project_model
       - user_model
+      - datafields_model
 servers:
   - url: https://planner.ganttic.com/api/v1
 paths:
