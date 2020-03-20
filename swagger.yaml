@@ -6,12 +6,12 @@ info:
     # Description
     Ganttic API allows programmatic access to Ganttic resources, tasks, projects and users. It is intended to access your data programmatically for integration with your in-house applications or integrations with third party applications. Ganttic API follows RESTful style and uses JSON data format.
 
-    Ganttic API root URL is https://planner.ganttic.com/api/v1. ‘v1’ is the version number. All requests to the API must me made over HTTPS. This reference lists all available endpoints and their descriptions. 
+    Ganttic API root URL is https://planner.ganttic.com/api/v1. ‘v1’ is the version number. All requests to the API must be made over HTTPS. This reference lists all available endpoints and their descriptions. 
 
     # Authentication
-    Each request to the ganttic API is authorized by an API token. This token must be sent with each request as a query parameter. An coount administrator can obtain the token from [the web interface](https://planner.ganttic.com) under Settings > API. If the authentication token is not contained in the request or is invalid then the server will return an Unauthorized (401) response.
+    Each request to the Ganttic API is authorized by an API token. This token must be sent with each request as a "token" query parameter. An account administrator can obtain the token from [the web interface](https://planner.ganttic.com) under Settings > API. If the authentication token is not contained in the request or is invalid then the server will return an Unauthorized (401) response.
     
-    **NOTE** - When you already have a token and generate a new one then the old token will be discontinued immediately and will no longer function in any existing systems you might have running.
+    **NOTE** - If you already have a token and generate a new one then the old token will be discontinued immediately and will no longer function in any existing systems you might have running.
     
     # Data format
     All requests and responses are in JSON format. Nonexistent values are given as null values.
@@ -24,7 +24,6 @@ info:
     
     # Pagination
     Pagination is used in all GET requests that return an array of objects. Each response includes page and pageCount parameters. Page can be specified as a query parameter, pageCount is the number of total pages. Pages are 1-indexed and the page parameter defaults to 1. Page size is 50.
-
       
   version: "1.0.1"
   title: Ganttic API
@@ -32,66 +31,67 @@ info:
   contact:
     email: info@ganttic.com
   x-logo:
-    url: 'https://redocly.github.io/redoc/petstore-logo.png'
-    altText: Petstore logo
+    url: './ganttic-logo_sini-valge.svg'
+    altText: Ganttic logo
 tags:
   - name: resource
+    x-displayName: Resource
     description: A resource in Ganttic represents anyone or anything that should be planned or booked in order to complete a project. You can learn more about resources [here](https://www.ganttic.com/helpdesk/features/resources).
-      <br/><br/>
-      Each resource has a unique id that is generated automatically when adding a resource. A name is required when adding a resource. This is a human-friendly identifier for telling resources apart. However, resource names are not unique.
-      <br/><br/>
-      In addition, each resource has a status, either "resource" or "archived", the latter denoting an inactive resource. Archived resources are read-only. Each resource has a list of user generated notes and a list of data fields. You can read more about them in the data fields section.
-      <br/><br/>
-      When querying the list of resources you can use the includeNotes query paramter to specify whether you want to receive notes attached to resources and the includeEmptyDataFields parameter to specify whether each resource should contain data fields for which it does not have a non-null value.
-      <br/><br/>
-      When dealing with a lot of resources the list can be split into several pages. Each response contains the current page and the number of total pages. The required page number can be specified by the page query parameter.
   - name: task
+    x-displayName: Task
     description: A task is an assignment for a resource, whether it's a booking, a job or something else. You can learn more about tasks [here](https://www.ganttic.com/helpdesk/features/tasks).
-      <br/><br/>
-      Each task has a unique id that is generated automatically when adding the task. When adding a task start and end properties are mandatory, representing the start and end times of the task respectively. The allDay parameter specifies the date format of the start and end. If it is an all day task then the format is YYYY-MM-DD, YYYY-MM-DD HH:MM otherwise. Each task can also have a human-friendly name, but this is not required.
-      <br/><br/>
-      Also mandatory is that the task is assigned to at least one resource via the resources parameter, which is a list of resource ids. You can fetch all available resources via a query to the /resources endpont, which you can read more about in the resources section. The task also has an optional projectId parameter which indicates that the task is a part of a specific project. Read more about projects in the projects section.
-      <br/><br/>
-      In addition, each task has a status, any of "task", "archived", "holiday" or "public_holiday", which in order represent a regular task, an inactive read-only task, a custom time-off (e.g. vacation or sick leave) and a public holiday. The difference between the last two is that public holiday tasks are automatically assigned to all resources while custom holidays are resource specific. You can read more about holydays [here](https://www.ganttic.com/helpdesk/features/tasks/holiday-and-public-holiday-tasks).
-      Some other properties of a task are usedTime, which represents the time it actually took to complete the task in minutes; utilizationPercent, which represents the percentage of time that should be used to focus on that specific task in the given time span; creation time of the task; user generated notes; and data fields, which you can find more about in the data fields section.
-      <br/><br/>
-      Tasks can also have a recurring id. This means that the task is repeated at certain time intervals. When editing a task that is in a recurring set then all the tasks in the set will be modified accordingly. For example, if you set the start of a recurring task to be two hours later then all other tasks in the set will be moved forward two hours. To remove a task from the group leave the recurringId property empty when updating the task.
-      <br/>
-      NOTE - Deleting a recurring task will delete all other tasks in the set.
-      <br/><br/>
-      You can set several parameters to fine tune the response of your /tasks query. timeMin and timeMax are required parameters representing the interval for which you are querying tasks for. The includeArchived parameter can be used to include archived tasks in the response. includeNotes and includeEmptyDatafields parameters can be used to save bandwidth when notes and/or empty data fields are not required, they default to 0, and are not required if the data is not necessary. projectId, resourceId and recurringId parameters can be used alone or in combination to fine tune the response to only contain tasks for a specific project, resource or belonging to a specific recurring set.
-      <br/><br/>
-      You can also specify a time zone from [the IANA time zone database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) to convert the start and end times of the resulting tasks to the time zone of your choice. The default value for this is UTC.
-      <br/><br/>
-      When dealing with a lot of tasks the list can be split into several pages. Each response contains the current page and the number of total pages. The required page number can be specified by the page query parameter.
   - name: project
-    description: Projects might be the reason you're planning your resources. In that case this is the place to look for projects that are ongoing. To see which tasks a certain project contains look into the tasks section. You can learn more about projects [here](https://www.ganttic.com/helpdesk/features/projects).
-      <br/><br/>
-      Each project has a unique id that is generated automatically when adding a resource. A name is required when adding a project. This is a human-friendly identifier for telling them apart. However, the names are not unique.
-      <br/><br/>
-      In addition, each project has a status, either "project" or "archived", the latter denoting a finished project. Archived projects are read-only. Each project has a list of user generated notes and a list of data fields. You can read more about them in the data fields section.
-      <br/><br/>
-      When querying the list of projects you can use the includeNotes query paramter to specify whether you want to receive notes attached to projects and the includeEmptyDataFields parameter to specify whether each project should contain data fields for which it does not have a non-null value.
-      <br/><br/>
-      When dealing with a lot of projects the list can be split into several pages. Each response contains the current page and the number of total pages. The required page number can be specified by the page query parameter.
+    x-displayName: Project
+    description: Projects might be the reason you're planning your resources. In that case, this is the place to look for projects that are ongoing. To see which tasks a certain project contains, look into the tasks section. You can learn more about projects [here](https://www.ganttic.com/helpdesk/features/projects).
   - name: user
-    description: Users are the users of Ganttic, not resources. This is not mutually exclusive, however a separate resource must be created for the person to assign them tasks. Users are identified by the automatically generated id, but also a unique email address, which is used to log into Ganttic's web application.
-      <br/><br/>
-      First name and surname can be set for each user as well as a status of either "user" or "admin", which represents the basic permission set the user has in the application. The permissions can be tweaked further in the web interface.
-      <br/><br/>
-      In addition, the user has a created property showing when the user was added to the system.
-      <br/><br/>
-      When dealing with a lot of users the list can be split into several pages. Each response contains the current page and the number of total pages. The required page number can be specified by the page query parameter.
+    x-displayName: User
+    description: Users are the users of Ganttic, not resources. Though this may not be mutually exclusive, a separate resource must be created for the person to assign them tasks. Users are identified by the automatically generated id, and also a unique email address, which is used to log into Ganttic's web application.
   - name: datafield
-    description: "Resources, tasks and projects can all contain data fields. There are six types of data fields in total: users, dates, numbers, texts, links and listValues. The data fields are grouped by type in the dataFields object.<br/><br/>Data fields are account wide meaning that each resource/task/project has identical data fields to other resources/tasks/projects. However not each of them has a value for each data field. You can strip out empty data fields from list queries by setting the value of the includeEmptyDataFields to 0.<br/><br/>A user data field contains a user id. A date data field contains a date value. A number data field contains either an integer or a floating point value. A text data field contains a string value. A link data field contains a url and a title for the link. And a list type data field contains one of string type predefined values for that list.<br/><br/>You can use one of the queries below to fetch all data fields for resources/tasks/projects. Requests for resources/projects/tasks also contain data fields and their respective values for each resource/task/project. You can select whether to include data fields with no value via the includeEmptyDataFields query parameter."
+    x-displayName: Datafield
+    description: "Resources, tasks and projects can all contain data fields. There are six types of data fields in total: users, dates, numbers,  texts, links and listValues. The data fields are grouped by type in the dataFields object. Data fields are account wide, meaning that     each resource/task/project has identical data fields to other resources/tasks/projects. However, not each of them has a value for each data field. You can strip out empty data fields from list queries by setting the value of the includeEmptyDataFields to 0. You can use one of the queries below to fetch all data fields for resources/tasks/projects. Requests for resources/projects/tasks also contain data fields and their respective values for each resource/task/project. You can select whether to include data fields with no value via the includeEmptyDataFields query parameter."
+  - name: resource_model
+    x-displayName: Resource model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/ResourceGet"/>
+  - name: task_model
+    x-displayName: Task model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/TaskGet"/>
+  - name: project_model
+    x-displayName: Project model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/ProjectGet"/>
+  - name: user_model
+    x-displayName: User model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/UserSchema"/>
+  - name: datafields_model
+    x-displayName: Datafields model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/DataFields"/>
+x-tagGroups:
+  - name: Requests
+    tags:
+      - resource
+      - task
+      - project
+      - user
+      - datafield
+  - name: Models
+    tags:
+      - resource_model
+      - task_model
+      - project_model
+      - user_model
+      - datafields_model
 servers:
-  - url: https://yutiti.com/api/v1
+  - url: https://planner.ganttic.com/api/v1
 paths:
   /resources:
     parameters:
       - name: token
         in: query
-        description: API token
+        description: API token.
         required: true
         schema:
           type: string
@@ -102,7 +102,7 @@ paths:
       parameters:
         - name: includeNotes
           in: query
-          description: Include notes in result
+          description: Include notes in result.
           required: false
           schema:
             type: integer
@@ -110,7 +110,7 @@ paths:
             default: 0
         - name: includeEmptyDataFields
           in: query
-          description: Include data fields for which the task has no value in result
+          description: Include data fields for which the task has no value in result.
           required: false
           schema:
             type: integer
@@ -118,7 +118,7 @@ paths:
             default: 0
         - name: page
           in: query
-          description: Page of resources to get
+          description: Page of resources to get.
           required: false
           schema:
             type: integer
@@ -175,7 +175,7 @@ paths:
         - resource
       summary: Modify a resource
       requestBody:
-        $ref: '#/components/requestBodies/ResourcePost'
+        $ref: '#/components/requestBodies/ResourcePatch'
       responses:
         '200':
           $ref: '#/components/responses/Resource'
@@ -235,21 +235,23 @@ paths:
       parameters:
         - name: timeMin
           in: query
-          description: Start date of task range (YYYY-MM-DD HH:MM)
+          description: Start date of task range (YYYY-MM-DD hh:mm).
           required: true
           schema:
             type: string
             format: date-time
+            example: 2020-01-01 20:20
         - name: timeMax
           in: query
-          description: End date of task range (YYYY-MM-DD HH:MM)
+          description: End date of task range (YYYY-MM-DD hh:mm).
           required: true
           schema:
             type: string
             format: date-time
+            example: 2020-01-01 20:20
         - name: includeArchived
           in: query
-          description: Include archived tasks
+          description: Include archived tasks in the result.
           required: false
           schema:
             type: integer
@@ -257,7 +259,7 @@ paths:
             default: 0
         - name: includeNotes
           in: query
-          description: Include notes in result
+          description: Include notes in the result.
           required: false
           schema:
             type: integer
@@ -265,7 +267,15 @@ paths:
             default: 0
         - name: includeEmptyDataFields
           in: query
-          description: Include data fields for which the task has no value in result
+          description: Include data fields for which the task has no value in the result.
+          required: false
+          schema:
+            type: integer
+            enum: [0, 1]
+            default: 0
+        - name: onlyHolidays
+          in: query
+          description: Get holiday and public holiday type tasks. If this value is true then all other tasks will be excluded from the response.
           required: false
           schema:
             type: integer
@@ -273,35 +283,35 @@ paths:
             default: 0
         - name: page
           in: query
-          description: Page of tasks to get
+          description: Page of tasks to get.
           required: false
           schema:
             type: integer
             default: 1
         - name: projectId
           in: query
-          description: Project id of the tasks
+          description: Project id of the tasks.
           required: false
           schema:
             type: string
             default: null
         - name: resourceId
           in: query
-          description: Resource id of the tasks
+          description: Resource id of the tasks.
           required: false
           schema:
             type: string
             default: null
         - name: recurringId
           in: query
-          description: Recurring id of the tasks
+          description: Recurring id of the tasks.
           required: false
           schema:
             type: string
             default: null
         - name: timeZone
           in: query
-          description: IANA name of the time zone into which resulting task start and end times are converted
+          description: IANA name of the time zone into which resulting task start and end times are converted. For example, "Europe/Tallinn".
           required: false
           schema:
             type: string
@@ -396,7 +406,7 @@ paths:
           type: string
       - name: timeZone
         in: query
-        description: IANA name of the time zone into which resulting task start and end times are converted
+        description: IANA name of the time zone into which resulting task start and end times are converted. For example "Europe/Tallinn".
         required: false
         schema:
           type: string
@@ -604,6 +614,19 @@ paths:
           $ref: '#/components/responses/Error'
         '5XX':
           $ref: '#/components/responses/Error'
+    patch:
+      tags:
+        - user
+      summary: Modify a user
+      requestBody:
+        $ref: '#/components/requestBodies/UserPatch'
+      responses:
+        '200':
+          $ref: '#/components/responses/User'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
   '/user/{userId}':
     parameters:
       - name: token
@@ -629,6 +652,17 @@ paths:
           $ref: '#/components/responses/Error'
         '5XX':
           $ref: '#/components/responses/Error'
+    delete:
+      tags:
+        - user
+      summary: Delete a user
+      responses:
+        '200':
+          description: Successful operation
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
 components:
   schemas:
     ResourceList:
@@ -650,13 +684,29 @@ components:
       properties:
         name:
           type: string
-          description: Name of the resource
+          description: Name of the resource.
+          minLength: 1
         status:
           type: string
-          enum: ["", archived]
-          description: Status of the resource - empty for a regular resource
+          enum: [resource, archived]
+          default: resource
+          description: Status of the resource. One of either "resource" for a regular resource or "archived" for a read-only archived resource.
+        notes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+          description: List of notes attached to the resource.
+          readOnly: true
+        created:
+          type: string
+          format: date-time
+          example: 2020-01-01 20:20
+          description: Date the resource was created (YYYY-MM-DD hh:mm).
+          readOnly: true
         dataFields:
           $ref: '#/components/schemas/DataFieldValues'
+      required:
+        - name
     ResourceGet:
       type: object
       allOf:
@@ -664,16 +714,7 @@ components:
       properties:
         id:
           type: string
-          description: Id of the resource
-        notes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Note'
-          description: List of notes attached to the resource
-        created:
-          type: string
-          format: date-time
-          description: Date the resource was created (YYYY-MM-DD HH:MM)
+          description: Id of the resource. This is a read-only value and is assigned when a resource is created.
     ResourcePost:
       allOf:
         - $ref: '#/components/schemas/Resource'
@@ -683,7 +724,7 @@ components:
       properties:
         id:
           type: string
-          description: Id of the resource
+          description: Id of the resource. This is a read-only value and is assigned when a resource is created.
     TaskList:
       type: object
       properties:
@@ -704,42 +745,56 @@ components:
         status:
           type: string
           enum: [task, archived, holiday, public_holiday]
-          description: Status of the task
+          default: task
+          description: Status of the task. "task" for a regular task, "archived" for an archived read-only task, "holiday" for a custom time-off (e.g. vacation or sick leave) or "public_holiday" which is assigned to all resources. When creating or modifying a task only "task", "holiday" and "public_holiday" values are accepted. A task is archived when its corresponding project is archived.
         projectId:
           type: string
-          description: Id of the project the task belongs in
+          description: Id of the project the task belongs in.
+          nullable: true
         name:
           type: string
-          description: Name of the task
+          description: Name of the task.
+          nullable: true
         resources:
           type: array
           items:
             type: string
-          description: List of resources the task is connected to
+          minItems: 1
+          description: List of resource ids the task is assigned to. At least one resource id is required when creating or modifying a task unless the task status is "public_holiday" in which case it is automatically assigned to all resources.
         start:
           type: string
           format: date-time
-          description: Start time of the task (YYYY-MM-DD HH:MM)
+          example: 2020-01-01 20:20
+          description: Start time of the task YYYY-MM-DD if allDay=true YYYY-MM-DD hh:mm otherwise.
         end:
           type: string
           format: date-time
-          description: End time of the task (YYYY-MM-DD HH:MM)
+          example: 2020-01-01 20:20
+          description: End time of the task YYYY-MM-DD if allDay=true YYYY-MM-DD hh:mm otherwise.
         allDay:
           type: boolean
-          description: Whether this is a all day task (planning precision is day)
+          description: Whether this is an all day task. This changes the start and end date format to either include or exclude time values.
+          default: false
         usedTime:
           type: integer
           format: int64
-          description: Task used time in minutes
+          description: Task used time in minutes.
+          default: 0
         recurringId:
           type: string
-          description: Recurring id of the task
+          description: Id of the recurring set the task is in.
+          default: null
         utilizationPercent:
           type: integer
           format: int32
-          description: Utilization percent of the task
+          description: Utilization percent of the task. This value is null if the task is using timing based utilization.
+          default: 100
         dataFields:
           $ref: '#/components/schemas/DataFieldValues'
+      required:
+        - start
+        - end
+        - resources
     TaskGet:
       type: object
       allOf:
@@ -747,16 +802,26 @@ components:
       properties:
         id:
           type: string
-          description: Id of the task
+          description: Id of the task. This is a read-only value and is assigned automatically when a task is created.
+          readOnly: true
+        resourceUtilizationPercent:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceUtilization'
+          description: List of utilization percentages for each resource assigned to the task. This value is null if the task is using percentage based utilization.
+          readOnly: true
         notes:
           type: array
           items:
             $ref: '#/components/schemas/Note'
-          description: List of notes attached to the task
+          readOnly: true
+          description: List of notes attached to the task.
         created:
           type: string
           format: date-time
-          description: Date the task was created (YYYY-MM-DD HH:MM)
+          example: 2020-01-01 20:20
+          readOnly: true
+          description: Date the task was created YYYY-MM-DD hh:mm
     TaskPost:
       type: object
       allOf:
@@ -764,8 +829,9 @@ components:
       properties:
         timeZone:
           type: string
+          nullable: true
           default: null
-          description: IANA name of the time zone of the task's start and end times
+          description: IANA name of the time zone of the task's start and end times. For example "Europe/Tallinn".
       required:
         - start
         - end
@@ -777,11 +843,11 @@ components:
       properties:
         id:
           type: string
-          description: Id of the task
+          description: Id of the task.
         timeZone:
           type: string
           default: null
-          description: IANA name of the time zone of the task's start and end times
+          description: IANA name of the time zone of the task's start and end times. For example "Europe/Tallinn".
       required:
         - id
         - start
@@ -806,13 +872,29 @@ components:
       properties:
         name:
           type: string
-          description: Name of the project
+          description: Name of the project.
+          minLength: 1
         status:
           type: string
-          enum: ["", archived]
-          description: Status of the project - empty for a regular project
+          enum: [project, archived]
+          default: project
+          description: Status of the project. One of either "project" for a regular project or "archived" for a read-only archived project. When the project is archived all the tasks in the project will be archived automatically.
+        notes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+          description: List of notes attached to the project.
+          readOnly: true
+        created:
+          type: string
+          format: date-time
+          description: Date the project was created (YYYY-MM-DD hh:mm).
+          example: 2020-01-01 20:20
+          readOnly: true
         dataFields:
           $ref: '#/components/schemas/DataFieldValues'
+      required:
+        - name
     ProjectGet:
       type: object
       allOf:
@@ -820,16 +902,7 @@ components:
       properties:
         id:
           type: string
-          description: Id of the project
-        notes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Note'
-          description: List of notes attached to the project
-        created:
-          type: string
-          format: date-time
-          description: Date the project was created (YYYY-MM-DD HH:MM)
+          description: Id of the project. This value is assigned when a project is created.
     ProjectPost:
       type: object
       allOf:
@@ -841,7 +914,7 @@ components:
       properties:
         id:
           type: string
-          description: Id of the project
+          description: Id of the project. This value is assigned when a project is created.
     UserList:
       type: object
       properties:
@@ -861,18 +934,26 @@ components:
       properties:
         firstName:
           type: string
-          description: First name of the user
+          description: First name of the user.
         surname:
           type: string
-          description: Surname of the user
+          description: Surname of the user.
         email:
           type: string
           format: email
-          description: Email of the user
+          description: Email of the user.
         type:
           type: string
           enum: [user, admin]
-          description: Type of the user
+          description: Type of the user. Either "user" for a regular user or "admin" for an administrator. This sets a basic permissions template when creating a user. The permissions can be fine-tuned in the web interface.
+        created:
+          type: string
+          format: date-time
+          example: 2020-01-01 20:20
+          description: Date the user was created (YYYY-MM-DD hh:mm).
+          readOnly: true
+      required:
+        - email
     UserGet:
       type: object
       allOf:
@@ -880,15 +961,33 @@ components:
       properties:
         id:
           type: string
-          description: Id of the user
-        created:
-          type: string
-          format: date-time
-          description: Date the user was created (YYYY-MM-DD HH:MM)
+          description: Id of the user.
     UserPost:
       type: object
       allOf:
         - $ref: '#/components/schemas/User'
+      properties:
+        password:
+          type: string
+          description: Password of the user. This is a write-only property included in the request when creating a user and will not be returned with GET requests.
+      required:
+        - password
+    UserPatch:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/User'
+      properties:
+        id:
+          type: string
+          description: Id of the user.
+    UserSchema:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/UserGet'
+      properties:
+        password:
+          type: string
+          description: Password of the user. This is a write-only property included in the request when creating a user and will not be returned with GET requests.
     DataFieldValues:
       type: object
       properties:
@@ -935,7 +1034,7 @@ components:
       properties:
         userId:
           type: string
-          description: Id of the user
+          description: Id of the user.
     DataFieldDateValue:
       type: object
       allOf:
@@ -944,16 +1043,16 @@ components:
         date:
           type: string
           format: date-time
-          description: Date value (YYYY-MM-DD HH:MM)
+          example: 2020-01-01 20:20
+          description: Date value (YYYY-MM-DD hh:mm).
     DataFieldNumberValue:
       type: object
       allOf:
         - $ref: '#/components/schemas/DataFieldValue'
       properties:
         number:
-          type: integer
-          format: int64
-          description: Number value
+          type: string
+          description: Number value in string format. Can be signed or unsigned integer or floating point number.
     DataFieldTextValue:
       type: object
       allOf:
@@ -979,9 +1078,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataFieldValue'
       properties:
-        listId:
+        valueId:
           type: string
-          description: Id of the list
+          description: Id of the current value of the list.
     DataFields:
       type: object
       properties:
@@ -1051,7 +1150,7 @@ components:
       properties:
         values:
           type: array
-          description: Id of the list
+          description: Possible values the list can have.
           items:
             $ref: '#/components/schemas/DataFieldListOption'
     DataFieldListOption:
@@ -1059,26 +1158,37 @@ components:
       properties:
         id:
           type: string
-          description: Id of the list option
+          description: Id of the list option.
         value:
           type: string
-          description: Value of the list option
+          description: Value of the list option.
     Note:
       type: object
       properties:
         id:
           type: string
-          description: Id of the note
+          description: Id of the note.
         userId:
           type: string
-          description: Id of the user that created the note
+          description: Id of the user that created the note.
         note:
           type: string
-          description: Contents of the note
+          description: Contents of the note.
         created:
           type: string
           format: date-time
-          description: Date the note was created (YYYY-MM-DD HH:MM)
+          example: 2020-01-01 20:20
+          description: Date the note was created (YYYY-MM-DD hh:mm).
+    ResourceUtilization:
+      type: object
+      properties:
+        resourceId:
+          type: string
+          description: Id of the resource.
+        utilizationPercent:
+          type: integer
+          format: int32
+          description: Utilization percent for that resource.
     Error:
       type: object
       properties:
@@ -1124,6 +1234,11 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/UserPost'
+    UserPatch:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserPatch'
   responses:
     Task:
       description: Successful operation
