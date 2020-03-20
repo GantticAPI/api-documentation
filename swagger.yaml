@@ -737,7 +737,7 @@ components:
         utilizationPercent:
           type: integer
           format: int32
-          description: Utilization percent of the task. This value is null if the task is using timing based utilization.
+          description: Utilization percent of the task
         dataFields:
           $ref: '#/components/schemas/DataFieldValues'
     TaskGet:
@@ -748,11 +748,6 @@ components:
         id:
           type: string
           description: Id of the task
-        resourceUtilizationPercent:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceUtilization'
-          description: A list of resource based utilization percentages. This value is null if the task is using percent based utilization.
         notes:
           type: array
           items:
@@ -1084,15 +1079,6 @@ components:
           type: string
           format: date-time
           description: Date the note was created (YYYY-MM-DD HH:MM)
-    ResourceUtilization:
-      type: object
-      properties:
-        resourceId:
-          type: string
-          description: Id of the resource
-        utilizationPercent:
-          type: int32
-          description: Task utilization percent for that resource
     Error:
       type: object
       properties:
