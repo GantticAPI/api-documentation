@@ -1214,8 +1214,9 @@ components:
       type: object
       properties:
         errorCode:
-          type: integer
+          type: string
           description: Error code
+          enum: [TASK_NOT_FOUND, RESOURCE_NOT_FOUND,PROJECT_NOT_FOUND, USER_NOT_FOUND, DATAFIELD_NOT_FOUND, DATAFIELD_LIST_VALUE_NOT_FOUND, INVALID_TOKEN, INVALID_START_DATE, INVALID_END_DATE, INVALID_NUMBER, INVALID_USER_TYPE, INVALID_JSON, INVALID_RESOURCE_NAME, INVALID_PROJECT_NAME, NO_RESOURCES, SYNC_RESOURCE_DELETE, RESOURCE_LIMIT_EXCEEDED, USER_EXISTS, START_TIME_AFTER_END_TIME]
         message:
           type: string
           description: Error description
