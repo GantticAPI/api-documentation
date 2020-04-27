@@ -776,12 +776,12 @@ components:
           type: string
           format: date-time
           example: 2020-01-01 20:20
-          description: Start time of the task YYYY-MM-DD if allDay=true YYYY-MM-DD hh:mm otherwise.
+          description: Start time of the task YYYY-MM-DD if allDay=true YYYY-MM-DD hh:mm otherwise. 00:00 denotes the midnight at the start of the day, 24:00 midnight at the end of the day.
         end:
           type: string
           format: date-time
           example: 2020-01-01 20:20
-          description: End time of the task YYYY-MM-DD if allDay=true YYYY-MM-DD hh:mm otherwise.
+          description: End time of the task YYYY-MM-DD if allDay=true YYYY-MM-DD hh:mm otherwise. 00:00 denotes the midnight at the start of the day, 24:00 midnight at the end of the day.
         allDay:
           type: boolean
           description: Whether this is an all day task. This changes the start and end date format to either include or exclude time values.
