@@ -758,11 +758,6 @@ components:
     Task:
       type: object
       properties:
-        status:
-          type: string
-          enum: [task, archived, holiday, public_holiday]
-          default: task
-          description: Status of the task. "task" for a regular task, "archived" for an archived read-only task, "holiday" for a custom time-off (e.g. vacation or sick leave) or "public_holiday" which is assigned to all resources. When creating or modifying a task only "task", "holiday" and "public_holiday" values are accepted. A task is archived when its corresponding project is archived.
         projectId:
           type: string
           description: Id of the project the task belongs in.
@@ -820,6 +815,11 @@ components:
           type: string
           description: Id of the task. This is a read-only value and is assigned automatically when a task is created.
           readOnly: true
+        status:
+          type: string
+          enum: [task, archived, holiday, public_holiday]
+          default: task
+          description: Status of the task. "task" for a regular task, "archived" for an archived read-only task, "holiday" for a custom time-off (e.g. vacation or sick leave) or "public_holiday" which is assigned to all resources. When creating or modifying a task only "task", "holiday" and "public_holiday" values are accepted. A task is archived when its corresponding project is archived.
         resourceUtilizationPercent:
           type: array
           items:
@@ -843,6 +843,11 @@ components:
       allOf:
         - $ref: '#/components/schemas/Task'
       properties:
+        status:
+          type: string
+          enum: [task, archived, holiday, public_holiday]
+          default: task
+          description: Status of the task. "task" for a regular task, "archived" for an archived read-only task, "holiday" for a custom time-off (e.g. vacation or sick leave) or "public_holiday" which is assigned to all resources. When creating or modifying a task only "task", "holiday" and "public_holiday" values are accepted. A task is archived when its corresponding project is archived.
         timeZone:
           type: string
           nullable: true
