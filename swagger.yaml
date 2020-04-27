@@ -819,7 +819,7 @@ components:
           type: string
           enum: [task, archived, holiday, public_holiday]
           default: task
-          description: Status of the task. "task" for a regular task, "archived" for an archived read-only task, "holiday" for a custom time-off (e.g. vacation or sick leave) or "public_holiday" which is assigned to all resources. When creating or modifying a task only "task", "holiday" and "public_holiday" values are accepted. A task is archived when its corresponding project is archived.
+          description: Status of the task. "task" for a regular task, "archived" for an archived read-only task, "holiday" for a custom time-off (e.g. vacation or sick leave) or "public_holiday" which is assigned to all resources. When creating or modifying a task only "task", "holiday" and "public_holiday" values are accepted. This value cannot be changed once the task is created. A task is archived when its corresponding project is archived.
         resourceUtilizationPercent:
           type: array
           items:
