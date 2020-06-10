@@ -88,6 +88,7 @@ x-tagGroups:
       - project_model
       - user_model
       - datafields_model
+      - webhook_model
 servers:
   - url: https://planner.ganttic.com/api/v1
 paths:
