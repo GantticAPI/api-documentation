@@ -69,6 +69,10 @@ tags:
     x-displayName: Datafields model
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/DataFields"/>
+  - name: webhook_model
+    x-displayName: Webhook request body
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/WebhookRequestBody"/>
 x-tagGroups:
   - name: Requests
     tags:
@@ -1210,6 +1214,20 @@ components:
           type: integer
           format: int32
           description: Utilization percent for that resource.
+    WebhookRequestBody:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookMessage'
+    WebhookMessage:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique id of the message.
     Error:
       type: object
       properties:
