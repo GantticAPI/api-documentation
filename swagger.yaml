@@ -1222,6 +1222,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WebhookMessage'
+        apiToken:
+          type: string
+          description: Your API token for verifying the authenticity of the request.
     WebhookMessage:
       type: object
       properties:
@@ -1229,6 +1232,19 @@ components:
           type: integer
           format: int64
           description: Unique id of the message.
+        actionTime:
+          type: string
+          format: date-time
+          description: Time of the action.
+        actionType:
+          type: string
+          enum: [I, U, D]
+        resource:
+          $ref: '#/components/schemas/Resource'
+        task:
+          $ref: '#/components/schemas/Task'
+        project:
+          $ref: '#/components/schemas/Project'
     Error:
       type: object
       properties:
