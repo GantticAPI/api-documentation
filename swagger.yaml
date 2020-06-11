@@ -29,16 +29,16 @@ info:
     Webhooks allow external services to be notified when certain events happen. When the specified events happen, we’ll send a POST request to each of the URLs you provide. You can configure webhooks under Settings > API. For each webhook you can set a name and an endpoint where the data will be sent. You can also set the type of events you want to receive as any combination of task/resource/project add/update/delete.
     
     ## Request format
-    Events are sent as a POST request. The request body contains an array of message objects containing one or more messages as well as your API token to verify the authenticity of the request. You can see the exact format of the request body in the Models subsection of this document.
+    Events are sent as a POST request. The request body contains an array of message objects containing one or more messages as well as your API token to verify the authenticity of the request. You can see the exact format of the request body in the Models section of this document.
     
     ## Handling the request
-    Each webhook request expects a 200 HTTP status response. We ask that you respond to the request before doing any processing of the data. This assures that each message is only sent once and saves both your and our bandwidth and processing power.
+    Each webhook request expects a response with a 200 HTTP status code. We ask that you respond to the request before doing any processing of the data. This assures that each message is only sent once and saves both your and our bandwidth and processing power.
     
     ## Failed requests
     If a webhook message request does not recieve a response in a timely manner or receives a response with a status code other than 200 it will be retried several times. These retries follow an exponential backoff, meaning that each retry will happen at larger interval than the previous. After 16 failed requests, which are in total spread over 3 days, the message is marked as failed and no more retries will be attempted.
     
     ## Grouping
-    Events that happen within one send interval are grouped together in one request rather than sent individually. This message group may also contain messages for events that might not have happened within the interval, but have failed to be delivered previously.
+    Events that happen within one send interval are grouped together in one request rather than sent individually. This message group may also contain messages for events that did not happen within the interval, but have failed to be delivered previously.
     
     ## Exemptions
     Some event messages are exempt from being sent. These cases are:
