@@ -1262,12 +1262,22 @@ components:
         actionType:
           type: string
           enum: [I, U, D]
+          description: I - insert, U - update, D - delete.
         resource:
-          $ref: '#/components/schemas/Resource'
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/Resource'
+          description: The resource the event happened to. This key is not contained in the message if the event happened to a task or a project.
         task:
-          $ref: '#/components/schemas/Task'
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/Task'
+          description: The task the event happened to. This key is not contained in the message if the event happened to a resource or a project.
         project:
-          $ref: '#/components/schemas/Project'
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/Project'
+          description: The task the event happened to. This key is not contained in the message if the event happened to a resource or a task.
     Error:
       type: object
       properties:
