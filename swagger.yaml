@@ -31,7 +31,7 @@ info:
     ## Request format
     Events are sent as a POST request. The request body contains an array of message objects containing one or more messages as well as your API token to verify the authenticity of the request. You can see the exact format of the request body in the Models section of this document.
     
-    ## Handling the request
+    ## Handling the requests
     Each webhook request expects a response with a 200 HTTP status code. We ask that you respond to the request before doing any processing of the data. This assures that each message is only sent once and saves both your and our bandwidth and processing power.
     
     ## Failed requests
