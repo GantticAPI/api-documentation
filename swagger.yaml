@@ -26,7 +26,7 @@ info:
     Pagination is used in all GET requests that return an array of objects. Each response includes page and pageCount parameters. Page can be specified as a query parameter, pageCount is the number of total pages. Pages are 1-indexed and the page parameter defaults to 1. Page size is 50.
     
     # Webhooks
-    Webhooks allow external services to be notified when certain events happen. When the specified events happen, we’ll send a POST request to each of the URLs you provide. You can configure webhooks under Settings > API. For each webhook you can set a name and an endpoint where the data will be sent. You can also set the type of events you want to receive as any combination of task/resource/project add/update/delete.
+    Webhooks allow external services to be notified when certain events happen. When the specified events happen, we’ll send a POST request to each of the URLs you provide. You can configure webhooks under Settings > API. For each webhook you can set a symbolic name and an endpoint where the data will be sent. You can also set the types of events you want to receive as any combination of task/resource/project add/update/delete.
     
     ## Request format
     Events are sent as a POST request. The request body contains an array of message objects containing one or more messages as well as your API token to verify the authenticity of the request. You can see the exact format of the request body in the Models section of this document.
