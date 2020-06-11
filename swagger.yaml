@@ -24,6 +24,29 @@ info:
     
     # Pagination
     Pagination is used in all GET requests that return an array of objects. Each response includes page and pageCount parameters. Page can be specified as a query parameter, pageCount is the number of total pages. Pages are 1-indexed and the page parameter defaults to 1. Page size is 50.
+    
+    # Webhooks
+    Webhooks allow external services to be notified when certain events happen. When the specified events happen, we’ll send a POST request to each of the URLs you provide. You can configure webhooks under Settings > API. For each webhook you can set a name and an endpoint where the data will be sent. You can also set the type of events you want to receive as any combination of task/resource/project add/update/delete.
+    
+    ## Request format
+    Events are sent as a POST request. The request body contains an array of message objects containing one or more messages as well as your API token to verify the authenticity of the request. You can see the exact format of the request body in the Models subsection of this document.
+    
+    ## Handling the request
+    Each webhook request expects a 200 HTTP status response. We ask that you respond to the request before doing any processing of the data. This assures that each message is only sent once and saves both your and our bandwidth and processing power.
+    
+    ## Failed requests
+    If a webhook message request does not recieve a response in a timely manner or receives a response with a status code other than 200 it will be retried several times. These retries follow an exponential backoff, meaning that each retry will happen at larger interval than the previous. After 16 failed requests, which are in total spread over 3 days, the message is marked as failed and no more retries will be attempted.
+    
+    ## Grouping
+    Events that happen within one send interval are grouped together in one request rather than sent individually. This message group may also contain messages for events that might not have happened within the interval, but have failed to be delivered previously.
+    
+    ## Exemptions
+    Some event messages are exempt from being sent. These cases are:
+      * Several update events have happened to the same object within the send interval. In this case only the latest update event is sent.
+      * When deleting a resource or a project all the tasks assigned to the resource or contained in the project are also deleted. In that case a delete message is sent for the resource or the project, but not the tasks. This is to prevent overloading your sever with potentially hundreds or thousands of delete events.
+      
+    ## Data integrity
+    In some cases where your server takes too long to respond, it is possible that a message is delivered multiple times. For those cases each message object contains a unique id, so you can easily tell which messages you have already handled and save resources on processing them again.
       
   version: "1.0.1"
   title: Ganttic API
