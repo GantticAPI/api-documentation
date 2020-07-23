@@ -851,8 +851,19 @@ components:
         resourceUtilizationPercent:
           type: array
           items:
-            $ref: '#/components/schemas/ResourceUtilization'
+            $ref: '#/components/schemas/ResourceUtilizationPercent'
           description: List of utilization percentages for each resource assigned to the task. This value is null if the task is using percentage based utilization.
+          readOnly: true
+        utilizationMinutes:
+          type: integer
+          format: int32
+          description: Busy time of the task in minutes. This value is null if the task is using percentage based utilization.
+          readOnly: true
+        resourceUtilizationMinutes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceUtilizationTime'
+          description: List of busy time values for each resource assigned to the task. This value is null if the task is using timing based utilization.
           readOnly: true
         notes:
           type: array
@@ -1228,7 +1239,7 @@ components:
           format: date-time
           example: 2020-01-01 20:20
           description: Date the note was created (YYYY-MM-DD hh:mm).
-    ResourceUtilization:
+    ResourceUtilizationPercent:
       type: object
       properties:
         resourceId:
@@ -1238,6 +1249,16 @@ components:
           type: integer
           format: int32
           description: Utilization percent for that resource.
+    ResourceUtilizationTime:
+      type: object
+      properties:
+        resourceId:
+          type: string
+          description: Id of the resource.
+        utilizationPercent:
+          type: integer
+          format: int32
+          description: Busy time for that resource.
     WebhookRequestBody:
       type: object
       properties:
