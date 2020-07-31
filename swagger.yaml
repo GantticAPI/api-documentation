@@ -769,6 +769,9 @@ components:
         id:
           type: string
           description: Id of the resource. This is a read-only value and is assigned when a resource is created.
+      required: 
+        - id
+        - name
     TaskList:
       type: object
       properties:
@@ -975,6 +978,9 @@ components:
         id:
           type: string
           description: Id of the project. This value is assigned when a project is created.
+      required: 
+        - id
+        - name
     UserList:
       type: object
       properties:
@@ -1040,6 +1046,9 @@ components:
         id:
           type: string
           description: Id of the user.
+      required: 
+        - id
+        - email
     UserSchema:
       type: object
       allOf:
