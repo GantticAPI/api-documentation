@@ -473,7 +473,7 @@ paths:
     post:
       tags:
         - task
-      summary: Create a task
+      summary: Add a task used time interval
       parameters:
         - name: taskId
           in: path
@@ -488,7 +488,7 @@ paths:
           schema:
             type: string
       requestBody:
-        $ref: '#/components/requestBodies/TaskPost'
+        $ref: '#/components/requestBodies/TaskUsedTimePost'
       responses:
         '200':
           $ref: '#/components/responses/Task'
