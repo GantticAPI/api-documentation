@@ -469,6 +469,33 @@ paths:
           $ref: '#/components/responses/Error'
         '5XX':
           $ref: '#/components/responses/Error'
+  '/task/{taskId}/usedtime':
+    post:
+      tags:
+        - task
+      summary: Create a task
+      parameters:
+        - name: taskId
+          in: path
+          description: Id of the task
+          required: true
+          schema:
+            type: string
+        - name: token
+          in: query
+          description: API token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        $ref: '#/components/requestBodies/TaskPost'
+      responses:
+        '200':
+          $ref: '#/components/responses/Task'
+        '4XX':
+          $ref: '#/components/responses/Error'
+        '5XX':
+          $ref: '#/components/responses/Error'
   /projects:
     parameters:
       - name: token
@@ -820,8 +847,14 @@ components:
         usedTime:
           type: integer
           format: int64
-          description: Task used time in minutes.
+          description: Total task used time in minutes. This value can only be modified through the API and __on doing so all existing used time intervals will be deleted__.
           default: 0
+        usedTimeIntervals:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskUsedTime'
+          readOnly: true
+          description: Used time intervals for the task.
         recurringId:
           type: string
           description: Id of the recurring set the task is in.
@@ -1248,6 +1281,27 @@ components:
           format: date-time
           example: 2020-01-01 20:20
           description: Date the note was created (YYYY-MM-DD hh:mm).
+    TaskUsedTime:
+      type: object
+      properties:
+        usedTime:
+          type: integer
+          format: int32
+          description: Used time in minutes.
+        usedTimeDate:
+          type: string
+          format: date
+          description: asd
+        description:
+          type: string
+          description: Description of the used time.
+        userId:
+          type: string
+          description: Id of the user who added the used time interval. NULL if this interval was added through the API.
+        insertTime:
+          type: string
+          format: date
+          description: Date the interval was added.
     ResourceUtilizationPercent:
       type: object
       properties:
@@ -1329,6 +1383,11 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/TaskPatch'
+    TaskUsedTimePost:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TaskUsedTime'
     ResourcePost:
       content:
         application/json:
