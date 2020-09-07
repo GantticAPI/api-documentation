@@ -491,7 +491,7 @@ paths:
         $ref: '#/components/requestBodies/TaskUsedTimePost'
       responses:
         '200':
-          $ref: '#/components/responses/Task'
+          $ref: '#/components/responses/TaskUsedTime'
         '4XX':
           $ref: '#/components/responses/Error'
         '5XX':
@@ -1440,6 +1440,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/TaskList'
+    TaskUsedTime:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TaskUsedTimeGet'
     Resource:
       description: Successful operation
       content:
