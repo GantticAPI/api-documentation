@@ -852,7 +852,7 @@ components:
         usedTimeIntervals:
           type: array
           items:
-            $ref: '#/components/schemas/TaskUsedTime'
+            $ref: '#/components/schemas/TaskUsedTimeGet'
           readOnly: true
           description: Used time intervals for the task.
         recurringId:
@@ -1295,6 +1295,11 @@ components:
         description:
           type: string
           description: Description of the used time.
+    TaskUsedTimeGet:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/TaskUsedTime'
+      properties:
         userId:
           type: string
           description: Id of the user who added the used time interval. NULL if this interval was added through the API.
@@ -1302,6 +1307,10 @@ components:
           type: string
           format: date
           description: Date the interval was added.
+    TaskUsedTimePost:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/TaskUsedTime'
     ResourceUtilizationPercent:
       type: object
       properties:
@@ -1387,7 +1396,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/TaskUsedTime'
+            $ref: '#/components/schemas/TaskUsedTimePost'
     ResourcePost:
       content:
         application/json:
