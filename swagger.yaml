@@ -1299,14 +1299,14 @@ components:
       type: object
       allOf:
         - $ref: '#/components/schemas/TaskUsedTime'
-      properties:
-        userId:
-          type: string
-          description: Id of the user who added the used time interval. NULL if this interval was added through the API.
-        insertTime:
-          type: string
-          format: date
-          description: Date the interval was added.
+        - properties:
+            userId:
+              type: string
+              description: Id of the user who added the used time interval. NULL if this interval was added through the API.
+            insertTime:
+              type: string
+              format: date
+              description: Date the interval was added.
     TaskUsedTimePost:
       type: object
       allOf:
