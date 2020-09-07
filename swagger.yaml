@@ -163,9 +163,9 @@ paths:
         '200':
           $ref: '#/components/responses/Resources'
         '4XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ClientError'
         '5XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ServerError'
   '/resources/datafields':
     parameters:
       - name: token
@@ -182,9 +182,9 @@ paths:
         '200':
           $ref: '#/components/responses/DataFields'
         '4XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ClientError'
         '5XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ServerError'
   /resource:
     parameters:
       - name: token
@@ -203,9 +203,9 @@ paths:
         '200':
           $ref: '#/components/responses/Resource'
         '4XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ClientError'
         '5XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ServerError'
     patch:
       tags:
         - resource
@@ -216,9 +216,9 @@ paths:
         '200':
           $ref: '#/components/responses/Resource'
         '4XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ClientError'
         '5XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ServerError'
   '/resource/{resourceId}':
     parameters:
       - name: token
@@ -242,9 +242,9 @@ paths:
         '200':
           $ref: '#/components/responses/Resource'
         '4XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ClientError'
         '5XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ServerError'
     delete:
       tags:
         - resource
@@ -253,9 +253,9 @@ paths:
         '200':
           description: Successful operation
         '4XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ClientError'
         '5XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ServerError'
   /tasks:
     parameters:
     - name: token
@@ -356,9 +356,9 @@ paths:
         '200':
           $ref: '#/components/responses/Tasks'
         '4XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ClientError'
         '5XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ServerError'
   '/tasks/datafields':
     parameters:
       - name: token
@@ -375,9 +375,9 @@ paths:
         '200':
           $ref: '#/components/responses/DataFields'
         '4XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ClientError'
         '5XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ServerError'
   /task:
     parameters:
     - name: token
@@ -403,9 +403,9 @@ paths:
         '200':
           $ref: '#/components/responses/Task'
         '4XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ClientError'
         '5XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ServerError'
     patch:
       tags:
         - task
@@ -423,9 +423,9 @@ paths:
         '200':
           $ref: '#/components/responses/Task'
         '4XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ClientError'
         '5XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ServerError'
   '/task/{taskId}':
     parameters:
       - name: token
@@ -455,9 +455,9 @@ paths:
         '200':
           $ref: '#/components/responses/Task'
         '4XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ClientError'
         '5XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ServerError'
     delete:
       tags:
         - task
@@ -466,9 +466,9 @@ paths:
         '200':
           description: Successful operation
         '4XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ClientError'
         '5XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ServerError'
   '/task/{taskId}/usedtime':
     post:
       tags:
@@ -493,9 +493,9 @@ paths:
         '200':
           $ref: '#/components/responses/TaskUsedTime'
         '4XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ClientError'
         '5XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ServerError'
   /projects:
     parameters:
       - name: token
@@ -544,9 +544,9 @@ paths:
         '200':
           $ref: '#/components/responses/Projects'
         '4XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ClientError'
         '5XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ServerError'
   '/projects/datafields':
     parameters:
       - name: token
@@ -563,9 +563,9 @@ paths:
         '200':
           $ref: '#/components/responses/DataFields'
         '4XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ClientError'
         '5XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ServerError'
   /project:
     parameters:
       - name: token
@@ -584,9 +584,9 @@ paths:
         '200':
           $ref: '#/components/responses/Project'
         '4XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ClientError'
         '5XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ServerError'
     patch:
       tags:
         - project
@@ -597,9 +597,9 @@ paths:
         '200':
           $ref: '#/components/responses/Project'
         '4XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ClientError'
         '5XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ServerError'
   '/project/{projectId}':
     parameters:
       - name: token
@@ -623,9 +623,9 @@ paths:
         '200':
           $ref: '#/components/responses/Project'
         '4XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ClientError'
         '5XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ServerError'
     delete:
       tags:
         - project
@@ -634,9 +634,9 @@ paths:
         '200':
           description: Successful operation
         '4XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ClientError'
         '5XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ServerError'
   /users:
     parameters:
       - name: token
@@ -661,9 +661,9 @@ paths:
         '200':
           $ref: '#/components/responses/Users'
         '4XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ClientError'
         '5XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ServerError'
   /user:
     parameters:
       - name: token
@@ -682,9 +682,9 @@ paths:
         '200':
           $ref: '#/components/responses/User'
         '4XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ClientError'
         '5XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ServerError'
     patch:
       tags:
         - user
@@ -695,9 +695,9 @@ paths:
         '200':
           $ref: '#/components/responses/User'
         '4XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ClientError'
         '5XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ServerError'
   '/user/{userId}':
     parameters:
       - name: token
@@ -720,9 +720,9 @@ paths:
         '200':
           $ref: '#/components/responses/User'
         '4XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ClientError'
         '5XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ServerError'
     delete:
       tags:
         - user
@@ -731,9 +731,9 @@ paths:
         '200':
           description: Successful operation
         '4XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ClientError'
         '5XX':
-          $ref: '#/components/responses/Error'
+          $ref: '#/components/responses/ServerError'
 components:
   schemas:
     ResourceList:
@@ -1086,10 +1086,10 @@ components:
       type: object
       allOf:
         - $ref: '#/components/schemas/UserGet'
-      properties:
-        password:
-          type: string
-          description: Password of the user. This is a write-only property included in the request when creating a user and will not be returned with GET requests.
+        - properties:
+            password:
+              type: string
+              description: Password of the user. This is a write-only property included in the request when creating a user and will not be returned with GET requests.
     DataFieldValues:
       type: object
       properties:
@@ -1371,13 +1371,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/Project'
           description: The task the event happened to. This key is not contained in the message if the event happened to a resource or a task.
-    Error:
+    ClientError:
       type: object
       properties:
         errorCode:
           type: string
           description: Error code
-          enum: [TASK_NOT_FOUND, RESOURCE_NOT_FOUND,PROJECT_NOT_FOUND, USER_NOT_FOUND, DATAFIELD_NOT_FOUND, DATAFIELD_LIST_VALUE_NOT_FOUND, INVALID_TOKEN, INVALID_START_DATE, INVALID_END_DATE, INVALID_NUMBER, INVALID_USER_TYPE, INVALID_JSON, INVALID_RESOURCE_NAME, INVALID_PROJECT_NAME, NO_RESOURCES, SYNC_RESOURCE_DELETE, RESOURCE_LIMIT_EXCEEDED, USER_EXISTS, START_TIME_AFTER_END_TIME]
+          enum: [TASK_NOT_FOUND, RESOURCE_NOT_FOUND, PROJECT_NOT_FOUND, USER_NOT_FOUND, DATAFIELD_NOT_FOUND, DATAFIELD_LIST_VALUE_NOT_FOUND, INVALID_TOKEN, INVALID_START_DATE, INVALID_END_DATE, INVALID_DATE, INVALID_NUMBER, INVALID_USER_TYPE, INVALID_JSON, INVALID_RESOURCE_NAME, INVALID_PROJECT_NAME, INVALID_PROPERTY_TYPE, NO_RESOURCES, SYNC_RESOURCE_DELETE, RESOURCE_LIMIT_EXCEEDED, USER_EXISTS, START_TIME_AFTER_END_TIME, UNRECOGNIZED_PROPERTY]
+        message:
+          type: string
+          description: Error description
+    ServerError:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: Error code
+          enum: [UNKNOWN]
         message:
           type: string
           description: Error description
@@ -1488,9 +1498,15 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/DataFields'
-    Error:
+    ClientError:
       description: An error occurred
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/ClientError'
+    ServerError:
+      description: An unknown error occurred
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ServerError'
