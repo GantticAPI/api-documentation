@@ -1291,7 +1291,7 @@ components:
         usedTimeDate:
           type: string
           format: date
-          description: asd
+          description: Date the time was used.
         description:
           type: string
           description: Description of the used time.
