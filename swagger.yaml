@@ -6,7 +6,7 @@ info:
     # Description
     Ganttic API allows programmatic access to Ganttic resources, tasks, projects and users. It is intended to access your data programmatically for integration with your in-house applications or integrations with third party applications. Ganttic API follows RESTful style and uses JSON data format.
 
-    Ganttic API root URL is https://planner.ganttic.com/api/v1. ‘v1’ is the version number. All requests to the API must be made over HTTPS. This reference lists all available endpoints and their descriptions. 
+    Ganttic API roo t URL is https://planner.ganttic.com/api/v1. ‘v1’ is the version number. All requests to the API must be made over HTTPS. This reference lists all available endpoints and their descriptions. 
 
     # Authentication
     Each request to the Ganttic API is authorized by an API token. This token must be sent with each request as a "token" query parameter. An account administrator can obtain the token from [the web interface](https://planner.ganttic.com) under Settings > API. If the authentication token is not contained in the request or is invalid then the server will return an Unauthorized (401) response.
