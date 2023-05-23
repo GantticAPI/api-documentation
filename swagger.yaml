@@ -54,7 +54,7 @@ info:
   contact:
     email: info@ganttic.com
   x-logo:
-    url: './ganttic-logo_sini-valge.svg'
+    url: './Ganttic_logotype_blue.svg'
     altText: Ganttic logo
 tags:
   - name: resource
@@ -264,6 +264,15 @@ paths:
       required: true
       schema:
         type: string
+    - name: includeUnassigned
+      in: query
+      description: Include unassigned tasks in the result.
+      required: false
+      schema:
+        type: integer
+        enum: [0, 1]
+        default: 0
+
     get:
       tags:
         - task
@@ -504,6 +513,14 @@ paths:
         required: true
         schema:
           type: string
+      - name: templates
+        in: query
+        description: Returns only template projects.
+        required: false
+        schema:
+          type: integer
+          enum: [0, 1]
+          default: 0
     get:
       tags:
         - project
