@@ -48,7 +48,7 @@ info:
     ## Data integrity
     In some cases where your server takes too long to respond, it is possible that a message is delivered multiple times. For those cases each message object contains a unique id, so you can easily tell which messages you have already handled and save resources on processing them again.
       
-  version: "1.0.1"
+  version: 1.0.1
   title: Ganttic API
   termsOfService: 'https://www.ganttic.com/terms-and-conditions'
   contact:
@@ -147,6 +147,14 @@ paths:
         - name: includeEmptyDataFields
           in: query
           description: Include data fields for which the task has no value in result.
+          required: false
+          schema:
+            type: integer
+            enum: [0, 1]
+            default: 0
+        - name: includeReadableDataFieldValues
+          in: query
+          description: Include human readable values for data fields in the result.
           required: false
           schema:
             type: integer
@@ -313,6 +321,14 @@ paths:
         - name: includeEmptyDataFields
           in: query
           description: Include data fields for which the task has no value in the result.
+          required: false
+          schema:
+            type: integer
+            enum: [0, 1]
+            default: 0
+        - name: includeReadableDataFieldValues
+          in: query
+          description: Include human readable values for data fields in the result.
           required: false
           schema:
             type: integer
@@ -545,6 +561,14 @@ paths:
         - name: includeEmptyDataFields
           in: query
           description: Include data fields for which the task has no value in result
+          required: false
+          schema:
+            type: integer
+            enum: [0, 1]
+            default: 0
+        - name: includeReadableDataFieldValues
+          in: query
+          description: Include human readable values for data fields in the result.
           required: false
           schema:
             type: integer
@@ -846,7 +870,7 @@ components:
           items:
             type: string
           minItems: 1
-          description: List of resource ids the task is assigned to. At least one resource id is required when creating or modifying a task unless the task status is "public_holiday" in which case it is automatically assigned to all resources.
+          description: List of resource ids the task is assigned to. At least one resource id is required when creating or modifying a task unless the task status is "public_holiday" in which case it is automatically assigned to all resources. Id "0" refers to the "UNASSIGNED" resource.
         start:
           type: string
           format: date-time
