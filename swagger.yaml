@@ -1170,6 +1170,9 @@ components:
         id:
           type: string
           description: Id of the data field
+        readableValue:
+          type: string
+          description: Human readable value of the data field.
     DataFieldUserValue:
       type: object
       allOf:
