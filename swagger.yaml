@@ -4,7 +4,7 @@ info:
     [www.ganttic.com](https://www.ganttic.com)
     
     # Description
-    Ganttic API allows programmatic access to Ganttic resources, tasks, projects and users. It is intended to access your data programmatically for integration with your in-house applications or integrations with third party applications. Ganttic API follows REStful style and uses JSON data format.
+    Ganttic API allows programmatic access to Ganttic resources, tasks, projects and users. It is intended to access your data programmatically for integration with your in-house applications or integrations with third party applications. Ganttic API follows restful style and uses JSON data format.
 
     Ganttic API root URL is https://planner.ganttic.com/api/v1. ‘v1’ is the version number. All requests to the API must be made over HTTPS. This reference lists all available endpoints and their descriptions. 
 
