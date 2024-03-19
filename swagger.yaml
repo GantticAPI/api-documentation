@@ -136,10 +136,6 @@ paths:
             type: integer
             enum: [0, 1]
             default: 0
-        taskColor:
-          type: string
-          description: Task's background color is conveyed using a hexadecimal code, representing the color's RGB (Red, Green, Blue) values. It consists of six characters.
-          nullable: true
         - name: includeNotes
           in: query
           description: Include notes in result.
@@ -819,6 +815,10 @@ components:
           example: 2020-01-01 20:20
           description: Date the resource was created (YYYY-MM-DD hh:mm).
           readOnly: true
+        taskColor:
+          type: string
+          description: Task's background color is conveyed using a hexadecimal code, representing the color's RGB (Red, Green, Blue) values. It consists of six characters.
+          nullable: true          
         dataFields:
           $ref: '#/components/schemas/DataFieldValues'
       required:
