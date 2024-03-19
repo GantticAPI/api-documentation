@@ -905,6 +905,10 @@ components:
           format: int32
           description: Utilization percent of the task. This value is null if the task is using timing based utilization.
           default: 100
+        taskColor:
+          type: string
+          description: Task's background color is conveyed using a hexadecimal code, representing the color's RGB (Red, Green, Blue) values. It consists of six characters.
+          nullable: true        
         dataFields:
           $ref: '#/components/schemas/DataFieldValues'
       required:
