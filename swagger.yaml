@@ -136,6 +136,10 @@ paths:
             type: integer
             enum: [0, 1]
             default: 0
+        taskColor:
+          type: string
+          description: Task's background color is conveyed using a hexadecimal code, representing the color's RGB (Red, Green, Blue) values. It consists of six characters.
+          nullable: true
         - name: includeNotes
           in: query
           description: Include notes in result.
@@ -905,10 +909,6 @@ components:
           format: int32
           description: Utilization percent of the task. This value is null if the task is using timing based utilization.
           default: 100
-        taskColor:
-          type: string
-          description: Task's background color is conveyed using a hexadecimal code, representing the color's RGB (Red, Green, Blue) values. It consists of six characters.
-          nullable: true        
         dataFields:
           $ref: '#/components/schemas/DataFieldValues'
       required:
@@ -1020,6 +1020,10 @@ components:
           enum: [project, archived]
           default: project
           description: Status of the project. One of either "project" for a regular project or "archived" for a read-only archived project. When the project is archived all the tasks in the project will be archived automatically.
+        taskColor:
+          type: string
+          description: Task's background color is conveyed using a hexadecimal code, representing the color's RGB (Red, Green, Blue) values. It consists of six characters.
+          nullable: true
         notes:
           type: array
           items:
