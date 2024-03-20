@@ -377,6 +377,10 @@ paths:
           schema:
             type: string
             default: null
+        - taskColor:
+            type: string
+            description: Task's background color is conveyed using a hexadecimal code, representing the color's RGB (Red, Green, Blue) values. It consists of six characters.
+            nullable: true
       responses:
         '200':
           $ref: '#/components/responses/Tasks'
