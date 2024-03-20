@@ -817,7 +817,7 @@ components:
           readOnly: true
         taskColor:
           type: string
-          description: Task's background color is conveyed using a hexadecimal code, representing the color's RGB (Red, Green, Blue) values. It consists of six characters.
+          description: The resource's color and taskbar color is conveyed using a hexadecimal code, representing the color's RGB (Red, Green, Blue) values. It consists of six characters.
           nullable: true          
         dataFields:
           $ref: '#/components/schemas/DataFieldValues'
@@ -911,7 +911,7 @@ components:
           default: 100
         taskColor:
           type: string
-          description: Task's background color is conveyed using a hexadecimal code, representing the color's RGB (Red, Green, Blue) values. It consists of six characters.
+          description: The task's color and taskbar color is conveyed using a hexadecimal code, representing the color's RGB (Red, Green, Blue) values. It consists of six characters.
           nullable: true
         dataFields:
           $ref: '#/components/schemas/DataFieldValues'
@@ -1026,7 +1026,7 @@ components:
           description: Status of the project. One of either "project" for a regular project or "archived" for a read-only archived project. When the project is archived all the tasks in the project will be archived automatically.
         taskColor:
           type: string
-          description: Task's background color is conveyed using a hexadecimal code, representing the color's RGB (Red, Green, Blue) values. It consists of six characters.
+          description: The project's color and taskbar color is conveyed using a hexadecimal code, representing the color's RGB (Red, Green, Blu) values. It consists of six characters.
           nullable: true
         notes:
           type: array
