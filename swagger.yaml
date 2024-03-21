@@ -815,7 +815,7 @@ components:
           example: 2020-01-01 20:20
           description: Date the resource was created (YYYY-MM-DD hh:mm).
           readOnly: true
-        taskColor:
+        color:
           type: string
           description: The resource's color and taskbar color is conveyed using a hexadecimal code, representing the color's RGB (Red, Green, Blue) values. It consists of six characters.
           nullable: true          
@@ -909,7 +909,7 @@ components:
           format: int32
           description: Utilization percent of the task. This value is null if the task is using timing based utilization.
           default: 100
-        taskColor:
+        color:
           type: string
           description: The task's color and taskbar color is conveyed using a hexadecimal code, representing the color's RGB (Red, Green, Blue) values. It consists of six characters.
           nullable: true
@@ -1024,7 +1024,7 @@ components:
           enum: [project, archived]
           default: project
           description: Status of the project. One of either "project" for a regular project or "archived" for a read-only archived project. When the project is archived all the tasks in the project will be archived automatically.
-        taskColor:
+        color:
           type: string
           description: The project's color and taskbar color is conveyed using a hexadecimal code, representing the color's RGB (Red, Green, Blu) values. It consists of six characters.
           nullable: true
