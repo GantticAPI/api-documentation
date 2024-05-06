@@ -932,7 +932,7 @@ components:
           type: string
           enum: [task, archived, holiday, public_holiday]
           default: task
-          description: Status of the task. Use "task" for a regular task, "archived" for an archived read-only task, "holiday" for Time Off or All Resources’ Time Off type tasks (e.g. vacation or sick leave), or "public_holiday" for any imported public holidays. When creating or modifying a task only "task", "holiday" and "public_holiday" values are accepted. A task is archived once its corresponding project is archived.
+          description: Status of the task. Use "task" for a regular task, "archived" for an archived read-only task, "holiday" for custom time-off such as Time Off type tasks and resource specific public holidays, or "public_holiday" for planner-wide imported public holidays or All Resources’ Time Off tasks. When creating or modifying a task only "task", "holiday" and "public_holiday" values are accepted. A task is archived once its corresponding project is archived.
         resourceUtilizationPercent:
           type: array
           items:
@@ -971,7 +971,7 @@ components:
           type: string
           enum: [task, archived, holiday, public_holiday]
           default: task
-          description: Status of the task. Use "task" for a regular task, "archived" for an archived read-only task, "holiday" for Time Off or All Resources’ Time Off type tasks (e.g. vacation or sick leave), or "public_holiday" for any imported public holidays. When creating or modifying a task only "task", "holiday" and "public_holiday" values are accepted. A task is archived once its corresponding project is archived.
+          description: Status of the task. Use "task" for a regular task, "archived" for an archived read-only task, "holiday" for custom time-off such as Time Off type tasks and resource specific public holidays, or "public_holiday" for planner-wide imported public holidays or All Resources’ Time Off tasks. When creating or modifying a task only "task", "holiday" and "public_holiday" values are accepted. A task is archived once its corresponding project is archived.
         timeZone:
           type: string
           nullable: true
