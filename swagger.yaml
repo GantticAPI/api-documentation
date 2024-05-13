@@ -334,6 +334,14 @@ paths:
             type: integer
             enum: [0, 1]
             default: 0
+        - name: includeDependencies
+          in: query
+          description: Include task dependencies.
+          required: false
+          schema:
+            type: integer
+            enum: [0, 1]
+            default: 0            
         - name: onlyHolidays
           in: query
           description: Get holiday (Time Off, All Resources’ Time Off) and public holiday type tasks. If this value is true, then all other tasks will be excluded from the response.
@@ -476,6 +484,15 @@ paths:
       tags:
         - task
       summary: Get task details
+      parameters:
+        - name: includeDependencies
+          in: query
+          description: Include task dependencies.
+          required: false
+          schema:
+            type: integer
+            enum: [0, 1]
+            default: 0                
       responses:
         '200':
           $ref: '#/components/responses/Task'
