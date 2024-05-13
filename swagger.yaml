@@ -932,6 +932,8 @@ components:
           nullable: true
         dataFields:
           $ref: '#/components/schemas/DataFieldValues'
+        dependencies:
+          $ref: '#/components/schemas/Dependencies'
       required:
         - start
         - end
@@ -1337,6 +1339,29 @@ components:
         value:
           type: string
           description: Value of the list option.
+    Dependencies:
+      type: object
+      properties:
+        taskId:
+          type: string
+          description: Id of the task.
+        type:
+          type: string
+          enum: [successor, predecessor]
+          description: Task dependency type. Possible values are successor or predecessor.
+        minGap:
+          type: integer
+          description: The minimum gap between two dependent tasks in minutes.
+        lagType:
+          type: string
+          enum: [minimal, fixed]
+          default: minimal
+          description: Task dependency lag type.
+        isLead:
+          type: boolean
+          enum: [false, true]
+          default: false
+          description: .
     Note:
       type: object
       properties:
