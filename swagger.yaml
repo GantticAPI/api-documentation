@@ -979,6 +979,13 @@ components:
           example: 2020-01-01 20:20
           readOnly: true
           description: Date the task was created YYYY-MM-DD hh:mm
+        taskDependcies:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskDependencies'
+          description: List of task dependencies.
+          readOnly: true
+          
     TaskPost:
       type: object
       allOf:
