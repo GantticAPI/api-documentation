@@ -979,10 +979,10 @@ components:
           example: 2020-01-01 20:20
           readOnly: true
           description: Date the task was created YYYY-MM-DD hh:mm
-        taskDependencies:
+        dependencies:
           type: array
           items:
-            $ref: '#/components/schemas/TaskDependencies'
+            $ref: '#/components/schemas/Dependencies'
           description: List of task dependencies.
           readOnly: true
           
@@ -1361,7 +1361,7 @@ components:
           format: date-time
           example: 2020-01-01 20:20
           description: Date the note was created (YYYY-MM-DD hh:mm).
-    TaskDependencies:
+    Dependencies:
       type: object
       properties:
         taskId:
@@ -1601,12 +1601,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/DataFields'
-    TaskDependencies:
+    Dependencies:
       description: Successful operation
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/TaskDependencies'
+            $ref: '#/components/schemas/Dependencies'
             
     ClientError:
       description: An error occurred
