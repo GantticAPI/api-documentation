@@ -162,7 +162,12 @@ paths:
             default: 0
         - name: page
           in: query
-          description: Page of resources to get.
+          description: The result is returned in pages, with 50 rows per page. The parameter page indicates which page you want to retrieve. <br>
+              Example:<br>
+                if `page` = 1 returns rows 1-50<br>
+                if `page` = 2 returns rows 51-100<br>
+                ....<br>
+                if `page` = -1 returns all records on a single page from 1 to n rows          
           required: false
           schema:
             type: integer
@@ -352,7 +357,12 @@ paths:
             default: 0
         - name: page
           in: query
-          description: Page of tasks to get.
+          description: The result is returned in pages, with 50 rows per page. The parameter page indicates which page you want to retrieve. <br>
+              Example:<br>
+                if `page` = 1 returns rows 1-50<br>
+                if `page` = 2 returns rows 51-100<br>
+                ....<br>
+                if `page` = -1 returns all records on a single page from 1 to n rows
           required: false
           schema:
             type: integer
@@ -593,7 +603,12 @@ paths:
             default: 0
         - name: page
           in: query
-          description: Page of projects to get
+          description: The result is returned in pages, with 50 rows per page. The parameter page indicates which page you want to retrieve. <br>
+              Example:<br>
+                if `page` = 1 returns rows 1-50<br>
+                if `page` = 2 returns rows 51-100<br>
+                ....<br>
+                if `page` = -1 returns all records on a single page from 1 to n rows
           required: false
           schema:
             type: integer
