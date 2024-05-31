@@ -601,6 +601,13 @@ paths:
             type: integer
             enum: [0, 1]
             default: 0
+        - name: projectTitle
+          in: query
+          description: Returns only projects whose name-title matches the given string. It is case-insensitive and searches for a part of the name-title.
+          required: false
+          schema:
+            type: string
+            default: null
         - name: page
           in: query
           description: The result is returned in pages, with 50 rows per page. The parameter page indicates which page you want to retrieve. <br>
