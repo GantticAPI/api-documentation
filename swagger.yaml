@@ -1095,7 +1095,7 @@ components:
         created:
           type: string
           format: date-time
-          description: Date the project was created (YYYY-MM-DD hh:mm).
+          description: The date the project was created (YYYY-MM-DD hh:mm).
           example: 2020-01-01 20:20
           readOnly: true
         updated:
