@@ -852,8 +852,14 @@ components:
           type: string
           format: date-time
           example: 2020-01-01 20:20
-          description: Date the resource was created (YYYY-MM-DD hh:mm).
+          description: The date the resource was created. (YYYY-MM-DD hh:mm).
           readOnly: true
+        updated:
+          type: string
+          format: date-time
+          example: 2020-01-01 20:20
+          description: The date when the resource was last modified. (YYYY-MM-DD hh:mm).
+          readOnly: true          
         color:
           type: string
           description: The resource's color and taskbar color is conveyed using a hexadecimal code, representing the color's RGB (Red, Green, Blue) values. It consists of six characters.
@@ -1001,6 +1007,12 @@ components:
           example: 2020-01-01 20:20
           readOnly: true
           description: Date the task was created YYYY-MM-DD hh:mm
+        updated:
+          type: string
+          format: date-time
+          example: 2020-01-01 20:20
+          description: The date when the task was last modified. (YYYY-MM-DD hh:mm).
+          readOnly: true          
         dependencies:
           type: array
           items:
@@ -1086,6 +1098,12 @@ components:
           description: Date the project was created (YYYY-MM-DD hh:mm).
           example: 2020-01-01 20:20
           readOnly: true
+        updated:
+          type: string
+          format: date-time
+          example: 2020-01-01 20:20
+          description: The date when the project was last modified. (YYYY-MM-DD hh:mm).
+          readOnly: true              
         dataFields:
           $ref: '#/components/schemas/DataFieldValues'
       required:
