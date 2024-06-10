@@ -1315,13 +1315,17 @@ components:
       type: object
       allOf:
         - $ref: '#/components/schemas/DataFieldValue'
+#      items:
+#        type: object
+#        allOf:
+#          - $ref: '#/components/schemas/DataFieldListOption'
       properties:
         values:
           type: object
           allOf:
             - $ref: '#/components/schemas/DataMultiSelect'
 #            - $ref: '#/components/schemas/DataFieldListOption'
-          description: Ids of the current value of the list.
+#          description: Ids of the current value of the list.
 
 
     DataFields:
@@ -1406,8 +1410,8 @@ components:
             
     DataMultiSelect:
       type: object
-#      allOf:
-#        - $ref: '#/components/schemas/DataField'
+      allOf:
+        - $ref: '#/components/schemas/DataField'
       properties:
         values:
           type: array
