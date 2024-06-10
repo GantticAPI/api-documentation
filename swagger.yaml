@@ -1407,7 +1407,6 @@ components:
           description: Possible values the list can have.
           items:
             $ref: '#/components/schemas/DataFieldListOption'
-            
     DataMultiSelect:
       type: object
       allOf:
@@ -1417,7 +1416,7 @@ components:
           type: array
           description: Possible values the list can have.
           items:
-            $ref: '#/components/schemas/DataFieldMultiSelectValuesOption'
+            $ref: '#/components/schemas/DataFieldMultiSelectOption'
 
     DataFieldListOption:
       type: object
@@ -1429,7 +1428,7 @@ components:
           type: string
           description: Value of the list option.
 
-    DataFieldMultiSelectValuesOption:
+    DataFieldMultiSelectOption:
       type: object
       properties:
         id:
