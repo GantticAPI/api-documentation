@@ -1319,8 +1319,8 @@ components:
         values:
           type: object
           allOf:
-#            - $ref: '#/components/schemas/DataMultiSelect'
-            - $ref: '#/components/schemas/DataFieldListOption'
+            - $ref: '#/components/schemas/DataMultiSelect'
+#            - $ref: '#/components/schemas/DataFieldListOption'
           description: Ids of the current value of the list.
 
 
