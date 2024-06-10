@@ -1199,14 +1199,16 @@ components:
       required: 
         - id
         - email
-    UserSchema:
-      type: object
-      allOf:
-        - $ref: '#/components/schemas/UserGet'
-        - properties:
-            password:
-              type: string
-              description: Password of the user. This is a write-only property included in the request when creating a user and will not be returned with GET requests.
+
+#    UserSchema:
+#      type: object
+#      allOf:
+#        - $ref: '#/components/schemas/UserGet'
+#        - properties:
+#            password:
+#              type: string
+#              description: Password of the user. This is a write-only property included in the request when creating a user and will not be returned with GET requests.
+
     DataFieldValues:
       type: object
       properties:
@@ -1240,11 +1242,7 @@ components:
           items:
             $ref: '#/components/schemas/DataFieldListValue'
           description: List of list type data fields
-        multiSelectValues:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataFieldMultiSelectValue'
-          description: List of list type data fields    
+
     DataFieldValue:
       type: object
       properties:
@@ -1308,16 +1306,7 @@ components:
         valueId:
           type: string
           description: Id of the current value of the list.
-    DataFieldMultiSelectValue:
-      type: object
-      allOf:
-        - $ref: '#/components/schemas/DataFieldValue'
-      properties:
-        values:
-          type: object
-          items:
-            $ref: '#/components/schemas/DataFieldMultiSelectValue'
-          description: List Ids of the current values of the list.  
+
     DataFields:
       type: object
       properties:
@@ -1351,12 +1340,7 @@ components:
           items:
             $ref: '#/components/schemas/DataFieldList'
           description: List of list type data fields
-        multiSelectValues:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataFieldMultiSelect'
-          description: List of multiselect type data fields
-          
+
     DataField:
       type: object
       properties:
@@ -1396,16 +1380,7 @@ components:
           description: Possible values the list can have.
           items:
             $ref: '#/components/schemas/DataFieldListOption'
-    DataFieldMultiSelect:
-      type: object
-      allOf:
-        - $ref: '#/components/schemas/DataField'
-      properties:
-        values:
-          type: array
-          description: Possible values the multiselect can have.
-          items:
-            $ref: '#/components/schemas/DataFieldMultiSelectOption'            
+           
     DataFieldListOption:
       type: object
       properties:
@@ -1415,15 +1390,7 @@ components:
         value:
           type: string
           description: Value of the list option.
-    DataFieldMultiSelectOption:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Id of the list option.
-        value:
-          type: string
-          description: Value of the list option.          
+         
     Note:
       type: object
       properties:
