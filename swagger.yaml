@@ -1200,14 +1200,14 @@ components:
         - id
         - email
 
-#    UserSchema:
-#      type: object
-#      allOf:
-#        - $ref: '#/components/schemas/UserGet'
-#        - properties:
-#            password:
-#              type: string
-#              description: Password of the user. This is a write-only property included in the request when creating a user and will not be returned with GET requests.
+    UserSchema:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/UserGet'
+        - properties:
+            password:
+              type: string
+              description: Password of the user. This is a write-only property included in the request when creating a user and will not be returned with GET requests.
 
     DataFieldValues:
       type: object
