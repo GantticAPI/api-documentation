@@ -1242,6 +1242,11 @@ components:
           items:
             $ref: '#/components/schemas/DataFieldListValue'
           description: List of list type data fields
+        multiSelect:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataFieldMultiSelectValue'
+          description: multiSelect of list type data fields
 
     DataFieldValue:
       type: object
@@ -1306,6 +1311,17 @@ components:
         valueId:
           type: string
           description: Id of the current value of the list.
+    DataFieldMultiSelectValue:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/DataFieldValue'
+      properties:
+        values:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/DataMultiSelect'
+          description: Ids of the current value of the list.
+
 
     DataFields:
       type: object
@@ -1345,8 +1361,7 @@ components:
           items:
             $ref: '#/components/schemas/DataMultiSelect'
           description: MultiSelect of list type data fields
-          
-          
+
 
     DataField:
       type: object
