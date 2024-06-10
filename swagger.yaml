@@ -1340,6 +1340,11 @@ components:
           items:
             $ref: '#/components/schemas/DataFieldList'
           description: List of list type data fields
+        multiSelect:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataMultiSelect'
+          description: List of list type data fields          
 
     DataField:
       type: object
@@ -1380,8 +1385,28 @@ components:
           description: Possible values the list can have.
           items:
             $ref: '#/components/schemas/DataFieldListOption'
+    DataMultiSelect:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/DataField'
+      properties:
+        values:
+          type: array
+          description: Possible values the list can have.
+          items:
+            $ref: '#/components/schemas/DataFieldMultiSelectValuesOption'            
            
     DataFieldListOption:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of the list option.
+        value:
+          type: string
+          description: Value of the list option.
+
+    DataFieldMultiSelectValuesOption:
       type: object
       properties:
         id:
