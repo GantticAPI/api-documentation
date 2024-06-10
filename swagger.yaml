@@ -1312,9 +1312,9 @@ components:
           type: string
           description: Id of the current value of the list.
     DataFieldMultiSelectValue:
-#      type: object
-#      allOf:
-#        - $ref: '#/components/schemas/DataFieldValue'
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/DataFieldValue'
       properties:
         values:
           type: object
@@ -1405,8 +1405,8 @@ components:
             
     DataMultiSelect:
       type: object
-      allOf:
-        - $ref: '#/components/schemas/DataField'
+#      allOf:
+#        - $ref: '#/components/schemas/DataField'
       properties:
         values:
           type: array
