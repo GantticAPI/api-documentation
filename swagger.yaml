@@ -91,10 +91,6 @@ tags:
     x-displayName: Resource model
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/ResourceGet"/>
-  - name: resource_datafields_model
-    x-displayName: Resource datafields model
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/ResourceDataFields"/>
   - name: task_model
     x-displayName: Task model
     description: |
@@ -107,10 +103,6 @@ tags:
     x-displayName: User model
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/UserSchema"/>
-  - name: task_datafields_model
-    x-displayName: Task datafields model
-    description: |
-      <SchemaDefinition schemaRef="#/components/schemas/TaskDataFields"/>
   - name: webhook_model
     x-displayName: Webhook request body
     description: |
