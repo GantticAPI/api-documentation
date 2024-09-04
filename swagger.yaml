@@ -60,22 +60,42 @@ tags:
   - name: resource
     x-displayName: Resource
     description: A resource in Ganttic represents anyone or anything that should be planned or booked in order to complete a project. You can learn more about resources [here](https://www.ganttic.com/helpdesk/features/resources).
+  - name: resource datafield
+    description: "Resources, tasks and projects can all contain data fields. There are six types of data fields in total: users, dates, numbers, texts, links, listValues and multiSelect. The data fields are grouped by type in the dataFields object. Data fields are account wide, meaning that     each resource/task/project has identical data fields to other resources/tasks/projects. However, not each of them has a value for each data field. You can strip out empty data fields from list queries by setting the value of the includeEmptyDataFields to 0. You can use one of the queries below to fetch all data fields for resources/tasks/projects. Requests for resources/projects/tasks also contain data fields and their respective values for each resource/task/project. You can select whether to include data fields with no value via the includeEmptyDataFields query parameter."
+    x-displayName: Resource datafield    
+  - name: resource datafield list
+    description: "The Resource/Task/Project custom field types 'listValues' and 'multiSelect' contain lists. This option is intended for adding, modifying, and deleting these lists."
+    x-displayName: Resource datafield list
   - name: task
     x-displayName: Task
     description: A task is an assignment for a resource, whether it's a booking, a job or something else. You can learn more about tasks [here](https://www.ganttic.com/helpdesk/features/tasks).
+  - name: task datafield
+    description: "Resources, tasks and projects can all contain data fields. There are six types of data fields in total: users, dates, numbers, texts, links, listValues and multiSelect. The data fields are grouped by type in the dataFields object. Data fields are account wide, meaning that     each resource/task/project has identical data fields to other resources/tasks/projects. However, not each of them has a value for each data field. You can strip out empty data fields from list queries by setting the value of the includeEmptyDataFields to 0. You can use one of the queries below to fetch all data fields for resources/tasks/projects. Requests for resources/projects/tasks also contain data fields and their respective values for each resource/task/project. You can select whether to include data fields with no value via the includeEmptyDataFields query parameter."
+    x-displayName: Task datafield    
+  - name: task datafield list
+    description: "The Resource/Task/Project custom field types 'listValues' and 'multiSelect' contain lists. This option is intended for adding, modifying, and deleting these lists."
+    x-displayName: Task datafield list
   - name: project
     x-displayName: Project
     description: Projects might be the reason you're planning your resources. In that case, this is the place to look for projects that are ongoing. To see which tasks a certain project contains, look into the tasks section. You can learn more about projects [here](https://www.ganttic.com/helpdesk/features/projects).
+  - name: project datafield
+    description: "Resources, tasks and projects can all contain data fields. There are six types of data fields in total: users, dates, numbers, texts, links, listValues and multiSelect. The data fields are grouped by type in the dataFields object. Data fields are account wide, meaning that     each resource/task/project has identical data fields to other resources/tasks/projects. However, not each of them has a value for each data field. You can strip out empty data fields from list queries by setting the value of the includeEmptyDataFields to 0. You can use one of the queries below to fetch all data fields for resources/tasks/projects. Requests for resources/projects/tasks also contain data fields and their respective values for each resource/task/project. You can select whether to include data fields with no value via the includeEmptyDataFields query parameter."
+    x-displayName: Project datafield
+  - name: project datafield list
+    description: "The Resource/Task/Project custom field types 'listValues' and 'multiSelect' contain lists. This option is intended for adding, modifying, and deleting these lists."
+    x-displayName: Project datafield list
   - name: user
     x-displayName: User
     description: Users are the users of Ganttic, not resources. Though this may not be mutually exclusive, a separate resource must be created for the person to assign them tasks. Users are identified by the automatically generated id, and also a unique email address, which is used to log into Ganttic's web application.
-  - name: datafield
-    x-displayName: Datafield
-    description: "Resources, tasks and projects can all contain data fields. There are six types of data fields in total: users, dates, numbers,  texts, links, listValues and multiSelect. The data fields are grouped by type in the dataFields object. Data fields are account wide, meaning that     each resource/task/project has identical data fields to other resources/tasks/projects. However, not each of them has a value for each data field. You can strip out empty data fields from list queries by setting the value of the includeEmptyDataFields to 0. You can use one of the queries below to fetch all data fields for resources/tasks/projects. Requests for resources/projects/tasks also contain data fields and their respective values for each resource/task/project. You can select whether to include data fields with no value via the includeEmptyDataFields query parameter."
+    
   - name: resource_model
     x-displayName: Resource model
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/ResourceGet"/>
+  - name: resource_datafields_model
+    x-displayName: Resource datafields model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/ResourceDataFields"/>
   - name: task_model
     x-displayName: Task model
     description: |
@@ -88,10 +108,14 @@ tags:
     x-displayName: User model
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/UserSchema"/>
-  - name: datafields_model
-    x-displayName: Datafields model
+  - name: task_datafields_model
+    x-displayName: Task datafields model
     description: |
-      <SchemaDefinition schemaRef="#/components/schemas/DataFields"/>
+      <SchemaDefinition schemaRef="#/components/schemas/TaskDataFields"/>
+  - name: project_datafields_model
+    x-displayName: Project datafields model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/ProjectDataFields"/>
   - name: webhook_model
     x-displayName: Webhook request body
     description: |
@@ -100,17 +124,21 @@ x-tagGroups:
   - name: Requests
     tags:
       - resource
+      - resource_datafield
       - task
+      - task_datafield
       - project
+      - project_datafield
       - user
-      - datafield
   - name: Models
     tags:
       - resource_model
+      - resource_datafields_model
       - task_model
+      - task_datafields_model
       - project_model
+      - project_datafields_model
       - user_model
-      - datafields_model
       - webhook_model
 servers:
   - url: https://planner.ganttic.com/api/v1
@@ -189,7 +217,7 @@ paths:
           type: string
     get:
       tags:
-        - datafield
+        - resource datafield
       summary: Get all resource data fields
       responses:
         '200':
@@ -198,6 +226,127 @@ paths:
           $ref: '#/components/responses/ClientError'
         '5XX':
           $ref: '#/components/responses/ServerError'
+  '/resource/datafield':
+    parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
+    post:
+      tags:
+        - resource datafield
+      summary: Create a resource datafield
+      requestBody:
+        $ref: '#/components/requestBodies/ResourceDataFieldPost'
+      responses:
+        '200':
+          $ref: '#/components/responses/ResourceDataFieldPost'
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '5XX':
+          $ref: '#/components/responses/ServerError'
+    patch:
+      tags:
+        - resource datafield
+      summary: Update a resource datafield
+      requestBody:
+        $ref: '#/components/requestBodies/ResourceDataFieldUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/ResourceDataFieldUpdate'
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '5XX':
+          $ref: '#/components/responses/ServerError'        
+  '/resource/datafield/{datafieldId}':
+    parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
+      - name: datafieldId
+        in: path
+        description: Id of the resource datafield
+        required: true
+        schema:
+          type: integer
+          format: int64
+    delete:
+      tags:
+        - resource datafield
+      summary: Delete a resource datafield
+      responses:
+        '200':
+          description: Successful operation
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '5XX':
+          $ref: '#/components/responses/ServerError'
+  '/resource/datafieldlist':
+    parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
+    post:
+      tags:
+        - resource datafield list
+      summary: Create a resource datafield list
+      requestBody:
+        $ref: '#/components/requestBodies/ResourceDataFieldListPost'
+      responses:
+        '200':
+          $ref: '#/components/responses/ResourceDataFieldListPost'
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '5XX':
+          $ref: '#/components/responses/ServerError'
+    patch:
+      tags:
+        - resource datafield list
+      summary: Update a resource datafield list
+      requestBody:
+        $ref: '#/components/requestBodies/ResourceDataFieldListUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/ResourceDataFieldListUpdate'
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '5XX':
+          $ref: '#/components/responses/ServerError'          
+  '/resource/datafieldlist/{datafieldListId}':
+    parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
+      - name: datafieldListId
+        in: path
+        description: Id of the resource datafield list
+        required: true
+        schema:
+          type: integer
+          format: int64
+    delete:
+      tags:
+        - resource datafield list
+      summary: Delete a resource datafield list
+      responses:
+        '200':
+          description: Successful operation
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '5XX':
+          $ref: '#/components/responses/ServerError'
+
   /resource:
     parameters:
       - name: token
@@ -412,7 +561,7 @@ paths:
           type: string
     get:
       tags:
-        - datafield
+        - task datafield
       summary: Get all task data fields
       responses:
         '200':
@@ -421,6 +570,127 @@ paths:
           $ref: '#/components/responses/ClientError'
         '5XX':
           $ref: '#/components/responses/ServerError'
+  '/task/datafield':
+    parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
+    post:
+      tags:
+        - task datafield
+      summary: Create a task datafield
+      requestBody:
+        $ref: '#/components/requestBodies/TaskDataFieldPost'
+      responses:
+        '200':
+          $ref: '#/components/responses/TaskDataFieldPost'
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '5XX':
+          $ref: '#/components/responses/ServerError'
+    patch:
+      tags:
+        - task datafield
+      summary: Patch a task datafield
+      requestBody:
+        $ref: '#/components/requestBodies/TaskDataFieldUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/TaskDataFieldUpdate'
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '5XX':
+          $ref: '#/components/responses/ServerError'          
+  '/task/datafield/{datafieldId}':
+    parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
+      - name: datafieldId
+        in: path
+        description: Id of the project datafield
+        required: true
+        schema:
+          type: integer
+          format: int64
+    delete:
+      tags:
+        - task datafield
+      summary: Delete a task datafield
+      responses:
+        '200':
+          description: Successful operation
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '5XX':
+          $ref: '#/components/responses/ServerError'
+  '/task/datafieldlist':
+    parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
+    post:
+      tags:
+        - task datafield list
+      summary: Create a task datafield list
+      requestBody:
+        $ref: '#/components/requestBodies/TaskDataFieldListPost'
+      responses:
+        '200':
+          $ref: '#/components/responses/TaskDataFieldListPost'
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '5XX':
+          $ref: '#/components/responses/ServerError'
+    patch:
+      tags:
+        - task datafield list
+      summary: Update a task datafield list
+      requestBody:
+        $ref: '#/components/requestBodies/TaskDataFieldListUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/TaskDataFieldListUpdate'
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '5XX':
+          $ref: '#/components/responses/ServerError'          
+  '/task/datafieldlist/{datafieldListId}':
+    parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
+      - name: datafieldListId
+        in: path
+        description: Id of the task datafield list
+        required: true
+        schema:
+          type: integer
+          format: int64
+    delete:
+      tags:
+        - task datafield list
+      summary: Delete a task datafield list
+      responses:
+        '200':
+          description: Successful operation
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '5XX':
+          $ref: '#/components/responses/ServerError'
+
   /task:
     parameters:
     - name: token
@@ -637,7 +907,7 @@ paths:
           type: string
     get:
       tags:
-        - datafield
+        - project datafield
       summary: Get all project data fields
       responses:
         '200':
@@ -646,6 +916,127 @@ paths:
           $ref: '#/components/responses/ClientError'
         '5XX':
           $ref: '#/components/responses/ServerError'
+  '/project/datafield':
+    parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
+    post:
+      tags:
+        - project datafield
+      summary: Create a project datafield
+      requestBody:
+        $ref: '#/components/requestBodies/ProjectDataFieldPost'
+      responses:
+        '200':
+          $ref: '#/components/responses/ProjectDataFieldPost'
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '5XX':
+          $ref: '#/components/responses/ServerError'
+    patch:
+      tags:
+        - project datafield
+      summary: Patch a project datafield
+      requestBody:
+        $ref: '#/components/requestBodies/ProjectDataFieldUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/ProjectDataFieldUpdate'
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '5XX':
+          $ref: '#/components/responses/ServerError'       
+  '/project/datafield/{datafieldId}':
+    parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
+      - name: datafieldId
+        in: path
+        description: Id of the project datafield
+        required: true
+        schema:
+          type: integer
+          format: int64
+    delete:
+      tags:
+        - project datafield
+      summary: Delete a project datafield
+      responses:
+        '200':
+          description: Successful operation
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '5XX':
+          $ref: '#/components/responses/ServerError'
+  '/project/datafieldlist':
+    parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
+    post:
+      tags:
+        - project datafield list
+      summary: Create a project datafield list
+      requestBody:
+        $ref: '#/components/requestBodies/ProjectDataFieldListPost'
+      responses:
+        '200':
+          $ref: '#/components/responses/ProjectDataFieldListPost'
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '5XX':
+          $ref: '#/components/responses/ServerError'
+    patch:
+      tags:
+        - project datafield list
+      summary: Update a project datafield list
+      requestBody:
+        $ref: '#/components/requestBodies/ProjectDataFieldListUpdate'
+      responses:
+        '200':
+          $ref: '#/components/responses/ProjectDataFieldListUpdate'
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '5XX':
+          $ref: '#/components/responses/ServerError'             
+  '/project/datafieldlist/{datafieldListId}':
+    parameters:
+      - name: token
+        in: query
+        description: API token
+        required: true
+        schema:
+          type: string
+      - name: datafieldListId
+        in: path
+        description: Id of the project datafield list
+        required: true
+        schema:
+          type: integer
+          format: int64
+    delete:
+      tags:
+        - project datafield list
+      summary: Delete a project datafield list
+      responses:
+        '200':
+          description: Successful operation
+        '4XX':
+          $ref: '#/components/responses/ClientError'
+        '5XX':
+          $ref: '#/components/responses/ServerError'
+
   /project:
     parameters:
       - name: token
@@ -863,7 +1254,7 @@ components:
         color:
           type: string
           description: The resource's color and taskbar color is conveyed using a hexadecimal code, representing the color's RGB (Red, Green, Blue) values. It consists of six characters.
-          nullable: true          
+          nullable: true
         dataFields:
           $ref: '#/components/schemas/DataFieldValues'
       required:
@@ -1019,7 +1410,6 @@ components:
             $ref: '#/components/schemas/Dependencies'
           description: List of task dependencies.
           readOnly: true
-          
     TaskPost:
       type: object
       allOf:
@@ -1199,7 +1589,6 @@ components:
       required: 
         - id
         - email
-
     UserSchema:
       type: object
       allOf:
@@ -1208,7 +1597,6 @@ components:
             password:
               type: string
               description: Password of the user. This is a write-only property included in the request when creating a user and will not be returned with GET requests.
-
     DataFieldValues:
       type: object
       properties:
@@ -1247,7 +1635,6 @@ components:
           items:
             $ref: '#/components/schemas/DataFieldMultiSelectValue'
           description: multiSelect of list type data fields
-
     DataFieldValue:
       type: object
       properties:
@@ -1315,19 +1702,11 @@ components:
       type: object
       allOf:
         - $ref: '#/components/schemas/DataFieldValue'
-#      items:
-#        type: object
-#        allOf:
-#          - $ref: '#/components/schemas/DataFieldListOption'
       properties:
         values:
           type: object
           allOf:
             - $ref: '#/components/schemas/DataMultiSelect'
-#            - $ref: '#/components/schemas/DataFieldListOption'
-#          description: Ids of the current value of the list.
-
-
     DataFields:
       type: object
       properties:
@@ -1366,8 +1745,6 @@ components:
           items:
             $ref: '#/components/schemas/DataMultiSelect'
           description: MultiSelect of list type data fields
-
-
     DataField:
       type: object
       properties:
@@ -1417,7 +1794,6 @@ components:
           description: Possible values the list can have.
           items:
             $ref: '#/components/schemas/DataFieldMultiSelectOption'
-
     DataFieldListOption:
       type: object
       properties:
@@ -1427,7 +1803,6 @@ components:
         value:
           type: string
           description: Value of the list option.
-
     DataFieldMultiSelectOption:
       type: object
       properties:
@@ -1437,7 +1812,292 @@ components:
         value:
           type: string
           description: Value of the list option.
-         
+
+    TaskDataFieldPostRequest:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/MDataFieldWId'
+      properties:      
+        showOnChartLabel:
+          type: integer
+          description: Show on chart label. Possible values are 0 or 1
+          minLength: 1
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/MDataFieldListWId'
+          description: Name of the resource data field list
+    TaskDataFieldPostResponse:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/MDataField'
+      properties:      
+        showOnChartLabel:
+          type: integer
+          description: Show on chart label. Possible values are 0 or 1
+          minLength: 1
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/MDataFieldList'
+          description: Name of the resource data field list
+    TaskDataFieldUpdate:
+      type: object
+      properties:      
+        id:
+          type: string
+          description: Id of the data field.
+        name:
+          type: string
+          description: Name of the task data field.
+          minLength: 1
+        showOnTaskbar:
+          type: integer
+          description: Show on taskbar. Possible values are 0 or 1
+          minLength: 1
+    TaskDataFieldListPostRequest:
+      type: object
+      properties:      
+        name:
+          type: string
+          description: Name of the task data field list.
+          minLength: 1
+        dataFieldId:
+          type: string
+          description: Id of the data field.
+        color:
+          type: string
+          description: The resource's color and taskbar color is conveyed using a hexadecimal code, representing the color's RGB (Red, Green, Blue) values. It consists of six characters.
+          nullable: true
+    TaskDataFieldListPostResponse:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/MDataFieldList'
+      properties:      
+        color:
+          type: string
+          description: The resource's color and taskbar color is conveyed using a hexadecimal code, representing the color's RGB (Red, Green, Blue) values. It consists of six characters.
+          nullable: true
+    TaskDataFieldListUpdate:
+      type: object
+      properties:      
+        id:
+          type: string
+          description: Id of the task data field list.
+        name:
+          type: string
+          description: Name of the task data field list.
+          minLength: 1
+        color:
+          type: string
+          description: The task's color is conveyed using a hexadecimal code, representing the color's RGB (Red, Green, Blue) values. It consists of six characters.
+          nullable: true
+
+    ResourceDataFieldPostRequest:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/MDataFieldWId'
+      properties:      
+        showOnChartLabel:
+          type: integer
+          description: Show on chart label. Possible values are 0 or 1
+          minLength: 1
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/MDataFieldListWId'
+          description: Name of the resource data field list
+    ResourceDataFieldPostResponse:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/MDataField'
+      properties:      
+        showOnChartLabel:
+          type: integer
+          description: Show on chart label. Possible values are 0 or 1
+          minLength: 1
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/MDataFieldList'
+          description: Name of the resource data field list
+    ResourceDataFieldUpdate:
+      type: object
+      properties:      
+        id:
+          type: string
+          description: Id of the data field.
+        name:
+          type: string
+          description: Name of the resource data field.
+          minLength: 1
+        showOnChartLabel:
+          type: integer
+          description: Show on chart label. Possible values are 0 or 1
+          minLength: 1
+    ResourceDataFieldListPostRequest:
+      type: object
+      properties:      
+        name:
+          type: string
+          description: Name of the resource data field list.
+          minLength: 1
+        dataFieldId:
+          type: string
+          description: Id of the data field.       
+    ResourceDataFieldListPostResponse:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/MDataFieldList'
+    ResourceDataFieldListUpdate:
+      type: object
+      properties:      
+        id:
+          type: string
+          description: Id of the resource data field list.
+        name:
+          type: string
+          description: Name of the resource data field list.
+          minLength: 1
+
+    ProjectDataFieldPostRequest:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/MDataFieldWId'
+      properties:      
+        dateInGantt:
+          type: integer
+          description: This applies only to date-type fields. Show date field on chart label. Possible values are 0 or 1
+          minLength: 1
+        dateColorInGantt: 
+          type: string
+          description: This applies only to date-type fields. If date_in_gantt is selected, the chart will display the color is conveyed using a hexadecimal code.
+          minLength: 1
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/MDataFieldListWId'
+          description: Name of the resource data field list
+    ProjectDataFieldPostResponse:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/MDataField'
+      properties:      
+        dateInGantt:
+          type: integer
+          description: This applies only to date-type fields. Show date field on chart label. Possible values are 0 or 1
+          minLength: 1
+        dateColorInGantt: 
+          type: string
+          description: This applies only to date-type fields. If date_in_gantt is selected, the chart will display the color is conveyed using a hexadecimal code.
+          minLength: 1
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/MDataFieldList'
+          description: Name of the resource data field list
+    ProjectDataFieldUpdate:
+      type: object
+      properties:      
+        id:
+          type: string
+          description: Id of the data field.
+        name:
+          type: string
+          description: Name of the project data field.
+          minLength: 1
+        dateInGantt:
+          type: integer
+          description: This applies only to date-type fields. Show date field on chart label. Possible values are 0 or 1
+          minLength: 1
+        dateColorInGantt: 
+          type: string
+          description: This applies only to date-type fields. If date_in_gantt is selected, the chart will display the color is conveyed using a hexadecimal code.
+          minLength: 1
+    ProjectDataFieldListPostRequest:
+      type: object
+      properties:      
+        name:
+          type: string
+          description: Name of the project data field list.
+          minLength: 1
+        dataFieldId:
+          type: string
+          description: Id of the data field.
+        color:
+          type: string
+          description: The resource's color and taskbar color is conveyed using a hexadecimal code, representing the color's RGB (Red, Green, Blue) values. It consists of six characters.
+          nullable: true
+    ProjectDataFieldListPostResponse:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/MDataFieldList'
+      properties:      
+        color:
+          type: string
+          description: The project's color is conveyed using a hexadecimal code, representing the color's RGB (Red, Green, Blue) values. It consists of six characters.
+          nullable: true
+    ProjectDataFieldListUpdate:
+      type: object
+      properties:      
+        id:
+          type: string
+          description: Id of the project data field list.
+        name:
+          type: string
+          description: Name of the project data field list.
+          minLength: 1
+        color:
+          type: string
+          description: The project's color is conveyed using a hexadecimal code, representing the color's RGB (Red, Green, Blue) values. It consists of six characters.
+          nullable: true
+
+    MDataFieldWId:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the resource data field.
+          minLength: 1
+        type:
+          type: string
+          description: Type of the resource data field.
+          minLength: 1
+    MDataFieldListWId:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the data field list.
+          minLength: 1
+    MDataField:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of the data field.
+        name:
+          type: string
+          description: Name of the resource data field.
+          minLength: 1
+        type:
+          type: string
+          description: Type of the resource data field.
+          minLength: 1
+    MDataFieldList:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of the data field list.
+        name:
+          type: string
+          description: Name of the data field list.
+          minLength: 1
+        dataFieldId:
+          type: string
+          description: Id of the data field.       
+
     Note:
       type: object
       properties:
@@ -1614,6 +2274,70 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ResourcePatch'
+
+    TaskDataFieldPost:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TaskDataFieldPostRequest'
+    TaskDataFieldUpdate:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TaskDataFieldUpdate'
+    TaskDataFieldListPost:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TaskDataFieldListPostRequest'
+    TaskDataFieldListUpdate:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TaskDataFieldListUpdate'
+
+    ResourceDataFieldPost:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResourceDataFieldPostRequest'
+    ResourceDataFieldUpdate:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResourceDataFieldUpdate'
+    ResourceDataFieldListPost:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResourceDataFieldListPostRequest'
+    ResourceDataFieldListUpdate:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResourceDataFieldListUpdate'
+
+    ProjectDataFieldPost:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectDataFieldPostRequest'
+    ProjectDataFieldUpdate:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectDataFieldUpdate'
+    ProjectDataFieldListPost:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectDataFieldListPostRequest'
+    ProjectDataFieldListUpdate:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectDataFieldListUpdate'
+
     ProjectPost:
       content:
         application/json:
@@ -1695,6 +2419,82 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/DataFields'
+
+    TaskDataFieldPost:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TaskDataFieldPostResponse'
+    TaskDataFieldUpdate:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TaskDataFieldUpdate'
+    TaskDataFieldListPost:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TaskDataFieldListPostResponse'
+    TaskDataFieldListUpdate:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TaskDataFieldListUpdate'
+
+    ResourceDataFieldPost:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResourceDataFieldPostResponse'
+    ResourceDataFieldUpdate:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResourceDataFieldUpdate'
+    ResourceDataFieldListPost:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResourceDataFieldPostResponse'
+    ResourceDataFieldListUpdate:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResourceDataFieldListUpdate'
+
+    ProjectDataFieldPost:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectDataFieldPostResponse'            
+    ProjectDataFieldUpdate:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectDataFieldUpdate'
+    ProjectDataFieldListPost:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectDataFieldListPostResponse' 
+    ProjectDataFieldListUpdate:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectDataFieldListUpdate' 
+
     Dependencies:
       description: Successful operation
       content:
