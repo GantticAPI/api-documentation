@@ -66,6 +66,7 @@ tags:
   - name: resource datafield list
     description: "The Resource/Task/Project custom field types 'listValues' and 'multiSelect' contain lists. This option is intended for adding, modifying, and deleting these lists."
     x-displayName: Resource datafield list
+  
   - name: task
     x-displayName: Task
     description: A task is an assignment for a resource, whether it's a booking, a job or something else. You can learn more about tasks [here](https://www.ganttic.com/helpdesk/features/tasks).
@@ -75,6 +76,7 @@ tags:
   - name: task datafield list
     description: "The Resource/Task/Project custom field types 'listValues' and 'multiSelect' contain lists. This option is intended for adding, modifying, and deleting these lists."
     x-displayName: Task datafield list
+  
   - name: project
     x-displayName: Project
     description: Projects might be the reason you're planning your resources. In that case, this is the place to look for projects that are ongoing. To see which tasks a certain project contains, look into the tasks section. You can learn more about projects [here](https://www.ganttic.com/helpdesk/features/projects).
@@ -84,13 +86,20 @@ tags:
   - name: project datafield list
     description: "The Resource/Task/Project custom field types 'listValues' and 'multiSelect' contain lists. This option is intended for adding, modifying, and deleting these lists."
     x-displayName: Project datafield list
+  
   - name: user
     x-displayName: User
     description: Users are the users of Ganttic, not resources. Though this may not be mutually exclusive, a separate resource must be created for the person to assign them tasks. Users are identified by the automatically generated id, and also a unique email address, which is used to log into Ganttic's web application.
+  
   - name: resource_model
     x-displayName: Resource model
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/ResourceGet"/>
+  - name: resource_datafield_model
+    x-displayName: Resource datafield model
+    description: |
+      <SchemaDefinition schemaRef="#/components/schemas/DataFields"/>
+
   - name: task_model
     x-displayName: Task model
     description: |
@@ -99,10 +108,12 @@ tags:
     x-displayName: Project model
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/ProjectGet"/>
+  
   - name: user_model
     x-displayName: User model
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/UserSchema"/>
+  
   - name: webhook_model
     x-displayName: Webhook request body
     description: |
@@ -113,19 +124,25 @@ x-tagGroups:
     tags:
       - resource
       - resource_datafield
+      - resource_datafield_list
       - task
       - task_datafield
+      - task_datafield_list
       - project
       - project_datafield
+      - project_datafield_list
       - user
   - name: Models
     tags:
       - resource_model
       - resource_datafield_model
+      - resource_datafield_list_model
       - task_model
       - task_datafield_model
+      - task_datafield_list_model
       - project_model
       - project_datafield_model
+      - project_datafield_list_model
       - user_model
       - webhook_model
 servers:
@@ -1801,6 +1818,73 @@ components:
           type: string
           description: Value of the list option.
 
+    ResourceDataFieldPostRequest:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/MDataFieldWId'
+      properties:      
+        showOnChartLabel:
+          type: integer
+          description: Show on chart label. Possible values are 0 or 1
+          minLength: 1
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/MDataFieldListWId'
+          description: Name of the resource data field list
+    ResourceDataFieldPostResponse:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/MDataField'
+      properties:      
+        showOnChartLabel:
+          type: integer
+          description: Show on chart label. Possible values are 0 or 1
+          minLength: 1
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/MDataFieldList'
+          description: Name of the resource data field list
+    ResourceDataFieldUpdate:
+      type: object
+      properties:      
+        id:
+          type: string
+          description: Id of the data field.
+        name:
+          type: string
+          description: Name of the resource data field.
+          minLength: 1
+        showOnChartLabel:
+          type: integer
+          description: Show on chart label. Possible values are 0 or 1
+          minLength: 1
+    ResourceDataFieldListPostRequest:
+      type: object
+      properties:      
+        name:
+          type: string
+          description: Name of the resource data field list.
+          minLength: 1
+        dataFieldId:
+          type: string
+          description: Id of the data field.       
+    ResourceDataFieldListPostResponse:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/MDataFieldList'
+    ResourceDataFieldListUpdate:
+      type: object
+      properties:      
+        id:
+          type: string
+          description: Id of the resource data field list.
+        name:
+          type: string
+          description: Name of the resource data field list.
+          minLength: 1
+
     TaskDataFieldPostRequest:
       type: object
       allOf:
@@ -1880,73 +1964,6 @@ components:
           type: string
           description: The task's color is conveyed using a hexadecimal code, representing the color's RGB (Red, Green, Blue) values. It consists of six characters.
           nullable: true
-
-    ResourceDataFieldPostRequest:
-      type: object
-      allOf:
-        - $ref: '#/components/schemas/MDataFieldWId'
-      properties:      
-        showOnChartLabel:
-          type: integer
-          description: Show on chart label. Possible values are 0 or 1
-          minLength: 1
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/MDataFieldListWId'
-          description: Name of the resource data field list
-    ResourceDataFieldPostResponse:
-      type: object
-      allOf:
-        - $ref: '#/components/schemas/MDataField'
-      properties:      
-        showOnChartLabel:
-          type: integer
-          description: Show on chart label. Possible values are 0 or 1
-          minLength: 1
-        list:
-          type: array
-          items:
-            $ref: '#/components/schemas/MDataFieldList'
-          description: Name of the resource data field list
-    ResourceDataFieldUpdate:
-      type: object
-      properties:      
-        id:
-          type: string
-          description: Id of the data field.
-        name:
-          type: string
-          description: Name of the resource data field.
-          minLength: 1
-        showOnChartLabel:
-          type: integer
-          description: Show on chart label. Possible values are 0 or 1
-          minLength: 1
-    ResourceDataFieldListPostRequest:
-      type: object
-      properties:      
-        name:
-          type: string
-          description: Name of the resource data field list.
-          minLength: 1
-        dataFieldId:
-          type: string
-          description: Id of the data field.       
-    ResourceDataFieldListPostResponse:
-      type: object
-      allOf:
-        - $ref: '#/components/schemas/MDataFieldList'
-    ResourceDataFieldListUpdate:
-      type: object
-      properties:      
-        id:
-          type: string
-          description: Id of the resource data field list.
-        name:
-          type: string
-          description: Name of the resource data field list.
-          minLength: 1
 
     ProjectDataFieldPostRequest:
       type: object
