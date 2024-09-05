@@ -123,14 +123,14 @@ x-tagGroups:
   - name: Requests
     tags:
       - resource
-      - resource_datafield
-      - resource_datafield_list
+      - resource datafield
+      - resource datafield list
       - task
-      - task_datafield
-      - task_datafield_list
+      - task datafield
+      - task datafield list
       - project
-      - project_datafield
-      - project_datafield_list
+      - project datafield
+      - project datafield list
       - user
   - name: Models
     tags:
