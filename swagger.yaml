@@ -107,6 +107,7 @@ tags:
     x-displayName: Webhook request body
     description: |
       <SchemaDefinition schemaRef="#/components/schemas/WebhookRequestBody"/>
+
 x-tagGroups:
   - name: Requests
     tags:
@@ -120,11 +121,11 @@ x-tagGroups:
   - name: Models
     tags:
       - resource_model
-      - resource_datafields_model
+      - resource_datafield_model
       - task_model
-      - task_datafields_model
+      - task_datafield_model
       - project_model
-      - project_datafields_model
+      - project_datafield_model
       - user_model
       - webhook_model
 servers:
@@ -2449,7 +2450,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ResourceDataFieldPostResponse'
+            $ref: '#/components/schemas/ResourceDataFieldListPostResponse'
     ResourceDataFieldListUpdate:
       description: Successful operation
       content:
