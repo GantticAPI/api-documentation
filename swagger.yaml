@@ -241,7 +241,7 @@ paths:
           type: string
     post:
       tags:
-        - resource
+        - resource datafield
       summary: Create a resource datafield
       requestBody:
         $ref: '#/components/requestBodies/ResourceDataFieldPost'
