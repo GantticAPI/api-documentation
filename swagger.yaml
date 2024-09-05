@@ -212,7 +212,7 @@ paths:
           $ref: '#/components/responses/ClientError'
         '5XX':
           $ref: '#/components/responses/ServerError'
-  '/resources/datafields':
+  /resources/datafields:
     parameters:
       - name: token
         in: query
@@ -231,7 +231,7 @@ paths:
           $ref: '#/components/responses/ClientError'
         '5XX':
           $ref: '#/components/responses/ServerError'
-  '/resource/datafield':
+  /resource/datafield:
     parameters:
       - name: token
         in: query
@@ -241,7 +241,7 @@ paths:
           type: string
     post:
       tags:
-        - resource datafield
+        - resource
       summary: Create a resource datafield
       requestBody:
         $ref: '#/components/requestBodies/ResourceDataFieldPost'
