@@ -252,7 +252,7 @@ paths:
           $ref: '#/components/responses/ClientError'
         '5XX':
           $ref: '#/components/responses/ServerError'
-    patch:
+    put:
       tags:
         - resource datafield
       summary: Update a resource datafield
@@ -312,7 +312,7 @@ paths:
           $ref: '#/components/responses/ClientError'
         '5XX':
           $ref: '#/components/responses/ServerError'
-    patch:
+    put:
       tags:
         - resource datafield list
       summary: Update a resource datafield list
@@ -373,10 +373,10 @@ paths:
           $ref: '#/components/responses/ClientError'
         '5XX':
           $ref: '#/components/responses/ServerError'
-    patch:
+    put:
       tags:
         - resource
-      summary: Modify a resource
+      summary: Update a resource
       requestBody:
         $ref: '#/components/requestBodies/ResourcePatch'
       responses:
@@ -596,10 +596,10 @@ paths:
           $ref: '#/components/responses/ClientError'
         '5XX':
           $ref: '#/components/responses/ServerError'
-    patch:
+    put:
       tags:
         - task datafield
-      summary: Patch a task datafield
+      summary: Update a task datafield
       requestBody:
         $ref: '#/components/requestBodies/TaskDataFieldUpdate'
       responses:
@@ -656,7 +656,7 @@ paths:
           $ref: '#/components/responses/ClientError'
         '5XX':
           $ref: '#/components/responses/ServerError'
-    patch:
+    put:
       tags:
         - task datafield list
       summary: Update a task datafield list
@@ -724,10 +724,10 @@ paths:
           $ref: '#/components/responses/ClientError'
         '5XX':
           $ref: '#/components/responses/ServerError'
-    patch:
+    put:
       tags:
         - task
-      summary: Modify a task
+      summary: Update a task
       parameters:
         - name: token
           in: query
@@ -942,10 +942,10 @@ paths:
           $ref: '#/components/responses/ClientError'
         '5XX':
           $ref: '#/components/responses/ServerError'
-    patch:
+    put:
       tags:
         - project datafield
-      summary: Patch a project datafield
+      summary: Update a project datafield
       requestBody:
         $ref: '#/components/requestBodies/ProjectDataFieldUpdate'
       responses:
@@ -1002,7 +1002,7 @@ paths:
           $ref: '#/components/responses/ClientError'
         '5XX':
           $ref: '#/components/responses/ServerError'
-    patch:
+    put:
       tags:
         - project datafield list
       summary: Update a project datafield list
@@ -1063,10 +1063,10 @@ paths:
           $ref: '#/components/responses/ClientError'
         '5XX':
           $ref: '#/components/responses/ServerError'
-    patch:
+    put:
       tags:
         - project
-      summary: Modify a project
+      summary: Update a project
       requestBody:
         $ref: '#/components/requestBodies/ProjectPatch'
       responses:
@@ -1161,10 +1161,10 @@ paths:
           $ref: '#/components/responses/ClientError'
         '5XX':
           $ref: '#/components/responses/ServerError'
-    patch:
+    put:
       tags:
         - user
-      summary: Modify a user
+      summary: Update a user
       requestBody:
         $ref: '#/components/requestBodies/UserPatch'
       responses:
